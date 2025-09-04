@@ -1,0 +1,41 @@
+extends ../layouts/default.pug
+
+block main
+  h1.box-title Tạo tài khoản quản trị
+
+  .section-8
+    form#setting-account-admin-create-form
+      .inner-group
+        label(class="inner-label" for="fullName") Họ tên
+        input(type="text" id="fullName" name="fullName")
+      .inner-group
+        label(class="inner-label" for="email") Email
+        input(type="email" id="email" name="email")
+      .inner-group
+        label(class="inner-label" for="phone") Số điện thoại
+        input(type="text" id="phone" name="phone")
+      .inner-group
+        label(class="inner-label" for="role") Nhóm quyền
+        select(id="role" name="role")
+          option(value="") Quản trị viên
+          option(value="") Quản lý tour
+          option(value="") Quản lý đơn hàng
+      .inner-group
+        label(class="inner-label" for="positionCompany") Chức vụ
+        input(type="text" id="positionCompany" name="positionCompany")
+      .inner-group
+        label(class="inner-label" for="status") Trạng thái
+        select(id="status" name="status")
+          option(value="") Hoạt động
+          option(value="") Dừng hoạt động
+      .inner-group
+        label(class="inner-label" for="password") Mật khẩu
+        input(type="text" id="password" name="password")
+      .inner-group.inner-two-col
+        label(class="inner-label" for="avatar") Ảnh đại diện
+        div(class="inner-upload-image")
+          input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
+      .inner-button.inner-two-col
+        button Tạo mới
+    .inner-back
+      a(href=`/${pathAdmin}/setting/account-admin/list`) Quay lại danh sách

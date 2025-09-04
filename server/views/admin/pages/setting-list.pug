@@ -1,0 +1,17 @@
+extends ../layouts/default.pug
+
+block main
+  h1.box-title Cài đặt chung
+
+  //- Section 9
+  .section-9
+    a(href=`/${pathAdmin}/setting/website-info` class="inner-item")
+      .inner-icon <i class="fa-solid fa-info"></i>
+      .inner-text Thông tin website
+    a(href=`/${pathAdmin}/setting/account-admin/list` class="inner-item")
+      .inner-icon <i class="fa-solid fa-user-tie"></i>
+      .inner-text Tài khoản quản trị
+    a(href=`/${pathAdmin}/setting/role/list` class="inner-item")
+      .inner-icon <i class="fa-solid fa-user-gear"></i>
+      .inner-text Nhóm quyền
+  //- End Section 9
