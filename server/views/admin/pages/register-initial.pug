@@ -1,0 +1,10 @@
+extends ../layouts/account.pug
+
+block main
+  .form-account
+    h2.inner-title Tài khoản đã được khởi tạo
+    p.inner-desc Vui lòng chờ phê duyệt của quản trị viên
+    
+    .inner-more
+      span Đã được phê duyệt?
+      a(href=`/${pathAdmin}/account/login`) Đăng nhập

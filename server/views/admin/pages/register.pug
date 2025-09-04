@@ -1,0 +1,62 @@
+extends ../layouts/account.pug
+
+block main
+  .form-account
+    h2.inner-title Đăng ký
+    p.inner-desc Tạo một tài khoản để tiếp tục
+    
+    form.inner-form#register-form
+      .inner-group
+        label(
+          class="inner-label"
+          for="fullName"
+        ) Họ tên
+        input(
+          type="text"
+          name="fullName"
+          id="fullName"
+          placeholder="Ví dụ: Lê Văn A"
+          class="inner-control"
+        )
+      .inner-group
+        label(
+          class="inner-label"
+          for="email"
+        ) Email
+        input(
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Ví dụ: levana@gmail.com"
+          class="inner-control"
+        )
+      .inner-group
+        label(
+          class="inner-label"
+          for="password"
+        ) Mật khẩu
+        input(
+          type="password"
+          name="password"
+          id="password"
+          class="inner-control"
+        )
+      .inner-meta
+        .inner-confirm
+          input(
+            type="checkbox"
+            name="agree"
+            id="agree"
+            class="inner-check"
+          )
+          label(
+            class="inner-label"
+            for="agree"
+          ) Tôi chấp nhận các điều khoản và điều kiện
+      button(class="inner-button") Đăng Ký
+    
+    .inner-more
+      span Bạn đã có tài khoản?
+      a(
+        href=`/${pathAdmin}/account/login`
+        ) Đăng nhập

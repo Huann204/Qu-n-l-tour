@@ -1,0 +1,35 @@
+extends ../layouts/default.pug
+
+block main
+  h1.box-title Tạo nhóm quyền
+
+  .section-8
+    form#setting-role-create-form
+      .inner-group
+        label(class="inner-label" for="name") Tên nhóm quyền
+        input(type="text" id="name" name="name")
+      .inner-group
+        label(class="inner-label" for="description") Mô tả ngắn
+        input(type="text" id="description" name="description")
+      .inner-group
+        label(class="inner-label") Phân quyền
+        .inner-checkbox-list
+          .inner-checkbox-item
+            input(type="checkbox" name="permissions" value="Xem trang Tổng quan")
+            label Xem trang Tổng quan
+          .inner-checkbox-item
+            input(type="checkbox" name="permissions" value="Xem danh mục")
+            label Xem danh mục
+          .inner-checkbox-item
+            input(type="checkbox" name="permissions" value="Tạo danh mục")
+            label Tạo danh mục
+          .inner-checkbox-item
+            input(type="checkbox" name="permissions" value="Sửa danh mục")
+            label Sửa danh mục
+          .inner-checkbox-item
+            input(type="checkbox" name="permissions" value="Xóa danh mục")
+            label Xóa danh mục
+      .inner-button.inner-two-col
+        button Tạo mới
+    .inner-back
+      a(href=`/${pathAdmin}/setting/role/list`) Quay lại danh sách
