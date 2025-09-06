@@ -54,14 +54,30 @@ if(categoryCreateForm) {
       }
       const description = tinymce.get("description").getContent();
       
-      console.log(name);
-      console.log(parent);
-      console.log(position);
-      console.log(status);
-      console.log(avatar);
-      console.log(description);
-    })
-  ;
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.href = `/${pathAdmin}/category/list`;
+        }
+      })
+    });
 }
 // End Category Create Form
 
@@ -248,9 +264,7 @@ if(settingAccountAdminCreateForm) {
 
 
 // Logout
-  const buttonLogout = document.querySelector(".sider .inner-logout");
-  console.log(buttonLogout);
-  
+  const buttonLogout = document.querySelector(".sider .inner-logout");  
     if(buttonLogout) {
       buttonLogout.addEventListener("click", () => {
         fetch(`/${pathAdmin}/account/logout`, {
@@ -267,3 +281,15 @@ if(settingAccountAdminCreateForm) {
 
 
 // End Logout
+
+// Alert
+const alertTime = document.querySelector("[alert-time]");
+if(alertTime) {
+  let time = alertTime.getAttribute("alert-time");
+  time = time ? parseInt(time) : 4000;
+  setTimeout(() => {
+    alertTime.remove(); // xóa phần tử khỏi giao diện
+  }, time);
+}
+
+// End Alert

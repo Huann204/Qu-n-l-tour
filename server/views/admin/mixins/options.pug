@@ -1,0 +1,9 @@
+mixin option(list, level, parent = "")
+  each item in list
+    option(
+      value=item.id
+      selected=(parent == item.id ? true : false) 
+    ) #{"--".repeat(level)} #{item.name}
+    if(item.children && item.children.length > 0)
+      +option(item.children, level + 1, parent)
+  
