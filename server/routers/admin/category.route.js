@@ -15,4 +15,12 @@ router.post(
   categoryController.createPost
 );
 
+router.get("/edit/:id", categoryController.edit);
+
+router.patch(
+  '/edit/:id', 
+  upload.single('avatar'),
+  categoryController.editPatch
+);
+
 module.exports = router;
