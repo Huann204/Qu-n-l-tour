@@ -93,7 +93,6 @@ if(categoryCreateForm) {
         }
       })
     });
-<<<<<<< HEAD
 }
 // End Category Create Form
 
@@ -153,8 +152,6 @@ if(categoryEditForm) {
       })
     })
   ;
-=======
->>>>>>> b69aa09e4e5cd0eaf4ccd4486ab736e74dbbcb73
 }
 // End Category Edit Form
 
