@@ -23,8 +23,23 @@ if(listFilepondImage.length > 0) {
   listFilepondImage.forEach(filepondImage => {
     FilePond.registerPlugin(FilePondPluginImagePreview);
     FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+     let files = null;
+    const elementImageDefault = filepondImage.closest("[image-default]");
+    if(elementImageDefault) {
+      const imageDefault = elementImageDefault.getAttribute("image-default");
+      if(imageDefault) {
+        files = [
+          {
+            source: imageDefault, // Đường dẫn ảnh
+          },
+        ]
+      }
+    }
+
     filePond[filepondImage.name] = FilePond.create(filepondImage, {
-      labelIdle: '+'
+      labelIdle: '+',
+      files: files
     });
   });
 }
@@ -54,16 +69,91 @@ if(categoryCreateForm) {
       }
       const description = tinymce.get("description").getContent();
       
-      console.log(name);
-      console.log(parent);
-      console.log(position);
-      console.log(status);
-      console.log(avatar);
-      console.log(description);
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.href = `/${pathAdmin}/category/list`;
+        }
+      })
+    });
+}
+// End Category Create Form
+
+// Category Edit Form
+const categoryEditForm = document.querySelector("#category-edit-form");
+if(categoryEditForm) {
+  const validation = new JustValidate('#category-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const description = tinymce.get("description").getContent();
+
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category/edit/${id}`, {
+      method: "PATCH",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.reload();
+        }
+      })
     })
   ;
 }
-// End Category Create Form
+// End Category Edit Form
 
 
 // Setting Website Info Form
@@ -248,9 +338,7 @@ if(settingAccountAdminCreateForm) {
 
 
 // Logout
-  const buttonLogout = document.querySelector(".sider .inner-logout");
-  console.log(buttonLogout);
-  
+  const buttonLogout = document.querySelector(".sider .inner-logout");  
     if(buttonLogout) {
       buttonLogout.addEventListener("click", () => {
         fetch(`/${pathAdmin}/account/logout`, {
@@ -267,3 +355,44 @@ if(settingAccountAdminCreateForm) {
 
 
 // End Logout
+
+// Alert
+const alertTime = document.querySelector("[alert-time]");
+if(alertTime) {
+  let time = alertTime.getAttribute("alert-time");
+  time = time ? parseInt(time) : 4000;
+  setTimeout(() => {
+    alertTime.remove(); // xóa phần tử khỏi giao diện
+  }, time);
+}
+
+// End Alert
+
+// Button Delete
+const listButtonDelete = document.querySelectorAll("[button-delete]");
+if(listButtonDelete.length > 0) {
+  listButtonDelete.forEach(button => {
+    button.addEventListener("click", () => {
+      const dataApi = button.getAttribute("data-api");
+      
+
+      fetch(dataApi, {
+        method: "PATCH"
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code === "error") {
+            alert(data.message);
+          };
+
+          if(data.code === "success") {
+            window.location.reload();
+          };
+          
+        })
+    })
+  })
+  
+}
+
+// End Button Delete
