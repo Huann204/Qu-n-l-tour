@@ -14,8 +14,6 @@ router.post(
   upload.single('avatar'),
   categoryController.createPost
 );
-
-<<<<<<< HEAD
 router.get("/edit/:id", categoryController.edit);
 
 router.patch(
@@ -29,6 +27,4 @@ router.patch(
   categoryController.deletePatch
 );
 
-=======
->>>>>>> b69aa09e4e5cd0eaf4ccd4486ab736e74dbbcb73
 module.exports = router;

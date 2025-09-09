@@ -85,7 +85,6 @@ module.exports.createPost = async (req, res) => {
   res.json({
     code: "success",
   })
-<<<<<<< HEAD
 };
 
 // Giao diện chỉnh sửa danh mục sản phẩm
@@ -178,6 +177,3 @@ module.exports.deletePatch = async (req, res) => {
     });
   };
 }
-=======
-};
->>>>>>> b69aa09e4e5cd0eaf4ccd4486ab736e74dbbcb73
