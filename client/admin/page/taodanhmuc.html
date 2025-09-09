@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tạo danh mục</title>
-    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+    <script src="https://cdn.tiny.cloud/1/rqftglkupumntx7w6xt7087tn75aflm0zn1dbwwi5dl5iwjo/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script src="../assets/js/tinymce-config.js"></script>
+  </head>
+  <body>
     <header class="header">
-        <div class="admin1"><a href="#">
-            <div class="inner-logo"><img src="../assets/images/logo.png" alt="Logo"></a></div>
-            <div class="text1">Admin</div>
-        </div>
-        <div class="admin2">
-            <div class="inner-avatar"><img src="../assets/images/avt1.jpg" alt="Avatar"></div>
-            <div class="text2">
-                <div class="name">Phan Ngọc Hà</div>
-                <div class="role">Admin</div>
-            </div>
-        </div>
-        <button class="inner-button-menu"><i class="fa-regular fa-square-list"></i></button>
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
     </header>
-
-    <div class="sider-overlay"></div>
     <nav class="sider">
       <ul class="inner-menu">
-        <li><a href="#"><i class="fa-brands fa-web-awesome"></i> Tổng quan</a></li>
-        <li><a class="active" href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
-        <li><a href="#"><i class="fa-solid fa-route"></i> Quản lý tour</a></li>
-        <li><a href="#"><i class="fa-solid fa-comments-dollar"></i> Quản lý đơn hàng</a></li>
-        <li><a href="#"><i class="fa-regular fa-circle-user"></i> Quản lý người dùng</a></li>
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
         <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
       </ul>
       <hr>
@@ -40,10 +39,11 @@
         <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
       </ul>
     </nav>
+    <div class="sider-overlay"></div>
     <main class="main">
-        <h1 class="main-title">Tạo danh mục</h1>
-        <div class="section-5">
-           <form id="category-create-form">
+      <h1 class="box-title">Tạo danh mục</h1>
+      <div class="section5">
+        <form id="category-create-form">
           <div class="inner-group">
             <label class="inner-label" for="name">Tên danh mục</label>
             <input type="text" id="name" name="name">
@@ -54,7 +54,6 @@
               <option value="">-- Chọn danh mục --</option>
               <option value="">Danh mục 1</option>
               <option value="">Danh mục 2</option>
-              <option value="">Danh mục 3</option>
             </select>
           </div>
           <div class="inner-group">
@@ -68,10 +67,28 @@
               <option value="">Dừng hoạt động</option>
             </select>
           </div>
-
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="avatar">Ảnh đại diện</label>
+            <div class="inner-upload-image">
+              <input type="file" id="avatar" accept="image/*" filepond-image name="avatar">
+            </div>
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="description">Mô tả</label>
+            <textarea id="description" textarea-mce name="description"></textarea>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Tạo mới</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Quay lại danh sách</a></div>
       </div>
-    </main> 
-    <script src="../assets/js/scriptAdmin.js"></script>   
-    
-</body>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"> </script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"> </script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
 </html>

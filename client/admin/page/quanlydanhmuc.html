@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý danh mục</title>
     <link rel="stylesheet" href="../assets/css/styleAdmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <div class="admin1"><a href="#">
-            <div class="inner-logo"><img src="../assets/images/logo.png" alt="Logo"></a></div>
-            <div class="text1">Admin</div>
-        </div>
-        <div class="admin2">
-            <div class="inner-avatar"><img src="../assets/images/avt1.jpg" alt="Avatar"></div>
-            <div class="text2">
-                <div class="name">Phan Ngọc Hà</div>
-                <div class="role">Admin</div>
-            </div>
-        </div>
-        <button class="inner-button-menu"><i class="fa-regular fa-square-list"></i></button>
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
     </header>
-
-    <div class="sider-overlay"></div>
     <nav class="sider">
       <ul class="inner-menu">
-        <li><a href="#"><i class="fa-brands fa-web-awesome"></i> Tổng quan</a></li>
-        <li><a class="active" href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
-        <li><a href="#"><i class="fa-solid fa-route"></i> Quản lý tour</a></li>
-        <li><a href="#"><i class="fa-solid fa-comments-dollar"></i> Quản lý đơn hàng</a></li>
-        <li><a href="#"><i class="fa-regular fa-circle-user"></i> Quản lý người dùng</a></li>
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
         <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
       </ul>
       <hr>
@@ -40,139 +35,136 @@
         <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
       </ul>
     </nav>
+    <div class="sider-overlay"></div>
     <main class="main">
       <h1 class="box-title">Quản lý danh mục</h1>
-      <div class="section-1">
-        <div class="wrap">
-          <div class ="item-label">Bộ lọc</div>
-          <div class ="item-select">
+      <div class="section1">
+        <div class="inner-wrap">
+          <div class="inner-item inner-label"><i class="fa-solid fa-filter"></i> Bộ lọc</div>
+          <div class="inner-item">
             <select>
               <option value="">Trạng thái</option>
               <option value="">Hoạt động</option>
               <option value="">Tạm dừng</option>
             </select>
+          </div>
+          <div class="inner-item">
             <select>
               <option value="">Người tạo</option>
               <option value="">Lê Văn A</option>
               <option value="">Lê Văn B</option>
             </select>
           </div>
-          <div class="item-date">
-              <input type="date"><span>-</span>
-              <input type="date">
+          <div class="inner-item inner-date">
+            <input type="date"><span>-</span>
+            <input type="date">
           </div>
-          <div class="item-reset"><i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc</div>
+          <div class="inner-item inner-reset"><i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc</div>
+        </div>
       </div>
-      <div class="section-2">
-          <div class="wrap">
-              <div class="item-label">Hành động</div>
-              <div class="item-select">
-                  <select>
-                      <option value="">-- Chọn hành động --</option>
-                      <option value="">Hoạt động</option>
-                      <option value="">Dừng hoạt động</option>
-                      <option value="">Xóa</option>
-                  </select>
-              </div>
-              <div class="item-button">
-                  <button class="apply">Áp dụng</button>
-              </div>
-              <div class="item-search">
-                  <input type="text" placeholder="Tìm kiếm">
-              </div>
-         
-          <div class="item-create">
-              <button class="create">+ Tạo mới</button>
-          </div>
-          </div>
-      </div>
-      <div class = "section-3">
-        <div class="table1">
-        <table>
-          <thead>
-            <tr>
-              <th class="inner-center">
-                <input class="inner-check" type="checkbox">
-              </th>
-              <th>Tên danh mục</th>
-              <th>Ảnh đại diện</th>
-              <th class="inner-center">Vị trí</th>
-              <th>Người tạo</th>
-              <th>Người cập nhật</th>
-              <th class="inner-center">Trạng thái</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input class="inner-check" type="checkbox"></td>
-              <td>Danh mục 1</td>
-              <td><img src="../assets/images/tour-1.jpg" class="inner-avatar"></td>
-              <td class = "inner-center">1</td>
-              <td>
-                <div>Lê Văn A</div>
-                <div class="inner-time">18:30 - 20/08/2025</div>
-              </td>
-              <td>
-                <div>Lê Văn A</div>
-                <div class="inner-time">18:30 - 20/08/2025</div>
-              </td>
-              <td class="inner-center"><span class="status status-active">Hoạt động</span></td>
-              <td>
-                <button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa</button>
-                <button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Xóa</button>
-              </td>
-            </tr>
-            <tr>
-              <td><input class="inner-check" type="checkbox"></td>
-              <td>Danh mục 2</td>
-              <td><img src="../assets/images/tour-2.png" class="inner-avatar"></td>
-              <td class = "inner-center">2</td>
-              <td>
-                <div>Lê Văn B</div>
-                <div class="inner-time">07:10 - 15/06/2025</div>
-              </td>
-              <td>
-                <div>Lê Văn B</div>
-                <div class="inner-time">07:10 - 15/06/2025</div>
-              </td>
-              <td class="inner-center"><span class="status status-active">Hoạt động</span></td>
-              <td>
-                <button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa</button>
-                <button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Xóa</button>
-              </td>
-            </tr>
-              <td><input class="inner-check" type="checkbox"></td>
-              <td>Danh mục 3</td>
-              <td><img src="../assets/images/tour-3.png" class="inner-avatar"></td>
-              <td class = "inner-center">3</td>
-              <td>
-                <div>Lê Văn C</div>
-                <div class="inner-time">10:31 - 25/07/2025</div>
-              </td>
-              <td>
-                <div>Lê Văn C</div>
-                <div class="inner-time">10:31 - 25/07/2025</div>
-              </td>
-              <td class="inner-center"><span class="status status-active">Hoạt động</span></td>
-              <td>
-                <button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i> Chỉnh sửa</button>
-                <button class="btn btn-delete"><i class="fa-solid fa-trash"></i> Xóa</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="section-4">
-          <div class="inner-label">Hiển thị</div>
-          <div class="inner-select">
+      <div class="section2">
+        <div class="inner-wrap">
+          <div class="inner-change-status">
+            <div class="inner-item">
               <select>
-                  <option value="">Trang 1</option>
-                  <option value="">Trang 2</option>
-                  <option value="">Trang 3</option>
+                <option value="">-- Hành động --</option>
+                <option value="">Hoạt động</option>
+                <option value="">Dừng hoạt động</option>
+                <option value="">Xóa</option>
               </select>
+            </div>
+            <div class="inner-item">
+              <button>Áp dụng</button>
+            </div>
+          </div>
+          <div class="inner-search"><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm">
+          </div>
+          <div class="inner-button-create">
+            <button>+ Tạo mới</button>
+          </div>
+        </div>
       </div>
-    </main> 
-    <script src="../assets/js/scriptAdmin.js"></script>   
-</body>
+      <div class="section3">
+        <div class="table3">
+          <table>
+            <thead>
+              <tr>
+                <th class="inner-center">
+                  <input class="inner-check" type="checkbox">
+                </th>
+                <th>Tên danh mục</th>
+                <th>Ảnh đại diện</th>
+                <th class="inner-center">Vị trí</th>
+                <th class="inner-center">Trạng thái</th>
+                <th>Tạo bởi</th>
+                <th>Cập nhật bởi</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="inner-center">
+                  <input class="inner-check" type="checkbox">
+                </td>
+                <td>Danh mục 1</td>
+                <td><img class="inner-avatar" src="../assets/images/tour-1.jpg"></td>
+                <td class="inner-center">1</td>
+                <td class="inner-center">
+                  <div class="badge badge-green">Hoạt động</div>
+                </td>
+                <td>
+                  <div>Lê Văn A</div>
+                  <div class="inner-time">16:30 - 20/10/2024</div>
+                </td>
+                <td>
+                  <div>Lê Văn A</div>
+                  <div class="inner-time">16:30 - 20/10/2024</div>
+                </td>
+                <td>
+                  <div class="inner-buttons">
+                    <button class="inner-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="inner-delete"><i class="fa-regular fa-trash-can"></i></button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="inner-center">
+                  <input class="inner-check" type="checkbox">
+                </td>
+                <td>Danh mục 2</td>
+                <td><img class="inner-avatar" src="../assets/images/tour-2.png"></td>
+                <td class="inner-center">2</td>
+                <td class="inner-center">
+                  <div class="badge badge-green">Hoạt động</div>
+                </td>
+                <td>
+                  <div>Lê Văn A</div>
+                  <div class="inner-time">16:30 - 20/10/2024</div>
+                </td>
+                <td>
+                  <div>Lê Văn A</div>
+                  <div class="inner-time">16:30 - 20/10/2024</div>
+                </td>
+                <td>
+                  <div class="inner-buttons">
+                    <button class="inner-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="inner-delete"><i class="fa-regular fa-trash-can"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="section4"><span class="inner-label">Hiển thị</span>
+        <select class="inner-pagination">
+          <option>Trang 1</option>
+          <option>Trang 2</option>
+          <option>Trang 3</option>
+        </select>
+      </div>
+    </main>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
 </html>
