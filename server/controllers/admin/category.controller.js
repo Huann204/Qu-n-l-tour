@@ -12,12 +12,30 @@ module.exports.list = async (req, res) => {
 
   if(req.query.status) {
     find.status = req.query.status;
-  }
+  };
 
   if(req.query.createdBy) {
     find.createdBy = req.query.createdBy;
-  }
+  };
+
+  const dateFilter = {};
+
+  if(req.query.startDate) {    
+    const startDate = moment(req.query.startDate).startOf("date").toDate();
+    dateFilter.$gte = startDate;    
+  };
+
+   if(req.query.endDate) {
+    const endDate = moment(req.query.endDate).endOf("date").toDate();
+    dateFilter.$lte = endDate;    
+  };
+  // gte = greater than or equal
+  // lte = less than or equal
   
+  if(Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  };
+
   const categoryList = await Category.find(find)
   .sort({
     position: "asc"
