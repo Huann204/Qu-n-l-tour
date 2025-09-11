@@ -13,6 +13,10 @@ module.exports.list = async (req, res) => {
   if(req.query.status) {
     find.status = req.query.status;
   }
+
+  if(req.query.createdBy) {
+    find.createdBy = req.query.createdBy;
+  }
   
   const categoryList = await Category.find(find)
   .sort({
