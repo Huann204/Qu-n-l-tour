@@ -108,8 +108,25 @@ module.exports.registerPost = async (req, res) => {
   });
 
   await newAccount.save();
-  
 
+  // gửi mã OTP qua email cho người dùng (tự động)
+  const subject = "Đăng ký tài khoản thành công - Chờ phê duyệt";
+  const content = `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; 
+              border: 1px solid #ddd; border-radius: 8px; padding: 20px; 
+              background-color: #f9f9f9; color: #333;">
+    <h2 style="color: #4CAF50; text-align: center;">Thông báo đăng ký tài khoản</h2>
+    <p>Xin chào <b>${fullName}</b>,</p>
+    <p>Bạn đã đăng ký tài khoản thành công trên hệ thống.</p>
+    <p>Hiện tại, tài khoản của bạn đang được quản trị viên xem xét và phê duyệt.</p>
+    <p>Chúng tôi sẽ thông báo cho bạn ngay khi tài khoản được kích hoạt.</p>
+    <br>
+    <p style="margin-top: 20px;">Trân trọng,</p>
+    <p><i>Đội ngũ hỗ trợ</i></p>
+  </div>
+`;
+  emailHelpers.sendEmail(email, subject, content);
+  
   res.json({
     code: "success",
     message: "Đăng ký tài khoản thành công!"
