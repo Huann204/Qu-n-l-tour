@@ -1,4 +1,5 @@
 const moment = require("moment");
+const slugify = require('slugify');
 const Category = require("../../models/category.model");
 const categoryHelper = require("../../helpers/category.helper");
 const AccountAdmin = require("../../models/account-admin.model");
@@ -12,12 +13,84 @@ module.exports.list = async (req, res) => {
 
   if(req.query.status) {
     find.status = req.query.status;
-  }
+  };
+
+  if(req.query.createdBy) {
+    find.createdBy = req.query.createdBy;
+  };
+
+  const dateFilter = {};
+
+  if(req.query.startDate) {    
+    const startDate = moment(req.query.startDate).startOf("date").toDate();
+    dateFilter.$gte = startDate;    
+  };
+
+   if(req.query.endDate) {
+    const endDate = moment(req.query.endDate).endOf("date").toDate();
+    dateFilter.$lte = endDate;    
+  };
+  // gte = greater than or equal
+  // lte = less than or equal
   
+  if(Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  };
+
+  // Tìm kiếm
+  if(req.query.keyword) {
+    const keyword = slugify(req.query.keyword, {
+      lower: true
+    })
+
+    const keywordRegex = new RegExp(keyword);
+     find.slug = keywordRegex;
+
+    // const keywordRegex = new RegExp(req.query.keyword, "i");
+    // find.name = keywordRegex;
+  }
+  // Hết Tìm kiếm
+
+  // Pagination
+  const limitItems = 3;
+  let page = 1;
+
+  if(req.query.page) {
+    const currentPage = parseInt(req.query.page);
+
+    if(currentPage > 0) {
+      page = currentPage;
+    };
+  };
+  
+  const totalRecord = await Category.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+
+  if(page > totalPage) {
+    page = totalPage
+  };
+
+  if(totalPage === 0) {
+    page = 1;
+  };
+  
+  const skip = (page - 1) * limitItems;
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+  }
+
+  // End Pagination
+
+
   const categoryList = await Category.find(find)
   .sort({
     position: "asc"
-  });
+  })
+  .limit(limitItems)
+  .skip(skip)
+  ;
   
 
   for (const item of categoryList) {
@@ -50,7 +123,8 @@ module.exports.list = async (req, res) => {
   res.render("admin/pages/category-list.pug", {
     pageTitle: "Quản lý danh mục",
     categoryList: categoryList,
-    accountAdminList: accountAdminList
+    accountAdminList: accountAdminList,
+    pagination: pagination
   })
 };
 
@@ -180,4 +254,42 @@ module.exports.deletePatch = async (req, res) => {
       message: "Id không hợp lệ!"
     });
   };
+}
+
+module.exports.changeMultiPatch = async (req, res) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "active":
+      case "inactive":
+        await Category.updateMany({
+          _id: { $in: ids }
+        }, {
+          status: option,
+          updatedAt: Date.now(),
+          updatedBy: req.account.id,
+        });
+        req.flash("success", "Đổi trạng thái thành công!");
+        break;
+      case "delete":
+        await Category.updateMany({
+          _id: { $in: ids }
+        }, {
+          deleted: true,
+          deletedAt: Date.now(),
+          deletedBy: req.account.id,
+        });
+        req.flash("success", "Xóa thành công!");
+        break;
+    }
+    res.json({
+      code: "success",
+    });
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Id tồn tại trong hệ thống!"
+    })
+  }
 }

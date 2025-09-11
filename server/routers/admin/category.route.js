@@ -27,4 +27,6 @@ router.patch(
   categoryController.deletePatch
 );
 
+router.patch(`/change-multi`, categoryController.changeMultiPatch);
+
 module.exports = router;
