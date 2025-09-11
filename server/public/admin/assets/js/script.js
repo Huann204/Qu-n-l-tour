@@ -23,8 +23,23 @@ if(listFilepondImage.length > 0) {
   listFilepondImage.forEach(filepondImage => {
     FilePond.registerPlugin(FilePondPluginImagePreview);
     FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+     let files = null;
+    const elementImageDefault = filepondImage.closest("[image-default]");
+    if(elementImageDefault) {
+      const imageDefault = elementImageDefault.getAttribute("image-default");
+      if(imageDefault) {
+        files = [
+          {
+            source: imageDefault, // Đường dẫn ảnh
+          },
+        ]
+      }
+    }
+
     filePond[filepondImage.name] = FilePond.create(filepondImage, {
-      labelIdle: '+'
+      labelIdle: '+',
+      files: files
     });
   });
 }
@@ -54,16 +69,91 @@ if(categoryCreateForm) {
       }
       const description = tinymce.get("description").getContent();
       
-      console.log(name);
-      console.log(parent);
-      console.log(position);
-      console.log(status);
-      console.log(avatar);
-      console.log(description);
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.href = `/${pathAdmin}/category/list`;
+        }
+      })
+    });
+}
+// End Category Create Form
+
+// Category Edit Form
+const categoryEditForm = document.querySelector("#category-edit-form");
+if(categoryEditForm) {
+  const validation = new JustValidate('#category-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const description = tinymce.get("description").getContent();
+
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category/edit/${id}`, {
+      method: "PATCH",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.reload();
+        }
+      })
     })
   ;
 }
-// End Category Create Form
+// End Category Edit Form
 
 
 // Setting Website Info Form
@@ -248,9 +338,7 @@ if(settingAccountAdminCreateForm) {
 
 
 // Logout
-  const buttonLogout = document.querySelector(".sider .inner-logout");
-  console.log(buttonLogout);
-  
+  const buttonLogout = document.querySelector(".sider .inner-logout");  
     if(buttonLogout) {
       buttonLogout.addEventListener("click", () => {
         fetch(`/${pathAdmin}/account/logout`, {
@@ -267,3 +355,286 @@ if(settingAccountAdminCreateForm) {
 
 
 // End Logout
+
+// Alert
+const alertTime = document.querySelector("[alert-time]");
+if(alertTime) {
+  let time = alertTime.getAttribute("alert-time");
+  time = time ? parseInt(time) : 4000;
+  setTimeout(() => {
+    alertTime.remove(); // xóa phần tử khỏi giao diện
+  }, time);
+}
+
+// End Alert
+
+// Button Delete
+const listButtonDelete = document.querySelectorAll("[button-delete]");
+if(listButtonDelete.length > 0) {
+  listButtonDelete.forEach(button => {
+    button.addEventListener("click", () => {
+      const dataApi = button.getAttribute("data-api");
+      
+
+      fetch(dataApi, {
+        method: "PATCH"
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code === "error") {
+            alert(data.message);
+          };
+
+          if(data.code === "success") {
+            window.location.reload();
+          };
+          
+        })
+    })
+  })
+  
+}
+
+// End Button Delete
+
+// Filter Status 
+
+const filterStatus = document.querySelector("[filter-status]");
+if(filterStatus) {
+  const url = new URL(window.location.href);
+  
+
+  filterStatus.addEventListener("change", () => {
+    const value = filterStatus.value;
+    if(value) {
+      url.searchParams.set("status", value);
+    }else {
+      url.searchParams.delete("status");
+    };
+
+    window.location.href = url.href;
+  })
+
+  // Hiển thị lựa chọn mặc định
+  const valueCurrent = url.searchParams.get("status");
+  if(valueCurrent) {
+    filterStatus.value = valueCurrent;
+  }
+}
+
+// End Filter Status 
+
+// Filter createdBy
+
+const filterCreatedBy = document.querySelector("[filter-created-by]");
+if(filterCreatedBy) {
+  const url = new URL(window.location.href);
+  
+  filterCreatedBy.addEventListener("change", () => {
+    const value = filterCreatedBy.value;
+    if(value) {
+      url.searchParams.set("createdBy", value);
+    }else {
+      url.searchParams.delete("createdBy");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("createdBy");
+  if(valueCurrent) {
+    filterCreatedBy.value = valueCurrent;
+  };
+
+}
+
+// End Filter createdBy
+
+// Filter startDate
+
+const filterStartDate = document.querySelector("[filter-start-date]");
+if(filterStartDate) {
+  const url = new URL(window.location.href);
+  
+  filterStartDate.addEventListener("change", () => {
+    const value = filterStartDate.value;
+    if(value) {
+      url.searchParams.set("startDate", value);
+    }else {
+      url.searchParams.delete("startDate");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("startDate");
+  if(valueCurrent) {
+    filterStartDate.value = valueCurrent;
+  };
+
+}
+
+// End Filter startDate
+
+// Filter endDate
+
+const filterEndDate = document.querySelector("[filter-end-date]");
+if(filterEndDate) {
+  const url = new URL(window.location.href);
+  
+  filterEndDate.addEventListener("change", () => {
+    const value = filterEndDate.value;
+    if(value) {
+      url.searchParams.set("endDate", value);
+    }else {
+      url.searchParams.delete("endDate");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("endDate");
+  if(valueCurrent) {
+    filterEndDate.value = valueCurrent;
+  };
+
+}
+
+// End Filter endDate
+
+// Filter reset
+const filterReset = document.querySelector('[filter-reset]');
+if(filterReset) {
+  const url = new URL(window.location.href);
+  
+
+  filterReset.addEventListener("click", () => {
+    url.search = "";    
+    window.location.href = url.href;    
+  })
+}
+
+// End Filter reset
+
+// Check All
+const checkAll = document.querySelector("[check-all]");
+if(checkAll) {
+  checkAll.addEventListener("click", () => {
+    const listCheckItem = document.querySelectorAll("[check-item]");
+    listCheckItem.forEach(item => {
+      item.checked = checkAll.checked;
+    })
+  })
+};
+// End Check All
+
+// Change Multi
+
+const changeMulti = document.querySelector('[change-multi]');
+if(changeMulti) {
+ const select = changeMulti.querySelector("select");
+ const button = changeMulti.querySelector("button");
+ const dataApi = changeMulti.getAttribute("data-api");
+
+ button.addEventListener("click", () => {
+  const option = select.value;
+  let listInputChecked = document.querySelectorAll("input[type='checkbox']:checked");
+  if(option && listInputChecked.length > 0) {
+    const ids = [];
+    listInputChecked.forEach(item => {
+      const id = item.getAttribute("check-item");
+      if(id) {
+        ids.push(id);
+      }
+    });
+
+    const dataFinal = {
+      option: option,
+      ids: ids
+    };
+
+    fetch(dataApi, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dataFinal)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        };
+
+        if(data.code === "success") {
+          window.location.reload();        
+        }
+      });
+    
+  }else {
+    alert("Vui lòng chọn option và danh mục muốn thực hiện!")
+  };
+
+ })
+  
+}
+
+// End Change Multi
+
+// Search
+const search = document.querySelector("[search]");
+if(search) {
+  let url = new URL(window.location.href);
+
+  search.addEventListener("keyup", (event) => {
+    if(event.code === "Enter" ) {
+    
+      const value = search.value;
+      if(value) {
+        url.searchParams.set("keyword", value.trim());
+      }else {
+        url.searchParams.delete("keyword");
+      };
+
+      window.location.href = url.href;
+    };
+  })
+
+    // Khôi phục keyword khi load trang
+    const valueCurrent = url.searchParams.get("keyword");
+    if(valueCurrent) {
+      search.value = valueCurrent;
+    }
+}
+
+// End Search
+
+// Pagination
+const pagination = document.querySelector("[pagination]");
+if(pagination) {
+  let url = new URL(window.location.href);
+
+  pagination.addEventListener("change", () => {
+    let value = pagination.value;
+
+    if(value) {
+      url.searchParams.set("page", value);
+    }else {
+      url.searchParams.delete("page");
+    };
+
+    window.location.href = url.href;    
+  })
+
+  const currentValue = url.searchParams.get("page");
+  if(currentValue) {
+    pagination.value = currentValue;
+  }
+  
+}
+
+
+// End Pagination
