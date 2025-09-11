@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách tour</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  
+  <!-- Top Header -->
+  <div class="top-header">
+    <div class="container">
+      <div class="inner-wrap">
+        <div class="inner-item">
+          <i class="fa-solid fa-phone"></i> 0123.456.789
+        </div>
+        <div class="inner-item">
+          <i class="fa-solid fa-envelope"></i> contact@28travel.com
+        </div>
+        <div class="inner-item">
+          <i class="fa-solid fa-building"></i> Số 123, đường ABC, thành phố XYZ
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Top Header -->
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="inner-wrap">
+        <!-- Menu Mobile -->
+        <button class="inner-menu-mobile">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Logo -->
+        <div class="inner-logo">
+          <a href="index.html">
+            <img src="assets/images/logo.png" alt="28.TRAVEL">
+          </a>
+        </div>
+
+        <!-- Menu -->
+        <nav class="inner-menu">
+          <ul>
+            <li>
+              <a href="index.html" class="active">
+                Trang chủ
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Tour trong nước
+              </a>
+              <i class="fa-solid fa-caret-down"></i>
+              <ul>
+                <li>
+                  <a href="#">
+                    Tour Miền Bắc
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Miền Trung
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Miền Nam
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Xuyên Việt
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                Tour nước ngoài
+              </a>
+              <i class="fa-solid fa-caret-down"></i>
+              <ul>
+                <li>
+                  <a href="#">
+                    Tour Châu Á
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Châu Âu
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Châu Mỹ
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Tour Châu Úc
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                Tin tức
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                Liên hệ
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Cart -->
+        <div class="inner-cart">
+          <a href="#">
+            <img src="assets/images/icon-cart.svg" alt="Cart">
+            <span>1</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!-- Breadcrumb -->
+  <div class="box-breadcrumb">
+    <div class="inner-image">
+      <img src="assets/images/banner-6.jpg" alt="">
+    </div>
+    <div class="inner-content">
+      <div class="container">
+        <h1 class="inner-title">
+          Tour Nước Ngoài
+        </h1>
+        <div class="inner-list">
+          <a href="#">Trang Chủ</a>
+          <a href="#">Tour Nước Ngoài</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Breadcrumb -->
+
+  <!-- Section 9 -->
+  <div class="section-9">
+    <div class="container">
+      <div class="inner-wrap">
+        <div class="inner-left">
+          <!-- Box Filter -->
+          <div class="box-filter">
+            <div class="inner-head">
+              <div class="inner-title">
+                Bộ Lọc
+              </div>
+              <i class="fa-solid fa-filter"></i>
+            </div>
+            <div class="inner-body">
+              <div class="inner-group">
+                <div class="inner-label">Điểm đi</div>
+                <select name="">
+                  <option value="">-- Chọn điểm đi --</option>
+                  <option value="">Hà Nội</option>
+                  <option value="">Đà Nẵng</option>
+                  <option value="">Nha Trang</option>
+                </select>
+              </div>
+              <div class="inner-group">
+                <div class="inner-label">Điểm đến</div>
+                <select name="">
+                  <option value="">-- Chọn điểm đến --</option>
+                  <option value="">Hà Nội</option>
+                  <option value="">Đà Nẵng</option>
+                  <option value="">Nha Trang</option>
+                </select>
+              </div>
+              <div class="inner-group">
+                <div class="inner-label">Ngày khởi hành</div>
+                <input type="date">
+              </div>
+              <div class="inner-group">
+                <div class="inner-label">Số Lượng Hành Khách</div>
+                <div class="inner-input-list">
+                  <div class="inner-input-item">
+                    <div class="inner-label">Người lớn:</div>
+                    <input type="number" value="0">
+                  </div>
+                  <div class="inner-input-item">
+                    <div class="inner-label">Trẻ em:</div>
+                    <input type="number" value="0">
+                  </div>
+                  <div class="inner-input-item">
+                    <div class="inner-label">Em bé:</div>
+                    <input type="number" value="0">
+                  </div>
+                </div>
+              </div>
+              <div class="inner-group">
+                <div class="inner-label">Mức giá</div>
+                <select name="">
+                  <option value="">-- Chọn khoảng giá --</option>
+                  <option value="">Dưới 1tr</option>
+                  <option value="">Từ 1tr đến 3tr</option>
+                  <option value="">Từ 3tr đến 6tr</option>
+                  <option value="">Từ 6tr đến 10tr</option>
+                  <option value="">Trên 10tr</option>
+                </select>
+              </div>
+              <div class="inner-group">
+                <button class="inner-button">
+                  Áp Dụng
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="inner-overlay"></div>
+          <!-- End Box Filter -->
+        </div>
+        <div class="inner-right">
+          <div class="inner-info">
+            <h2 class="inner-title">
+              Tour Nước Ngoài
+            </h2>
+            <div class="inner-desc">
+              Du lịch Châu Á: là châu lục lớn và đông dân nhất thế giới. Châu Á cũng có nhiều danh lam thắng cảnh đẹp tại một số quốc gia như Hàn Quốc, Nhật Bản, Trung Quốc, Việt Nam,... và VK Travel là nhà tổ chức du lịch chuyên nghiệp hàng đầu Châu Á, đã 5 lần liên tiếp nhận giải TTG Travel Awards. Hãy cùng 28.Travel du lịch Châu Á để tận hưởng những dịch vụ tốt nhất.
+            </div>
+          </div>
+          <div class="inner-info-2">
+            <div class="inner-sort">
+              <div class="inner-label">
+                Sắp xếp:
+              </div>
+              <div class="inner-list">
+                <button>
+                  Giá tăng dần
+                  <i class="fa-solid fa-square-caret-up"></i>
+                </button>
+                <button>
+                  Giá giảm dần
+                  <i class="fa-solid fa-square-caret-down"></i>
+                </button>
+                <button class="active">
+                  Khuyến Mại Hot
+                  <i class="fa-solid fa-tag"></i>
+                </button>
+                <button>
+                  Xem Nhiều
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="inner-count-record">
+              Tất cả: <b>101 Tour</b>
+            </div>
+            <button class="inner-filter-mobile">
+              <span class="inner-title">
+                Bộ Lọc
+              </span>
+              <i class="fa-solid fa-filter"></i>
+            </button>
+          </div>
+          <div class="inner-list-tour">
+            <!-- Product Item -->
+            <div class="product-item">
+              <div class="inner-image">
+                <a href="">
+                  <img src="assets/images/product-1.jpg" alt="">
+                </a>
+              </div>
+              <div class="inner-discount">
+                <i class="fa-solid fa-bolt"></i>
+                Giảm -30%
+              </div>
+              <div class="inner-content">
+                <h3 class="inner-title">
+                  <a href="">Hà Nội - Lào Cai - SaPa 4N3Đ</a>
+                </h3>
+                <div class="inner-prices">
+                  <div class="inner-price-old">
+                    13.650.000<span class="inner-unit">đ</span>
+                  </div>
+                  <div class="inner-price-new">
+                    2.590.000<span class="inner-unit">đ</span>
+                  </div>
+                </div>
+                <div class="inner-desc">
+                  <div class="inner-desc-item">
+                    Mã Tour: <b>123456789</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Ngày Khởi Hành: <b>22/07/2024</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Thời Gian: <b>10 Ngày 9 Đêm</b>
+                  </div>
+                </div>
+                <div class="inner-meta">
+                  <div class="inner-rating">
+                    <div class="inner-stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="inner-number">
+                      (5)
+                    </div>
+                  </div>
+                  <div class="inner-stock">
+                    <div class="inner-label">
+                      Số chỗ còn:
+                    </div>
+                    <div class="inner-number">
+                      10
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Product Item -->
+            <!-- Product Item -->
+            <div class="product-item">
+              <div class="inner-image">
+                <a href="">
+                  <img src="assets/images/product-2.jpg" alt="">
+                </a>
+              </div>
+              <div class="inner-discount">
+                <i class="fa-solid fa-bolt"></i>
+                Giảm -30%
+              </div>
+              <div class="inner-content">
+                <h3 class="inner-title">
+                  <a href="">Tour 2024 Phú Quốc - Thiên Đường Đảo Ngọc (3N2D)</a>
+                </h3>
+                <div class="inner-prices">
+                  <div class="inner-price-old">
+                    13.650.000<span class="inner-unit">đ</span>
+                  </div>
+                  <div class="inner-price-new">
+                    2.590.000<span class="inner-unit">đ</span>
+                  </div>
+                </div>
+                <div class="inner-desc">
+                  <div class="inner-desc-item">
+                    Mã Tour: <b>123456789</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Ngày Khởi Hành: <b>22/07/2024</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Thời Gian: <b>10 Ngày 9 Đêm</b>
+                  </div>
+                </div>
+                <div class="inner-meta">
+                  <div class="inner-rating">
+                    <div class="inner-stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="inner-number">
+                      (5)
+                    </div>
+                  </div>
+                  <div class="inner-stock">
+                    <div class="inner-label">
+                      Số chỗ còn:
+                    </div>
+                    <div class="inner-number">
+                      10
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Product Item -->
+            <!-- Product Item -->
+            <div class="product-item">
+              <div class="inner-image">
+                <a href="">
+                  <img src="assets/images/product-3.jpg" alt="">
+                </a>
+              </div>
+              <div class="inner-discount">
+                <i class="fa-solid fa-bolt"></i>
+                Giảm -30%
+              </div>
+              <div class="inner-content">
+                <h3 class="inner-title">
+                  <a href="">Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL</a>
+                </h3>
+                <div class="inner-prices">
+                  <div class="inner-price-old">
+                    13.650.000<span class="inner-unit">đ</span>
+                  </div>
+                  <div class="inner-price-new">
+                    2.590.000<span class="inner-unit">đ</span>
+                  </div>
+                </div>
+                <div class="inner-desc">
+                  <div class="inner-desc-item">
+                    Mã Tour: <b>123456789</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Ngày Khởi Hành: <b>22/07/2024</b>
+                  </div>
+                  <div class="inner-desc-item">
+                    Thời Gian: <b>10 Ngày 9 Đêm</b>
+                  </div>
+                </div>
+                <div class="inner-meta">
+                  <div class="inner-rating">
+                    <div class="inner-stars">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="inner-number">
+                      (5)
+                    </div>
+                  </div>
+                  <div class="inner-stock">
+                    <div class="inner-label">
+                      Số chỗ còn:
+                    </div>
+                    <div class="inner-number">
+                      10
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Product Item -->
+          </div>
+
+          <!-- Pagination -->
+          <div class="box-pagination">
+            <button>
+              <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+          <!-- End Pagination -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Section 9 -->
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="inner-top">
+        <h2 class="inner-title">
+          Đăng ký ngay để không bỏ lỡ các chương trình của chúng tôi
+        </h2>
+        <form action="#" class="inner-form" id="email-form">
+          <input type="email" placeholder="Nhập email của bạn..." id="email-input" name="email">
+          <button type="submit">
+            Đăng Ký Ngay
+          </button>
+        </form>
+      </div>
+      <div class="inner-middle">
+        <nav class="inner-links">
+          <ul>
+            <li>
+              <a href="#">Trang Chủ</a>
+            </li>
+            <li>
+              <a href="#">Tour Trong Nước</a>
+            </li>
+            <li>
+              <a href="#">Tour Nước Ngoài</a>
+            </li>
+            <li>
+              <a href="#">Tin Tức</a>
+            </li>
+            <li>
+              <a href="#">Liên Hệ</a>
+            </li>
+          </ul>
+        </nav>
+        <nav class="inner-socials">
+          <ul>
+            <li>
+              <a href="#" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="inner-bottom">
+        <div class="inner-copyright">
+          © 2024 28Tech. All rights reserved.
+        </div>
+        <div class="inner-logo">
+          <a href="index.html">
+            <img src="assets/images/logo.png" alt="">
+          </a>
+        </div>
+        <nav class="inner-links">
+          <ul>
+            <li>
+              <a href="#">Điều khoản dịch vụ</a>
+            </li>
+            <li>
+              <a href="#">Chính sách bảo mật</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Box Contact -->
+  <div class="box-contact">
+    <ul>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa-brands fa-viber"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" target="_blank">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- End Box Contact -->
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
+  <script src="assets/js/script.js"></script>
+
+</body>
+</html>
