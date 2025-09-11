@@ -611,3 +611,30 @@ if(search) {
 }
 
 // End Search
+
+// Pagination
+const pagination = document.querySelector("[pagination]");
+if(pagination) {
+  let url = new URL(window.location.href);
+
+  pagination.addEventListener("change", () => {
+    let value = pagination.value;
+
+    if(value) {
+      url.searchParams.set("page", value);
+    }else {
+      url.searchParams.delete("page");
+    };
+
+    window.location.href = url.href;    
+  })
+
+  const currentValue = url.searchParams.get("page");
+  if(currentValue) {
+    pagination.value = currentValue;
+  }
+  
+}
+
+
+// End Pagination
