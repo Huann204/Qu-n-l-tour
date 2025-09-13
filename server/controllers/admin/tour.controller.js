@@ -220,6 +220,38 @@ module.exports.trash = async (req, res) => {
     deleted: true,
   };
 
+  // pagination
+  let limitItems = 3;
+  let page = 1;
+
+  if(req.query.page) {
+    const currentPage = parseInt(req.query.page);
+
+    if(currentPage > 0) {
+      page = currentPage;
+    };
+  }
+
+  const totalRecord = await Tour.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+
+  if(page > totalPage) {
+    page = totalPage;
+  };
+
+  if(totalPage === 0) {
+    page = 1;
+  };
+
+  const skip = (page - 1) * limitItems;
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage
+  };
+
+  // End pagination
+
   const tourList = await Tour
     .find(find)
     .sort({
@@ -249,7 +281,8 @@ module.exports.trash = async (req, res) => {
 
   res.render("admin/pages/tour-trash", {
     pageTitle: "Thùng rác tour",
-    tourList: tourList
+    tourList: tourList,
+    pagination: pagination
   })
 };
 
