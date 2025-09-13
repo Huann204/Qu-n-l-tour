@@ -31,5 +31,7 @@ router.patch(
   tourController.deletePatch
 );
 
+router.get('/trash', tourController.trash);
+
 
 module.exports = router
