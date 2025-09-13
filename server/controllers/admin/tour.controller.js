@@ -1,4 +1,5 @@
 const Category = require("../../models/category.model");
+const slugify = require('slugify');
 const moment = require("moment");
 const categoryHelper = require("../../helpers/category.helper");
 const City = require("../../models/city.model");
@@ -58,12 +59,57 @@ module.exports.list = async (req, res) => {
   };
   // Hết lọc theo giá
 
+  // Pagination
+  const limitItems = 3;
+  let page = 1;
+
+  if(req.query.page) {
+    const currentPage = parseInt(req.query.page);
+
+    if(currentPage > 0) {
+      page = currentPage;
+    };
+  };
+
+  const totalRecord = await Tour.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+
+  if(page > totalPage) {
+    page = totalPage;
+  };
+
+  if(totalRecord === 0) {
+    page = 1;
+  };
+
+  const skip = (page - 1)*limitItems;
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage
+  };
+  // End pagination
+
+
+  // search
+  if(req.query.keyword) {
+    let keyword = slugify(req.query.keyword, {
+      lower: true
+    });    
+
+    let keywordRegex = new RegExp(keyword);
+    find.slug = keywordRegex; 
+  }
+  // End search
 
   const tourList = await Tour
     .find(find)
     .sort({
       position: "asc"
     })
+    .limit(limitItems)
+    .skip(skip)
+
 
     for (const item of tourList) {
       if(item.createdBy) {
@@ -99,7 +145,8 @@ res.render("admin/pages/tour-list", {
     pageTitle: "Quản lý tour",
     tourList: tourList,
     accountAdminList: accountAdminList,
-    categoryList: categoryList
+    categoryList: categoryList,
+    pagination: pagination
   })
 }
 

@@ -932,3 +932,58 @@ if(filterReset) {
 }
 
 // End Filter reset
+
+// Pagination
+const pagination = document.querySelector("[pagination]");
+if(pagination) {
+  let url = new URL(window.location.href);
+
+  pagination.addEventListener("change", () => {
+    let value = pagination.value;
+
+    if(value) {
+      url.searchParams.set("page", value);
+    }else {
+      url.searchParams.delete("page");
+    };
+
+    window.location.href = url.href;    
+  })
+
+  const currentValue = url.searchParams.get("page");
+  if(currentValue) {
+    pagination.value = currentValue;
+  }
+  
+}
+
+
+// End Pagination
+
+// Search
+const search = document.querySelector("[search]");
+if(search) {
+  let url = new URL(window.location.href);
+
+  search.addEventListener("keyup", (event) => {
+    if(event.code === "Enter" ) {
+    
+      const value = search.value;
+      if(value) {
+        url.searchParams.set("keyword", value.trim());
+      }else {
+        url.searchParams.delete("keyword");
+      };
+
+      window.location.href = url.href;
+    };
+  })
+
+    // Khôi phục keyword khi load trang
+    const valueCurrent = url.searchParams.get("keyword");
+    if(valueCurrent) {
+      search.value = valueCurrent;
+    }
+}
+
+// End Search
