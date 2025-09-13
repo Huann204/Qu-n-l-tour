@@ -423,3 +423,28 @@ if(filterStatus) {
 }
 
 // End Filter Status 
+
+// Sider
+const sider = document.querySelector(".sider");
+if(sider) {
+  const pathNameCurrent = window.location.pathname;
+  // console.log(pathNameCurrent);
+  const splitPathNameCurrent = pathNameCurrent.split("/");
+  // console.log(splitPathNameCurrent);
+  
+  const menuList = sider.querySelectorAll("a");
+  menuList.forEach(item => {
+    const href = item.href;
+    const pathName = new URL(href).pathname;
+    // console.log(pathName);
+    const splitPathName = pathName.split("/");
+    if(splitPathNameCurrent[1] === splitPathName[1] && splitPathNameCurrent[2] === splitPathName[2]) {
+      item.classList.add("active");
+    }
+  })
+}
+
+/**
+ * Note: trung khop thi active
+ */
+// End Sider
