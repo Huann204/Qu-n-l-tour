@@ -1,13 +1,47 @@
 const Category = require("../../models/category.model");
+const moment = require("moment");
 const categoryHelper = require("../../helpers/category.helper");
 const City = require("../../models/city.model");
 const Tour = require("../../models/tour.model");
-
+const AccountAdmin = require("../../models/account-admin.model");
 
 
 module.exports.list = async (req, res) => {
+  const find = {
+    deleted: false,
+  };
+
+  const tourList = await Tour
+    .find(find)
+    .sort({
+      position: "asc"
+    })
+
+    for (const item of tourList) {
+      if(item.createdBy) {
+        const infoAccountCreated = await AccountAdmin.findOne({
+          _id: item.createdBy
+        });
+
+        item.createdByFullName = infoAccountCreated.fullName;
+      }
+
+      if(item.updatedBy) {
+        const infoAccountUpdated = await AccountAdmin.findOne({
+          _id: item.updatedBy
+        });
+
+        item.updatedByFullName = infoAccountUpdated.fullName;
+      }
+
+      item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+      item.updatedAtFormat = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY");
+    }
+
+
 res.render("admin/pages/tour-list", {
     pageTitle: "Quản lý tour",
+    tourList: tourList
   })
 }
 
