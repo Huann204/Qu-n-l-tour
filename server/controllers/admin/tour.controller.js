@@ -12,6 +12,10 @@ module.exports.list = async (req, res) => {
     deleted: false,
   };
 
+  if(req.query.status) {
+    find.status = req.query.status;
+  };
+
   const tourList = await Tour
     .find(find)
     .sort({
