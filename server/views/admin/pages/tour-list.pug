@@ -1,0 +1,116 @@
+extends ../layouts/default.pug
+
+block main
+  h1.box-title Quản lý tour
+
+  //- Section 4
+  .section-4
+    .inner-wrap
+      .inner-item.inner-label
+        <i class="fa-solid fa-filter"></i> Bộ lọc
+      .inner-item
+        select
+          option(value="") Trạng thái
+          option(value="") Hoạt động
+          option(value="") Tạm dừng
+      .inner-item
+        select
+          option(value="") Người tạo
+          option(value="") Lê Văn A
+          option(value="") Lê Văn B
+      .inner-item.inner-date
+        input(type="date")
+        span -
+        input(type="date")
+      .inner-item
+        select
+          option(value="") Danh mục
+          option(value="") Danh mục 1
+          option(value="") Danh mục 2
+      .inner-item
+        select
+          option(value="") Mức giá
+          option(value="") Dưới 2tr
+          option(value="") 2tr đến 4tr
+          option(value="") 4tr đến 8tr
+          option(value="") Trên 8tr
+      .inner-item.inner-reset
+        <i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc
+  //- End Section 4
+
+  //- Section 5
+  .section-5
+    .inner-wrap
+      .inner-change-status
+        .inner-item
+          select
+            option(value="") -- Hành động --
+            option(value="") Hoạt động
+            option(value="") Dừng hoạt động
+            option(value="") Xóa
+        .inner-item
+          button Áp dụng
+      .inner-search
+        <i class="fa-solid fa-magnifying-glass"></i>
+        input(type="text" placeholder="Tìm kiếm")
+      .inner-button-create
+        button + Tạo mới
+      .inner-button-trash
+        button Thùng rác
+  //- End Section 5
+
+  //- Section 6
+  .section-6
+    .table-2
+      table
+        thead
+          tr
+            th(class="inner-center")
+              input(type="checkbox" class="inner-check")
+            th Tên tour
+            th Ảnh đại diện
+            th Giá
+            th Còn lại
+            th(class="inner-center") Vị trí
+            th(class="inner-center") Trạng thái
+            th Tạo bởi
+            th Cập nhật bởi
+            th Hành động
+        tbody
+          tr
+            td(class="inner-center")
+              input(type="checkbox" class="inner-check")
+            td Tour Hạ Long
+            td
+              img(src="/admin/assets/images/tour-1.jpg" class="inner-avatar")
+            td
+              div NL: 1.900.000đ
+              div TE: 1.600.000đ
+              div EB: 1.000.000đ
+            td
+              div NL: 30
+              div TE: 20
+              div EB: 10
+            td(class="inner-center") 1
+            td(class="inner-center")
+              .badge.badge-green Hoạt động
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
+            td
+              .inner-buttons
+                button(class="inner-edit") <i class="fa-regular fa-pen-to-square"></i>
+                button(class="inner-delete") <i class="fa-regular fa-trash-can"></i>
+  //- End Section 6
+
+  //- Section 7
+  .section-7
+    span(class="inner-label") Hiển thị 1 - 9 của 78
+    select(class="inner-pagination")
+      option Trang 1
+      option Trang 2
+      option Trang 3
+  //- End Section 7
