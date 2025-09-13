@@ -16,6 +16,11 @@ module.exports.list = async (req, res) => {
     find.status = req.query.status;
   };
 
+   if(req.query.createdBy) {
+    find.createdBy = req.query.createdBy;
+  };
+
+
   const tourList = await Tour
     .find(find)
     .sort({
@@ -43,10 +48,14 @@ module.exports.list = async (req, res) => {
       item.updatedAtFormat = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY");
     }
 
+    const accountAdminList = await AccountAdmin
+    .find({})
+    .select("id fullName");
 
 res.render("admin/pages/tour-list", {
     pageTitle: "Quản lý tour",
-    tourList: tourList
+    tourList: tourList,
+    accountAdminList: accountAdminList
   })
 }
 

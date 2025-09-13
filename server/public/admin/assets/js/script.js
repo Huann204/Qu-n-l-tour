@@ -787,3 +787,30 @@ if(changeMulti) {
 }
 
 // End Change Multi
+
+// Filter createdBy
+
+const filterCreatedBy = document.querySelector("[filter-created-by]");
+if(filterCreatedBy) {
+  const url = new URL(window.location.href);
+  
+  filterCreatedBy.addEventListener("change", () => {
+    const value = filterCreatedBy.value;
+    if(value) {
+      url.searchParams.set("createdBy", value);
+    }else {
+      url.searchParams.delete("createdBy");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("createdBy");
+  if(valueCurrent) {
+    filterCreatedBy.value = valueCurrent;
+  };
+
+}
+
+// End Filter createdBy
