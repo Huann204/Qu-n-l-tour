@@ -17,4 +17,13 @@ router.post('/create',
   tourController.createPost
 );
 
+router.get('/edit/:id', tourController.edit);
+
+router.patch(
+  '/edit/:id', 
+  upload.single('avatar'), 
+  tourValidate.createPost,
+  tourController.editPatch
+);
+
 module.exports = router

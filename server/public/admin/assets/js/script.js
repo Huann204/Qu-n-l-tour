@@ -612,3 +612,113 @@ if(tourCreateForm) {
   ;
 }
 // End Tour Create Form
+
+// Tour Edit Form
+const tourEditForm = document.querySelector("#tour-edit-form");
+if(tourEditForm) {
+  const validation = new JustValidate('#tour-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên tour!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const category = event.target.category.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const priceAdult = event.target.priceAdult.value;
+      const priceChildren = event.target.priceChildren.value;
+      const priceBaby = event.target.priceBaby.value;
+      const priceNewAdult = event.target.priceNewAdult.value;
+      const priceNewChildren = event.target.priceNewChildren.value;
+      const priceNewBaby = event.target.priceNewBaby.value;
+      const stockAdult = event.target.stockAdult.value;
+      const stockChildren = event.target.stockChildren.value;
+      const stockBaby = event.target.stockBaby.value;
+      const locations = [];
+      const time = event.target.time.value;
+      const vehicle = event.target.vehicle.value;
+      const departureDate = event.target.departureDate.value;
+      const information = tinymce.get("information").getContent();
+      const schedules = [];
+
+      // locations
+      const listElementLocation = tourEditForm.querySelectorAll('input[name="locations"]:checked');
+      listElementLocation.forEach(input => {
+        locations.push(input.value);
+      });
+      // End locations
+
+      // schedules
+      const listElementScheduleItem = tourEditForm.querySelectorAll('.inner-schedule-item');
+      listElementScheduleItem.forEach(scheduleItem => {
+        const input = scheduleItem.querySelector("input");
+        const title = input.value;
+
+        const textarea = scheduleItem.querySelector("textarea");
+        const idTextarea = textarea.id;
+        const description = tinymce.get(idTextarea).getContent();
+
+        schedules.push({
+          title: title,
+          description: description
+        });
+      });
+      // End schedules
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("priceAdult", priceAdult);
+      formData.append("priceChildren", priceChildren);
+      formData.append("priceBaby", priceBaby);
+      formData.append("priceNewAdult", priceNewAdult);
+      formData.append("priceNewChildren", priceNewChildren);
+      formData.append("priceNewBaby", priceNewBaby);
+      formData.append("stockAdult", stockAdult);
+      formData.append("stockChildren", stockChildren);
+      formData.append("stockBaby", stockBaby);
+      formData.append("locations", JSON.stringify(locations));
+      formData.append("time", time);
+      formData.append("vehicle", vehicle);
+      formData.append("departureDate", departureDate);
+      formData.append("information", information);
+      formData.append("schedules", JSON.stringify(schedules));
+
+      fetch(`/${pathAdmin}/tour/edit/${id}`, {
+        method: "PATCH",
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
+    })
+  ;
+}
+// End Tour Edit Form
