@@ -663,6 +663,11 @@ a {
   border-color: red;
 }
 
+.section-8 form .inner-group textarea {
+  height: 160px;
+  padding: 18px 22px; 
+}
+
 .section5 form .ck-content {
   min-height: 300px;
   padding: 18px 22px;
