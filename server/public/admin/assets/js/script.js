@@ -448,3 +448,542 @@ if(sider) {
  * Note: trung khop thi active
  */
 // End Sider
+
+// Schedule Section 8
+const scheduleSection8 = document.querySelector(".section-8 .inner-schedule");
+if(scheduleSection8) {
+  const buttonCreate = scheduleSection8.querySelector(".inner-schedule-create");
+  const listItem = scheduleSection8.querySelector(".inner-schedule-list");
+
+  // Tạo mới
+  if(buttonCreate) {
+    buttonCreate.addEventListener("click", () => {
+      const firstItem = listItem.querySelector(".inner-schedule-item");
+      const cloneItem = firstItem.cloneNode(true);
+      cloneItem.querySelector(".inner-schedule-head input").value = "";
+
+      const body = cloneItem.querySelector(".inner-schedule-body");
+      const id = `mce_${Date.now()}`;
+      body.innerHTML = `<textarea textarea-mce id="${id}"></textarea>`;
+
+      listItem.appendChild(cloneItem);
+
+      initTinyMCE(`#${id}`);
+    })
+  }
+
+  listItem.addEventListener("click", (event) => {
+    // Đóng/mở item
+    if(event.target.closest('.inner-more')) {
+      const parentItem = event.target.closest('.inner-schedule-item');
+      if (parentItem) {
+        parentItem.classList.toggle('hidden');
+      }
+    }
+
+    // Xóa item
+    if(event.target.closest('.inner-remove')) {
+      const parentItem = event.target.closest('.inner-schedule-item');
+      const totalItem = listItem.querySelectorAll(".inner-schedule-item").length;
+      if (parentItem && totalItem > 1) {
+        parentItem.remove();
+      }
+    }
+  })
+
+  // Sắp xếp
+  new Sortable(listItem, {
+    animation: 150, // Thêm hiệu ứng mượt mà
+    handle: ".inner-move", // Chỉ cho phép kéo bằng class .inner-move
+    onStart: (event) => {
+      const textarea = event.item.querySelector("[textarea-mce]");
+      const id = textarea.id;
+      tinymce.get(id).remove();
+    },
+    onEnd: (event) => {
+      const textarea = event.item.querySelector("[textarea-mce]");
+      const id = textarea.id;
+      initTinyMCE(`#${id}`);
+    }
+  });
+}
+// End Schedule Section 8
+
+// Tour Create Form
+const tourCreateForm = document.querySelector("#tour-create-form");
+if(tourCreateForm) {
+  const validation = new JustValidate('#tour-create-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên tour!'
+      }
+    ])
+    .onSuccess((event) => {
+      const name = event.target.name.value;
+      const category = event.target.category.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+      const priceAdult = event.target.priceAdult.value;
+      const priceChildren = event.target.priceChildren.value;
+      const priceBaby = event.target.priceBaby.value;
+      const priceNewAdult = event.target.priceNewAdult.value;
+      const priceNewChildren = event.target.priceNewChildren.value;
+      const priceNewBaby = event.target.priceNewBaby.value;
+      const stockAdult = event.target.stockAdult.value;
+      const stockChildren = event.target.stockChildren.value;
+      const stockBaby = event.target.stockBaby.value;
+      const locations = [];
+      const time = event.target.time.value;
+      const vehicle = event.target.vehicle.value;
+      const departureDate = event.target.departureDate.value;
+      const information = tinymce.get("information").getContent();
+      const schedules = [];
+
+      // locations
+      const listElementLocation = tourCreateForm.querySelectorAll('input[name="locations"]:checked');
+      listElementLocation.forEach(input => {
+        locations.push(input.value);
+      });
+      // End locations
+
+      // schedules
+      const listElementScheduleItem = tourCreateForm.querySelectorAll('.inner-schedule-item');
+      listElementScheduleItem.forEach(scheduleItem => {
+        const input = scheduleItem.querySelector("input");
+        const title = input.value;
+
+        const textarea = scheduleItem.querySelector("textarea");
+        const idTextarea = textarea.id;
+        const description = tinymce.get(idTextarea).getContent();
+
+        schedules.push({
+          title: title,
+          description: description
+        });
+      });
+      // End schedules
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("priceAdult", priceAdult);
+      formData.append("priceChildren", priceChildren);
+      formData.append("priceBaby", priceBaby);
+      formData.append("priceNewAdult", priceNewAdult);
+      formData.append("priceNewChildren", priceNewChildren);
+      formData.append("priceNewBaby", priceNewBaby);
+      formData.append("stockAdult", stockAdult);
+      formData.append("stockChildren", stockChildren);
+      formData.append("stockBaby", stockBaby);
+      formData.append("locations", JSON.stringify(locations));
+      formData.append("time", time);
+      formData.append("vehicle", vehicle);
+      formData.append("departureDate", departureDate);
+      formData.append("information", information);
+      formData.append("schedules", JSON.stringify(schedules));
+
+      fetch(`/${pathAdmin}/tour/create`, {
+        method: "POST",
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code === "error") {
+            alert(data.message);
+          };
+
+          if(data.code === "success") {
+
+            window.location.href = `/${pathAdmin}/tour/list`;
+          };
+        })
+    })
+  ;
+}
+// End Tour Create Form
+
+// Tour Edit Form
+const tourEditForm = document.querySelector("#tour-edit-form");
+if(tourEditForm) {
+  const validation = new JustValidate('#tour-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên tour!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const category = event.target.category.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const priceAdult = event.target.priceAdult.value;
+      const priceChildren = event.target.priceChildren.value;
+      const priceBaby = event.target.priceBaby.value;
+      const priceNewAdult = event.target.priceNewAdult.value;
+      const priceNewChildren = event.target.priceNewChildren.value;
+      const priceNewBaby = event.target.priceNewBaby.value;
+      const stockAdult = event.target.stockAdult.value;
+      const stockChildren = event.target.stockChildren.value;
+      const stockBaby = event.target.stockBaby.value;
+      const locations = [];
+      const time = event.target.time.value;
+      const vehicle = event.target.vehicle.value;
+      const departureDate = event.target.departureDate.value;
+      const information = tinymce.get("information").getContent();
+      const schedules = [];
+
+      // locations
+      const listElementLocation = tourEditForm.querySelectorAll('input[name="locations"]:checked');
+      listElementLocation.forEach(input => {
+        locations.push(input.value);
+      });
+      // End locations
+
+      // schedules
+      const listElementScheduleItem = tourEditForm.querySelectorAll('.inner-schedule-item');
+      listElementScheduleItem.forEach(scheduleItem => {
+        const input = scheduleItem.querySelector("input");
+        const title = input.value;
+
+        const textarea = scheduleItem.querySelector("textarea");
+        const idTextarea = textarea.id;
+        const description = tinymce.get(idTextarea).getContent();
+
+        schedules.push({
+          title: title,
+          description: description
+        });
+      });
+      // End schedules
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("priceAdult", priceAdult);
+      formData.append("priceChildren", priceChildren);
+      formData.append("priceBaby", priceBaby);
+      formData.append("priceNewAdult", priceNewAdult);
+      formData.append("priceNewChildren", priceNewChildren);
+      formData.append("priceNewBaby", priceNewBaby);
+      formData.append("stockAdult", stockAdult);
+      formData.append("stockChildren", stockChildren);
+      formData.append("stockBaby", stockBaby);
+      formData.append("locations", JSON.stringify(locations));
+      formData.append("time", time);
+      formData.append("vehicle", vehicle);
+      formData.append("departureDate", departureDate);
+      formData.append("information", information);
+      formData.append("schedules", JSON.stringify(schedules));
+
+      fetch(`/${pathAdmin}/tour/edit/${id}`, {
+        method: "PATCH",
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
+    })
+  ;
+}
+// End Tour Edit Form
+
+// Check All
+const checkAll = document.querySelector("[check-all]");
+if(checkAll) {
+  checkAll.addEventListener("click", () => {
+    const listCheckItem = document.querySelectorAll("[check-item]");
+    listCheckItem.forEach(item => {
+      item.checked = checkAll.checked;
+    })
+  })
+};
+// End Check All
+
+// Change Multi
+
+const changeMulti = document.querySelector('[change-multi]');
+if(changeMulti) {
+ const select = changeMulti.querySelector("select");
+ const button = changeMulti.querySelector("button");
+ const dataApi = changeMulti.getAttribute("data-api");
+
+ button.addEventListener("click", () => {
+  const option = select.value;
+  let listInputChecked = document.querySelectorAll("input[type='checkbox']:checked");
+  if(option && listInputChecked.length > 0) {
+    const ids = [];
+    listInputChecked.forEach(item => {
+      const id = item.getAttribute("check-item");
+      if(id) {
+        ids.push(id);
+      }
+    });
+
+    const dataFinal = {
+      option: option,
+      ids: ids
+    };
+
+    fetch(dataApi, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dataFinal)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        };
+
+        if(data.code === "success") {
+          window.location.reload();        
+        }
+      });
+    
+  }else {
+    alert("Vui lòng chọn option và danh mục muốn thực hiện!")
+  };
+
+ })
+  
+}
+
+// End Change Multi
+
+// Filter createdBy
+
+const filterCreatedBy = document.querySelector("[filter-created-by]");
+if(filterCreatedBy) {
+  const url = new URL(window.location.href);
+  
+  filterCreatedBy.addEventListener("change", () => {
+    const value = filterCreatedBy.value;
+    if(value) {
+      url.searchParams.set("createdBy", value);
+    }else {
+      url.searchParams.delete("createdBy");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("createdBy");
+  if(valueCurrent) {
+    filterCreatedBy.value = valueCurrent;
+  };
+
+}
+
+// End Filter createdBy
+
+// Filter startDate
+
+const filterStartDate = document.querySelector("[filter-start-date]");
+if(filterStartDate) {
+  const url = new URL(window.location.href);
+  
+  filterStartDate.addEventListener("change", () => {
+    const value = filterStartDate.value;
+    if(value) {
+      url.searchParams.set("startDate", value);
+    }else {
+      url.searchParams.delete("startDate");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("startDate");
+  if(valueCurrent) {
+    filterStartDate.value = valueCurrent;
+  };
+
+}
+
+// End Filter startDate
+
+// Filter endDate
+
+const filterEndDate = document.querySelector("[filter-end-date]");
+if(filterEndDate) {
+  const url = new URL(window.location.href);
+  
+  filterEndDate.addEventListener("change", () => {
+    const value = filterEndDate.value;
+    if(value) {
+      url.searchParams.set("endDate", value);
+    }else {
+      url.searchParams.delete("endDate");
+    };
+
+    window.location.href = url.href;
+  });
+
+  // Hiển thị trên màn hình
+  const valueCurrent = url.searchParams.get("endDate");
+  if(valueCurrent) {
+    filterEndDate.value = valueCurrent;
+  };
+
+}
+
+// End Filter endDate
+
+// Filter category
+const filterCategory = document.querySelector("[filter-category]");
+if(filterCategory) {
+  
+  let url = new URL(window.location.href);
+  filterCategory.addEventListener("change", () => {
+    const value = filterCategory.value;
+    if(value) {
+      url.searchParams.set("category", value);
+    }else {
+      url.searchParams.delete("category");
+    }
+
+    window.location.href = url.href;
+  })
+
+  const currentValue = url.searchParams.get("category");
+  if(currentValue) {
+    filterCategory.value = currentValue;
+  }
+  
+}
+
+// End Filter category
+
+// Filter price
+const filterPrice = document.querySelector("[filter-price]");
+if(filterPrice) {
+  
+  let url = new URL(window.location.href);
+  filterPrice.addEventListener("change", () => {
+    const value = filterPrice.value;
+    if(value) {
+      url.searchParams.set("price", value);
+    }else {
+      url.searchParams.delete("price");
+    }
+
+    window.location.href = url.href;
+  })
+
+  const currentValue = url.searchParams.get("price");
+  if(currentValue) {
+    filterPrice.value = currentValue;
+  }
+  
+}
+
+// End Filter price
+
+// Filter reset
+const filterReset = document.querySelector('[filter-reset]');
+if(filterReset) {
+  const url = new URL(window.location.href);
+  
+
+  filterReset.addEventListener("click", () => {
+    url.search = "";    
+    window.location.href = url.href;    
+  })
+}
+
+// End Filter reset
+
+// Pagination
+const pagination = document.querySelector("[pagination]");
+if(pagination) {
+  let url = new URL(window.location.href);
+
+  pagination.addEventListener("change", () => {
+    let value = pagination.value;
+
+    if(value) {
+      url.searchParams.set("page", value);
+    }else {
+      url.searchParams.delete("page");
+    };
+
+    window.location.href = url.href;    
+  })
+
+  const currentValue = url.searchParams.get("page");
+  if(currentValue) {
+    pagination.value = currentValue;
+  }
+  
+}
+
+
+// End Pagination
+
+// Search
+const search = document.querySelector("[search]");
+if(search) {
+  let url = new URL(window.location.href);
+
+  search.addEventListener("keyup", (event) => {
+    if(event.code === "Enter" ) {
+    
+      const value = search.value;
+      if(value) {
+        url.searchParams.set("keyword", value.trim());
+      }else {
+        url.searchParams.delete("keyword");
+      };
+
+      window.location.href = url.href;
+    };
+  })
+
+    // Khôi phục keyword khi load trang
+    const valueCurrent = url.searchParams.get("keyword");
+    if(valueCurrent) {
+      search.value = valueCurrent;
+    }
+}
+
+// End Search

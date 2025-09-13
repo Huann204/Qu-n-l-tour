@@ -1628,3 +1628,7 @@ a {
   font-family: 'Kablammo', cursive;
   color: var(--color-primary) !important;
 }
+
+.section-7.inner {
+  margin-top: 20px;
+}
