@@ -23,18 +23,18 @@ block main
         span -
         input(type="date" filter-end-date)
       .inner-item
-        select
+        select(filter-category)
           option(value="") Danh mục
-          option(value="") Danh mục 1
-          option(value="") Danh mục 2
+          each item in categoryList
+            option(value=item.id) #{item.name}
       .inner-item
-        select
+        select(filter-price)
           option(value="") Mức giá
-          option(value="") Dưới 2tr
-          option(value="") 2tr đến 4tr
-          option(value="") 4tr đến 8tr
-          option(value="") Trên 8tr
-      .inner-item.inner-reset
+          option(value="0-2000000") Dưới 2tr
+          option(value="2000000-4000000") 2tr đến 4tr
+          option(value="4000000-8000000") 4tr đến 8tr
+          option(value="8000000-1000000000") Trên 8tr
+      .inner-item.inner-reset(filter-reset)
         <i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc
   //- End Section 4
 

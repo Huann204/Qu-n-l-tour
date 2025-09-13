@@ -46,6 +46,19 @@ module.exports.list = async (req, res) => {
 
   // Hết Lọc theo ngày tạo và ngày kết thúc
 
+  // Lọc theo danh mục
+  if(req.query.category) {
+    find.category = req.query.category;
+  };
+  // HếtLọc theo danh mục
+
+  // Lọc theo giá
+  if(req.query.price) {
+    find.priceNewAdult = parseInt(req.query.price);
+  };
+  // Hết lọc theo giá
+
+
   const tourList = await Tour
     .find(find)
     .sort({
@@ -77,10 +90,16 @@ module.exports.list = async (req, res) => {
     .find({})
     .select("id fullName");
 
+    const categoryList = await Category
+    .find({})
+    .select("id name");
+
+
 res.render("admin/pages/tour-list", {
     pageTitle: "Quản lý tour",
     tourList: tourList,
-    accountAdminList: accountAdminList
+    accountAdminList: accountAdminList,
+    categoryList: categoryList
   })
 }
 
