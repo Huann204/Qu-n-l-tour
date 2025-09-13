@@ -31,6 +31,8 @@ router.patch(
   tourController.deletePatch
 );
 
+router.patch('/change-multi', tourController.tourChangeMultiPatch);
+
 router.get('/trash', tourController.trash);
 
 router.patch('/undo/:id', tourController.undoPatch);

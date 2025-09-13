@@ -5,6 +5,7 @@ const City = require("../../models/city.model");
 const Tour = require("../../models/tour.model");
 const AccountAdmin = require("../../models/account-admin.model");
 
+// Controller trang quản lý tour
 
 module.exports.list = async (req, res) => {
   const find = {
@@ -214,6 +215,47 @@ module.exports.deletePatch = async (req, res) => {
     });
   }
 ;}
+
+module.exports.tourChangeMultiPatch = async (req, res) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "active":
+      case "inactive":
+        await Tour.updateMany({
+          _id: { $in: ids }
+        }, {
+          status: option,
+          updatedBy: req.account.id
+        });
+        req.flash("success", "Cập nhật trạng thái tour thành công!")
+        break;
+      case "delete":
+        await Tour.updateMany({
+          _id: { $in: ids }
+        }, {
+          deleted: true,
+          deletedBy: req.account.id
+        });
+        req.flash("success", "Xóa tour thành công!")
+        break;
+    }
+    
+    res.json({
+      code: "success",
+    });
+
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Id không tồn tại!"
+    })
+  }
+}
+
+
+// Controller trang thùng rác
 
 module.exports.trash = async (req, res) => {
   const find = {
