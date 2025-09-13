@@ -19,9 +19,9 @@ block main
           each item in accountAdminList
             option(value=item.id) #{item.fullName}
       .inner-item.inner-date
-        input(type="date")
+        input(type="date" filter-start-date)
         span -
-        input(type="date")
+        input(type="date" filter-end-date)
       .inner-item
         select
           option(value="") Danh mục

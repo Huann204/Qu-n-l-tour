@@ -20,6 +20,31 @@ module.exports.list = async (req, res) => {
     find.createdBy = req.query.createdBy;
   };
 
+  // Lọc theo ngày tạo và ngày kết thúc
+  const dataFilter = {};
+
+  if(req.query.startDate) {
+    const startDate = moment(req.query.startDate).startOf("date").toDate();
+    dataFilter.$gte = startDate;
+  };
+
+  if(req.query.endDate) {
+    const endDate = moment(req.query.endDate).endOf("date").toDate();
+    dataFilter.$lte = endDate;
+  };
+
+  if(Object.keys(dataFilter).length > 0) {
+    find.createdAt = dataFilter;
+  }
+
+  // "year" → cuối năm (31/12 23:59:59.999)
+  // "month" → cuối tháng (30/31 23:59:59.999)
+  // "week" → cuối tuần (Chủ nhật 23:59:59.999)
+  // "day" hoặc "date" → cuối ngày (23:59:59.999)
+  // "hour" → cuối giờ (vd: 10:59:59.999)
+
+
+  // Hết Lọc theo ngày tạo và ngày kết thúc
 
   const tourList = await Tour
     .find(find)
