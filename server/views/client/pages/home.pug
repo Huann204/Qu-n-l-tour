@@ -1,0 +1,446 @@
+extends ../layouts/default.pug
+include ../mixins/product-item.pug
+
+block main
+  // Section 1
+  .section-1
+    .container
+      .inner-wrap
+        h1.inner-title(
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          | Du lịch Châu Á - Khám phá Mỹ, Úc, Âu
+          br
+          | Đi nơi đâu bạn muốn
+        p.inner-desc(
+          data-aos-delay="150" 
+          data-aos-duration="800" 
+          data-aos="fade-up"
+          )
+          | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        form.inner-form(
+          data-aos-delay="300" 
+          data-aos-duration="800" 
+          data-aos="fade-up" 
+          action="#"
+          )
+          .inner-box.inner-address
+            .inner-input-group
+              img.inner-icon(src="/assets/images/icon-address.svg")
+              input.inner-input(
+                placeholder="Bạn muốn đi đâu?" 
+                type="text"
+                )
+              i.fa-solid.fa-angle-down.inner-down
+            .inner-suggest
+              .inner-suggest-title
+                i.fa-solid.fa-location-dot
+                | Địa Điểm Hot
+              .inner-suggest-list
+                .inner-item
+                  .inner-item-image
+                    img(
+                      alt="" 
+                      src="/assets/images/product-1.jpg"
+                      )
+                  .inner-item-content
+                    .inner-item-title Nhật Bản
+                    .inner-item-desc 50 tours
+                .inner-item
+                  .inner-item-image
+                    img(
+                      alt="" 
+                      src="/assets/images/product-2.jpg"
+                      )
+                  .inner-item-content
+                    .inner-item-title Phú Quốc
+                    .inner-item-desc 50 tours
+                .inner-item
+                  .inner-item-image
+                    img(
+                      alt="" 
+                      src="/assets/images/product-3.jpg"
+                      )
+                  .inner-item-content
+                    .inner-item-title Singapore
+                    .inner-item-desc 50 tours
+          .inner-box.inner-user
+            .inner-input-group
+              img.inner-icon(src="/assets/images/icon-user.svg")
+              input.inner-input(
+                placeholder="Số lượng" 
+                type="text"
+                )
+              i.fa-solid.fa-angle-down.inner-down
+            .inner-quantity
+              .inner-item
+                .inner-label Người lớn
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 1
+                  span.inner-up +
+              .inner-item
+                .inner-label Trẻ em
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 0
+                  span.inner-up +
+              .inner-item
+                .inner-label Em bé
+                .inner-count
+                  span.inner-down -
+                  span.inner-number 0
+                  span.inner-up +
+          .inner-box.inner-calendar
+            .inner-input-group
+              img.inner-icon(src="/assets/images/icon-calendar.svg")
+              input.inner-input(type="date")
+          button.inner-button(type="submit")
+            i.fa-solid.fa-magnifying-glass
+            | Tìm Kiếm
+  // End Section 1
+
+  // Section 2
+  .section-2(
+    data-aos-delay="450" 
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-wrap
+        .inner-info
+          h2.inner-title
+            | ƯU ĐÃI 2024
+            br
+            | TOUR GIỜ CHÓT
+          .inner-desc Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          .inner-clock-title Kết thúc sau
+          .inner-clock-number(clock-expire="2024-12-10T15:00:00")
+            span.inner-item
+              .inner-number 00
+              .inner-label Ngày
+            span.inner-item
+              .inner-number 00
+              .inner-label Giờ
+            span.inner-item
+              .inner-number 00
+              .inner-label Phút
+            span.inner-item
+              .inner-number 00
+              .inner-label Giây
+          .inner-discount-title GIẢM ĐẾN
+          .inner-discount-price
+            | 990.000
+            span.inner-unit đ
+        .inner-list
+          .swiper.swiper-section-2
+            .swiper-wrapper
+              each item in tourListSection2
+                .swiper-slide
+                  // Product Item
+                  +product-item(item)
+                  // End Product Item
+  // End Section 2
+
+  // Section 3
+  .section-3
+    .container
+      h2.box-title(
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Khuyến Mại Bùng Nổ - Đánh Tan Nóng Bức
+      .swiper.swiper-section-3(
+        data-aos-delay="150" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        .swiper-wrapper
+          .swiper-slide
+            .inner-item
+              a(href="#")
+                img(
+                  alt="" 
+                  src="/assets/images/banner-1.png"
+                  )
+          .swiper-slide
+            .inner-item
+              a(href="#")
+                img(
+                  alt="" 
+                  src="/assets/images/banner-2.png"
+                  )
+          .swiper-slide
+            .inner-item
+              a(href="#")
+                img(
+                  alt="" 
+                  src="/assets/images/banner-3.png"
+                  )
+          .swiper-slide
+            .inner-item
+              a(href="#")
+                img(
+                  alt="" 
+                  src="/assets/images/banner-3.png"
+                  )
+        .swiper-pagination
+  // End Section 3
+
+  // Section 4
+
+  -
+    var productListSection4 = [
+      {
+        avatar: "/assets/images/product-1.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Hà Nội - Lào Cai - SaPa 4N3Đ",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000001",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 4,
+        ratingTotal: 20,
+        stock: 10
+      },
+      {
+        avatar: "/assets/images/product-2.jpg",
+        slug: "#",
+        discount: 0,
+        name: "Tour 2024 Phú Quốc - Thiên Đường Đảo Ngọc (3N2D)",
+        priceOld: 12000000,
+        priceNew: 12000000,
+        code: "TOUR000002",
+        departureDate: "24/12/2025",
+        time: "3 Ngày 2 Đêm",
+        ratingStars: 5,
+        ratingTotal: 30,
+        stock: 15
+      },
+      {
+        avatar: "/assets/images/product-3.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000003",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 0,
+        ratingTotal: 0,
+        stock: 20
+      },
+      {
+        avatar: "/assets/images/product-3.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL 2",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000004",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 3,
+        ratingTotal: 12,
+        stock: 20
+      }
+    ];
+
+  .section-4
+    .container
+      h2.box-title(
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tour Trong Nước
+      .inner-wrap(
+        data-aos-delay="150" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        each item in productListSection4
+          // Product Item
+          //- +product-item(item)
+          // End Product Item
+      .inner-button
+        a.button-outline(href="#") Xem tất cả
+  // End Section 4
+
+  // Section 5
+  .section-5(
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-image
+        a(href="#")
+          img(
+            alt="" 
+            src="/assets/images/banner-4.png"
+            )
+  // End Section 5
+
+  // Section 6
+
+  -
+    var productListSection6 = [
+      {
+        avatar: "/assets/images/product-1.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Hà Nội - Lào Cai - SaPa 4N3Đ",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000001",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 4,
+        ratingTotal: 20,
+        stock: 10
+      },
+      {
+        avatar: "/assets/images/product-2.jpg",
+        slug: "#",
+        discount: 0,
+        name: "Tour 2024 Phú Quốc - Thiên Đường Đảo Ngọc (3N2D)",
+        priceOld: 12000000,
+        priceNew: 12000000,
+        code: "TOUR000002",
+        departureDate: "24/12/2025",
+        time: "3 Ngày 2 Đêm",
+        ratingStars: 5,
+        ratingTotal: 30,
+        stock: 15
+      },
+      {
+        avatar: "/assets/images/product-3.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000003",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 0,
+        ratingTotal: 0,
+        stock: 20
+      },
+      {
+        avatar: "/assets/images/product-3.jpg",
+        slug: "#",
+        discount: 30,
+        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL 2",
+        priceOld: 13650000,
+        priceNew: 2590000,
+        code: "TOUR000004",
+        departureDate: "22/12/2025",
+        time: "10 Ngày 9 Đêm",
+        ratingStars: 3,
+        ratingTotal: 12,
+        stock: 20
+      }
+    ];
+
+  
+
+  .section-4
+    .container
+      h2.box-title(
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tour Nước Ngoài
+      .inner-wrap(
+        data-aos-delay="150" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        each item in productListSection6
+          // Product Item
+          //- +product-item(item)
+          // End Product Item
+      .inner-button
+        a.button-outline(href="#") Xem tất cả
+  // End Section 6
+
+  // Section 7
+  .section-5(
+    data-aos-duration="800" 
+    data-aos="fade-up"
+    )
+    .container
+      .inner-image
+        a(href="#")
+          img(
+            alt="" 
+            src="/assets/images/banner-5.png"
+            )
+  // End Section 7
+
+  // Section 8
+  .section-8
+    .container
+      h2.box-title(
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        ) Tin Tức Mới
+      .inner-wrap(
+        data-aos-delay="150" 
+        data-aos-duration="800" 
+        data-aos="fade-up"
+        )
+        .blog-item
+          a(href="#")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/blog-1.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2024
+              h3.inner-title Homestay “cổ tích” giữa Đà Lạt mộng mơ
+        .blog-item-2
+          a(href="#")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/blog-2.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2024
+              h3.inner-title Top 5 điểm check in độc đáo tại Singapore
+              .inner-desc
+                | Nếu bạn nghĩ du lịch Singapore rất nhàm chán vì chỉ mãi quanh quẩn trong những khối bê tông vô cảm thì bạn “chắc chưa?”. Tuy đảo quốc Sư Tử không phải là một quốc gia rộng lớn nhưng các địa điểm du lịch tại Singapore chưa từng đánh mất sức hút đối với cộng đồng xê dịch quốc tế.
+        .blog-item
+          a(href="#")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/blog-3.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2024
+              h3.inner-title Đặc sản không thể bỏ qua khi đến với Đà Nẵng - Hội An
+        .blog-item
+          a(href="#")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/blog-4.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2024
+              h3.inner-title Đảo Phú Quý Bình Thuận hot trend năm 2024
+        .blog-item
+          a(href="#")
+            .inner-image
+              img(
+                alt="" 
+                src="/assets/images/blog-5.jpg"
+                )
+            .inner-content
+              .inner-date 23/05/2024
+              h3.inner-title Trekking cắm trại tại Đà Lạt- Cảm nhận Đà Lạt qua từng bước chân
+  // End Section 8

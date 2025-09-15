@@ -1,0 +1,13 @@
+mixin box-breadcrumb(breadcrumb)
+  .box-breadcrumb
+    .inner-image
+      img(
+        alt=breadcrumb.title 
+        src=breadcrumb.image
+        )
+    .inner-content
+      .container
+        h1.inner-title #{breadcrumb.title}
+        .inner-list
+          each item in breadcrumb.list
+            a(href=item.link) #{item.title}

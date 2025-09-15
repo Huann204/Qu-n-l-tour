@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    title #{pageTitle}
+    link(
+      href=settingWebsiteInfo.favicon 
+      rel="icon" 
+      type="image/x-icon"
+    )
+    link(
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      rel="stylesheet" 
+      href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+      )
+    link(
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.css" 
+      rel="stylesheet"
+      )
+    link(
+      href="/assets/css/style.css" 
+      rel="stylesheet"
+      )
+  body
+    include ../partials/header.pug
+
+    block main
+
+    include ../partials/footer.pug
+
+    include ../partials/box-contact.pug
+
+    script(src="https://unpkg.com/aos@2.3.1/dist/aos.js")
+    script(src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.7/viewer.min.js")
+    script(
+      src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"
+      )
+    script(src="/assets/js/script.js")
