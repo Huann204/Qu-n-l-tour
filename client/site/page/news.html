@@ -110,375 +110,331 @@
       </div>
     </header>
     <!-- End Header -->
-    <!DOCTYPE html>
-    <html lang="vi">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Tin tức du lịch | Huan Tour</title>
-        <!-- Font Awesome (bạn đã tích hợp rồi, giữ nguyên link của bạn) -->
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
-        <link rel="stylesheet" href="./news.css" />
-      </head>
-      <body>
-        <!-- ===== Header của bạn ở đây ===== -->
-        <!-- <header> ... </header> -->
+    <main class="news">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__content">
+            <span class="badge"
+              ><i class="fa-solid fa-plane-departure"></i> Bản tin du lịch</span
+            >
+            <h1>Khám phá thế giới — cập nhật từng ngày</h1>
+            <p>
+              Tin nóng, bí kíp săn sale, review điểm đến, lịch lễ hội, và tất
+              tần tật để bạn “chốt tour” không lăn tăn.
+            </p>
 
-        <main class="news">
-          <!-- Hero -->
-          <section class="hero">
-            <div class="container hero__inner">
-              <div class="hero__content">
-                <span class="badge"
-                  ><i class="fa-solid fa-plane-departure"></i> Bản tin du
-                  lịch</span
+            <form class="searchbar" action="#" onsubmit="return false;">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                placeholder="Tìm bài viết, điểm đến, ưu đãi..."
+                aria-label="Tìm kiếm tin tức"
+              />
+              <button class="btn btn--primary" type="button">Tìm</button>
+            </form>
+
+            <ul class="hero__highlights">
+              <li><i class="fa-regular fa-clock"></i> Cập nhật hằng ngày</li>
+              <li><i class="fa-solid fa-fire"></i> Hot deal bay/vé</li>
+              <li><i class="fa-solid fa-earth-asia"></i> Toàn cầu</li>
+            </ul>
+          </div>
+          <div class="hero__visual">
+            <img
+              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1600&auto=format&fit=crop"
+              alt="Ảnh minh họa du lịch"
+            />
+          </div>
+        </div>
+        <div class="hero__wave" aria-hidden="true"></div>
+      </section>
+
+      <!-- Content -->
+      <section class="container layout">
+        <div class="content">
+          <!-- Featured -->
+          <article class="featured">
+            <a class="featured__image" href="#">
+              <img
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop"
+                alt="Bali mùa thu - săn hoàng hôn"
+              />
+              <span class="chip">Bí kíp săn vé</span>
+            </a>
+            <div class="featured__body">
+              <a href="#" class="category"
+                ><i class="fa-solid fa-tag"></i> Kinh nghiệm</a
+              >
+              <h2 class="featured__title">
+                <a href="#"
+                  >Bali mùa thu: săn hoàng hôn tím & combo resort giá mềm</a
                 >
-                <h1>Khám phá thế giới — cập nhật từng ngày</h1>
-                <p>
-                  Tin nóng, bí kíp săn sale, review điểm đến, lịch lễ hội, và
-                  tất tần tật để bạn “chốt tour” không lăn tăn.
-                </p>
-
-                <form class="searchbar" action="#" onsubmit="return false;">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <input
-                    type="text"
-                    placeholder="Tìm bài viết, điểm đến, ưu đãi..."
-                    aria-label="Tìm kiếm tin tức"
-                  />
-                  <button class="btn btn--primary" type="button">Tìm</button>
-                </form>
-
-                <ul class="hero__highlights">
-                  <li>
-                    <i class="fa-regular fa-clock"></i> Cập nhật hằng ngày
-                  </li>
-                  <li><i class="fa-solid fa-fire"></i> Hot deal bay/vé</li>
-                  <li><i class="fa-solid fa-earth-asia"></i> Toàn cầu</li>
-                </ul>
+              </h2>
+              <p class="featured__desc">
+                Hướng dẫn chọn khu ở, khung giờ check-in “cháy máy”, lịch trình
+                4N3Đ đủ Chill – Explore – Eat, kèm mẹo đặt vé rẻ.
+              </p>
+              <div class="meta">
+                <span><i class="fa-regular fa-user"></i> Huan Travel</span>
+                <span><i class="fa-regular fa-clock"></i> 14/09/2025</span>
+                <span
+                  ><i class="fa-solid fa-location-dot"></i> Bali,
+                  Indonesia</span
+                >
               </div>
-              <div class="hero__visual">
+              <a href="#" class="readmore"
+                >Đọc tiếp <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
+          </article>
+
+          <!-- Grid news -->
+          <div class="grid">
+            <!-- Card 1 -->
+            <article class="card">
+              <a class="card__thumb" href="#">
                 <img
-                  src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1600&auto=format&fit=crop"
-                  alt="Ảnh minh họa du lịch"
+                  src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
+                  alt="Nhật Bản mùa lá đỏ"
                 />
+                <span class="chip chip--primary">Trend</span>
+              </a>
+              <div class="card__body">
+                <a href="#" class="category">Điểm đến</a>
+                <h3 class="card__title">
+                  <a href="#">Nhật Bản mùa lá đỏ: lịch ngắm momiji 2025</a>
+                </h3>
+                <p class="card__desc">
+                  Update lịch lá đỏ theo từng vùng, cách di chuyển, set đồ sống
+                  ảo, và gợi ý cung đường 5 ngày.
+                </p>
+                <div class="meta meta--sm">
+                  <span><i class="fa-regular fa-clock"></i> 12/09/2025</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Kyoto</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="card">
+              <a class="card__thumb" href="#">
+                <img
+                  src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=1200&auto=format&fit=crop"
+                  alt="Châu Âu cuối năm"
+                />
+              </a>
+              <div class="card__body">
+                <a href="#" class="category">Ưu đãi</a>
+                <h3 class="card__title">
+                  <a href="#">Săn vé châu Âu cuối năm: 13M khứ hồi</a>
+                </h3>
+                <p class="card__desc">
+                  Checklist 7 bước “săn” vé rẻ, cảnh báo phí ẩn, và cách tối ưu
+                  điểm thưởng thẻ.
+                </p>
+                <div class="meta meta--sm">
+                  <span><i class="fa-regular fa-clock"></i> 10/09/2025</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Paris</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="card">
+              <a class="card__thumb" href="#">
+                <img
+                  src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
+                  alt="Phú Quốc resort"
+                />
+              </a>
+              <div class="card__body">
+                <a href="#" class="category">Review</a>
+                <h3 class="card__title">
+                  <a href="#">Top 7 resort private beach ở Phú Quốc</a>
+                </h3>
+                <p class="card__desc">
+                  Combo nghỉ dưỡng chuẩn “nạp pin”: bãi tắm riêng, brunch thảnh
+                  thơi, sunset cocktail.
+                </p>
+                <div class="meta meta--sm">
+                  <span><i class="fa-regular fa-clock"></i> 09/09/2025</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Phú Quốc</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="card">
+              <a class="card__thumb" href="#">
+                <img
+                  src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
+                  alt="Visa Hàn Quốc"
+                />
+              </a>
+              <div class="card__body">
+                <a href="#" class="category">Thủ tục</a>
+                <h3 class="card__title">
+                  <a href="#">Visa Hàn 2025: checklist hồ sơ & lịch hẹn</a>
+                </h3>
+                <p class="card__desc">
+                  Điều kiện mới, cách đặt lịch, mẹo phỏng vấn và các lỗi thường
+                  gặp khi nộp.
+                </p>
+                <div class="meta meta--sm">
+                  <span><i class="fa-regular fa-clock"></i> 08/09/2025</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Seoul</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Pagination -->
+          <nav class="pagination" aria-label="Pagination">
+            <a href="#" class="page disabled" aria-disabled="true"
+              ><i class="fa-solid fa-chevron-left"></i
+            ></a>
+            <a href="#" class="page is-active">1</a>
+            <a href="#" class="page">2</a>
+            <a href="#" class="page">3</a>
+            <a href="#" class="page"
+              ><i class="fa-solid fa-chevron-right"></i
+            ></a>
+          </nav>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <!-- Search -->
+          <div class="widget">
+            <h4 class="widget__title">
+              <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+            </h4>
+            <div class="widget__body">
+              <div class="input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Từ khóa..." />
               </div>
             </div>
-            <div class="hero__wave" aria-hidden="true"></div>
-          </section>
+          </div>
 
-          <!-- Content -->
-          <section class="container layout">
-            <div class="content">
-              <!-- Featured -->
-              <article class="featured">
-                <a class="featured__image" href="#">
+          <!-- Categories -->
+          <div class="widget">
+            <h4 class="widget__title">
+              <i class="fa-solid fa-folder-open"></i> Danh mục
+            </h4>
+            <ul class="widget__list">
+              <li>
+                <a href="#"><i class="fa-solid fa-tag"></i> Ưu đãi & Deal</a
+                ><span>12</span>
+              </li>
+              <li>
+                <a href="#"><i class="fa-solid fa-tag"></i> Điểm đến</a
+                ><span>28</span>
+              </li>
+              <li>
+                <a href="#"><i class="fa-solid fa-tag"></i> Kinh nghiệm</a
+                ><span>19</span>
+              </li>
+              <li>
+                <a href="#"><i class="fa-solid fa-tag"></i> Review</a
+                ><span>15</span>
+              </li>
+              <li>
+                <a href="#"><i class="fa-solid fa-tag"></i> Thủ tục</a
+                ><span>9</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Trending -->
+          <div class="widget">
+            <h4 class="widget__title">
+              <i class="fa-solid fa-fire"></i> Đang nổi
+            </h4>
+            <ul class="trending">
+              <li>
+                <a href="#">
                   <img
-                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop"
-                    alt="Bali mùa thu - săn hoàng hôn"
+                    src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=400&auto=format&fit=crop"
+                    alt="Đà Lạt chill"
                   />
-                  <span class="chip">Bí kíp săn vé</span>
-                </a>
-                <div class="featured__body">
-                  <a href="#" class="category"
-                    ><i class="fa-solid fa-tag"></i> Kinh nghiệm</a
-                  >
-                  <h2 class="featured__title">
-                    <a href="#"
-                      >Bali mùa thu: săn hoàng hôn tím & combo resort giá mềm</a
-                    >
-                  </h2>
-                  <p class="featured__desc">
-                    Hướng dẫn chọn khu ở, khung giờ check-in “cháy máy”, lịch
-                    trình 4N3Đ đủ Chill – Explore – Eat, kèm mẹo đặt vé rẻ.
-                  </p>
-                  <div class="meta">
-                    <span><i class="fa-regular fa-user"></i> Huan Travel</span>
-                    <span><i class="fa-regular fa-clock"></i> 14/09/2025</span>
+                  <div>
+                    <p>Đà Lạt 3N2Đ: lịch sống chậm, quán cà phê & homestay</p>
                     <span
-                      ><i class="fa-solid fa-location-dot"></i> Bali,
-                      Indonesia</span
+                      ><i class="fa-regular fa-clock"></i> 2 ngày trước</span
                     >
                   </div>
-                  <a href="#" class="readmore"
-                    >Đọc tiếp <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </article>
-
-              <!-- Grid news -->
-              <div class="grid">
-                <!-- Card 1 -->
-                <article class="card">
-                  <a class="card__thumb" href="#">
-                    <img
-                      src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
-                      alt="Nhật Bản mùa lá đỏ"
-                    />
-                    <span class="chip chip--primary">Trend</span>
-                  </a>
-                  <div class="card__body">
-                    <a href="#" class="category">Điểm đến</a>
-                    <h3 class="card__title">
-                      <a href="#">Nhật Bản mùa lá đỏ: lịch ngắm momiji 2025</a>
-                    </h3>
-                    <p class="card__desc">
-                      Update lịch lá đỏ theo từng vùng, cách di chuyển, set đồ
-                      sống ảo, và gợi ý cung đường 5 ngày.
-                    </p>
-                    <div class="meta meta--sm">
-                      <span
-                        ><i class="fa-regular fa-clock"></i> 12/09/2025</span
-                      >
-                      <span
-                        ><i class="fa-solid fa-location-dot"></i> Kyoto</span
-                      >
-                    </div>
-                  </div>
-                </article>
-
-                <!-- Card 2 -->
-                <article class="card">
-                  <a class="card__thumb" href="#">
-                    <img
-                      src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=1200&auto=format&fit=crop"
-                      alt="Châu Âu cuối năm"
-                    />
-                  </a>
-                  <div class="card__body">
-                    <a href="#" class="category">Ưu đãi</a>
-                    <h3 class="card__title">
-                      <a href="#">Săn vé châu Âu cuối năm: 13M khứ hồi</a>
-                    </h3>
-                    <p class="card__desc">
-                      Checklist 7 bước “săn” vé rẻ, cảnh báo phí ẩn, và cách tối
-                      ưu điểm thưởng thẻ.
-                    </p>
-                    <div class="meta meta--sm">
-                      <span
-                        ><i class="fa-regular fa-clock"></i> 10/09/2025</span
-                      >
-                      <span
-                        ><i class="fa-solid fa-location-dot"></i> Paris</span
-                      >
-                    </div>
-                  </div>
-                </article>
-
-                <!-- Card 3 -->
-                <article class="card">
-                  <a class="card__thumb" href="#">
-                    <img
-                      src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
-                      alt="Phú Quốc resort"
-                    />
-                  </a>
-                  <div class="card__body">
-                    <a href="#" class="category">Review</a>
-                    <h3 class="card__title">
-                      <a href="#">Top 7 resort private beach ở Phú Quốc</a>
-                    </h3>
-                    <p class="card__desc">
-                      Combo nghỉ dưỡng chuẩn “nạp pin”: bãi tắm riêng, brunch
-                      thảnh thơi, sunset cocktail.
-                    </p>
-                    <div class="meta meta--sm">
-                      <span
-                        ><i class="fa-regular fa-clock"></i> 09/09/2025</span
-                      >
-                      <span
-                        ><i class="fa-solid fa-location-dot"></i> Phú Quốc</span
-                      >
-                    </div>
-                  </div>
-                </article>
-
-                <!-- Card 4 -->
-                <article class="card">
-                  <a class="card__thumb" href="#">
-                    <img
-                      src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
-                      alt="Visa Hàn Quốc"
-                    />
-                  </a>
-                  <div class="card__body">
-                    <a href="#" class="category">Thủ tục</a>
-                    <h3 class="card__title">
-                      <a href="#">Visa Hàn 2025: checklist hồ sơ & lịch hẹn</a>
-                    </h3>
-                    <p class="card__desc">
-                      Điều kiện mới, cách đặt lịch, mẹo phỏng vấn và các lỗi
-                      thường gặp khi nộp.
-                    </p>
-                    <div class="meta meta--sm">
-                      <span
-                        ><i class="fa-regular fa-clock"></i> 08/09/2025</span
-                      >
-                      <span
-                        ><i class="fa-solid fa-location-dot"></i> Seoul</span
-                      >
-                    </div>
-                  </div>
-                </article>
-              </div>
-
-              <!-- Pagination -->
-              <nav class="pagination" aria-label="Pagination">
-                <a href="#" class="page disabled" aria-disabled="true"
-                  ><i class="fa-solid fa-chevron-left"></i
-                ></a>
-                <a href="#" class="page is-active">1</a>
-                <a href="#" class="page">2</a>
-                <a href="#" class="page">3</a>
-                <a href="#" class="page"
-                  ><i class="fa-solid fa-chevron-right"></i
-                ></a>
-              </nav>
-            </div>
-
-            <!-- Sidebar -->
-            <aside class="sidebar">
-              <!-- Search -->
-              <div class="widget">
-                <h4 class="widget__title">
-                  <i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
-                </h4>
-                <div class="widget__body">
-                  <div class="input">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Từ khóa..." />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Categories -->
-              <div class="widget">
-                <h4 class="widget__title">
-                  <i class="fa-solid fa-folder-open"></i> Danh mục
-                </h4>
-                <ul class="widget__list">
-                  <li>
-                    <a href="#"><i class="fa-solid fa-tag"></i> Ưu đãi & Deal</a
-                    ><span>12</span>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-tag"></i> Điểm đến</a
-                    ><span>28</span>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-tag"></i> Kinh nghiệm</a
-                    ><span>19</span>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-tag"></i> Review</a
-                    ><span>15</span>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa-solid fa-tag"></i> Thủ tục</a
-                    ><span>9</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Trending -->
-              <div class="widget">
-                <h4 class="widget__title">
-                  <i class="fa-solid fa-fire"></i> Đang nổi
-                </h4>
-                <ul class="trending">
-                  <li>
-                    <a href="#">
-                      <img
-                        src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=400&auto=format&fit=crop"
-                        alt="Đà Lạt chill"
-                      />
-                      <div>
-                        <p>
-                          Đà Lạt 3N2Đ: lịch sống chậm, quán cà phê & homestay
-                        </p>
-                        <span
-                          ><i class="fa-regular fa-clock"></i> 2 ngày
-                          trước</span
-                        >
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        src="https://images.unsplash.com/photo-1494475673543-6a6bdcce3a5b?q=80&w=400&auto=format&fit=crop"
-                        alt="Bangkok street food"
-                      />
-                      <div>
-                        <p>Bangkok street food: map 12 quán “ăn-cho-đã”</p>
-                        <span
-                          ><i class="fa-regular fa-clock"></i> 3 ngày
-                          trước</span
-                        >
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <img
-                        src="https://images.unsplash.com/photo-1504199367641-aba8151af406?q=80&w=400&auto=format&fit=crop"
-                        alt="Jeju"
-                      />
-                      <div>
-                        <p>Jeju tự túc: thuê xe, cung đường ngắm biển – núi</p>
-                        <span
-                          ><i class="fa-regular fa-clock"></i> 1 tuần
-                          trước</span
-                        >
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Tags -->
-              <div class="widget">
-                <h4 class="widget__title">
-                  <i class="fa-solid fa-hashtag"></i> Thẻ
-                </h4>
-                <div class="tags">
-                  <a href="#">#bali</a><a href="#">#visa</a
-                  ><a href="#">#europe</a> <a href="#">#phuquoc</a
-                  ><a href="#">#sale</a><a href="#">#momiji</a>
-                  <a href="#">#budget</a><a href="#">#review</a>
-                </div>
-              </div>
-
-              <!-- Newsletter -->
-              <div class="widget widget--cta">
-                <h4 class="widget__title">
-                  <i class="fa-regular fa-paper-plane"></i> Nhận ưu đãi sớm
-                </h4>
-                <p>Đăng ký để nhận tin hot & mã giảm giá mỗi tuần.</p>
-                <form class="newsletter" action="#" onsubmit="return false;">
-                  <input
-                    type="email"
-                    placeholder="Email của bạn"
-                    aria-label="Email"
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img
+                    src="https://images.unsplash.com/photo-1494475673543-6a6bdcce3a5b?q=80&w=400&auto=format&fit=crop"
+                    alt="Bangkok street food"
                   />
-                  <button class="btn btn--primary" type="button">
-                    <i class="fa-regular fa-paper-plane"></i> Đăng ký
-                  </button>
-                </form>
-                <small class="muted"
-                  ><i class="fa-regular fa-circle-check"></i> Không spam, hứa
-                  luôn!</small
-                >
-              </div>
-            </aside>
-          </section>
-        </main>
+                  <div>
+                    <p>Bangkok street food: map 12 quán “ăn-cho-đã”</p>
+                    <span
+                      ><i class="fa-regular fa-clock"></i> 3 ngày trước</span
+                    >
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <img
+                    src="https://images.unsplash.com/photo-1504199367641-aba8151af406?q=80&w=400&auto=format&fit=crop"
+                    alt="Jeju"
+                  />
+                  <div>
+                    <p>Jeju tự túc: thuê xe, cung đường ngắm biển – núi</p>
+                    <span
+                      ><i class="fa-regular fa-clock"></i> 1 tuần trước</span
+                    >
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        <!-- ===== Footer của bạn ở đây ===== -->
-        <!-- <footer> ... </footer> -->
-      </body>
-    </html>
+          <!-- Tags -->
+          <div class="widget">
+            <h4 class="widget__title">
+              <i class="fa-solid fa-hashtag"></i> Thẻ
+            </h4>
+            <div class="tags">
+              <a href="#">#bali</a><a href="#">#visa</a><a href="#">#europe</a>
+              <a href="#">#phuquoc</a><a href="#">#sale</a
+              ><a href="#">#momiji</a> <a href="#">#budget</a
+              ><a href="#">#review</a>
+            </div>
+          </div>
 
+          <!-- Newsletter -->
+          <div class="widget widget--cta">
+            <h4 class="widget__title">
+              <i class="fa-regular fa-paper-plane"></i> Nhận ưu đãi sớm
+            </h4>
+            <p>Đăng ký để nhận tin hot & mã giảm giá mỗi tuần.</p>
+            <form class="newsletter" action="#" onsubmit="return false;">
+              <input
+                type="email"
+                placeholder="Email của bạn"
+                aria-label="Email"
+              />
+              <button class="btn btn--primary" type="button">
+                <i class="fa-regular fa-paper-plane"></i> Đăng ký
+              </button>
+            </form>
+            <small class="muted"
+              ><i class="fa-regular fa-circle-check"></i> Không spam, hứa
+              luôn!</small
+            >
+          </div>
+        </aside>
+      </section>
+    </main>
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
