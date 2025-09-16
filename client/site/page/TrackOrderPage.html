@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/trackoderpage.css" />
+  </head>
+
+  <body>
+    <!-- Top Header -->
+    <div class="top-header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-item">
+            <i class="fa-solid fa-phone"></i> 0123.456.789
+          </div>
+          <div class="inner-item">
+            <i class="fa-solid fa-envelope"></i> contact@28travel.com
+          </div>
+          <div class="inner-item">
+            <i class="fa-solid fa-building"></i> Số 123, đường ABC, thành phố
+            XYZ
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Top Header -->
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <!-- Menu Mobile -->
+          <button class="inner-menu-mobile">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <!-- Logo -->
+          <div class="inner-logo">
+            <a href="index.html">
+              <img src="../assets/images/logo.png" alt="28.TRAVEL" />
+            </a>
+          </div>
+
+          <!-- Menu -->
+          <nav class="inner-menu">
+            <ul>
+              <li>
+                <a href="index.html" class="active"> Trang chủ </a>
+              </li>
+              <li>
+                <a href="#"> Tour trong nước </a>
+                <i class="fa-solid fa-caret-down"></i>
+                <ul>
+                  <li>
+                    <a href="#"> Tour Miền Bắc </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Miền Trung </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Miền Nam </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Xuyên Việt </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#"> Tour nước ngoài </a>
+                <i class="fa-solid fa-caret-down"></i>
+                <ul>
+                  <li>
+                    <a href="#"> Tour Châu Á </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Châu Âu </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Châu Mỹ </a>
+                  </li>
+                  <li>
+                    <a href="#"> Tour Châu Úc </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#"> Tin tức </a>
+              </li>
+              <li>
+                <a href="#"> Liên hệ </a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Cart -->
+          <div class="inner-cart">
+            <a href="#">
+              <img src="../assets/images/icon-cart.svg" alt="Cart" />
+              <span>1</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- End Header -->
+    <section class="order-lookup">
+      <div class="ol-container">
+        <div class="ol-card">
+          <header class="ol-header">
+            <h1><i class="fa-solid fa-compass"></i> Tra cứu đơn tour</h1>
+            <p>
+              Nhập <strong>email</strong> và <strong>mã đơn hàng</strong> để xem
+              tình trạng đặt chỗ ✨
+            </p>
+          </header>
+
+          <form id="lookup-form" class="ol-form" novalidate>
+            <!-- Email -->
+            <div class="ol-group">
+              <label for="ol-email">Email đã dùng khi đặt</label>
+              <div class="ol-field">
+                <i class="fa-solid fa-envelope"></i>
+                <input
+                  type="email"
+                  id="ol-email"
+                  name="email"
+                  placeholder="vd: ban@example.com"
+                  required
+                />
+              </div>
+              <small class="ol-error" id="ol-email-error"></small>
+            </div>
+
+            <!-- Order code -->
+            <div class="ol-group">
+              <label for="ol-code">Mã đơn hàng</label>
+              <div class="ol-field">
+                <i class="fa-solid fa-receipt"></i>
+                <input
+                  type="text"
+                  id="ol-code"
+                  name="orderCode"
+                  placeholder="vd: TOUR-8G7X2"
+                  required
+                />
+              </div>
+              <small class="ol-error" id="ol-code-error"></small>
+            </div>
+
+            <button type="submit" class="ol-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>Tra cứu</span>
+              <span class="ol-spinner" aria-hidden="true"></span>
+            </button>
+
+            <p class="ol-help">
+              <i class="fa-regular fa-circle-question"></i>
+              Quên mã đơn? Kiểm tra email xác nhận hoặc liên hệ CSKH.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-top">
+          <h2 class="inner-title">
+            Đăng ký ngay để không bỏ lỡ các chương trình của chúng tôi
+          </h2>
+          <form action="#" class="inner-form" id="email-form">
+            <input
+              type="email"
+              placeholder="Nhập email của bạn..."
+              id="email-input"
+              name="email"
+            />
+            <button type="submit">Đăng Ký Ngay</button>
+          </form>
+        </div>
+        <div class="inner-middle">
+          <nav class="inner-links">
+            <ul>
+              <li>
+                <a href="#">Trang Chủ</a>
+              </li>
+              <li>
+                <a href="#">Tour Trong Nước</a>
+              </li>
+              <li>
+                <a href="#">Tour Nước Ngoài</a>
+              </li>
+              <li>
+                <a href="#">Tin Tức</a>
+              </li>
+              <li>
+                <a href="#">Liên Hệ</a>
+              </li>
+            </ul>
+          </nav>
+          <nav class="inner-socials">
+            <ul>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <i class="fa-brands fa-youtube"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="inner-bottom">
+          <div class="inner-copyright">© 2024 28Tech. All rights reserved.</div>
+          <div class="inner-logo">
+            <a href="index.html">
+              <img src="../assets/images/logo.png" alt="" />
+            </a>
+          </div>
+          <nav class="inner-links">
+            <ul>
+              <li>
+                <a href="#">Điều khoản dịch vụ</a>
+              </li>
+              <li>
+                <a href="#">Chính sách bảo mật</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Box Contact -->
+    <div class="box-contact">
+      <ul>
+        <li>
+          <a href="#" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank">
+            <i class="fa-brands fa-viber"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- End Box Contact -->
+  </body>
+  <script type="module" src="../assets/js/cursoreffects.js"></script>
+  <script src="../assets/js/validate.js"></script>
+</html>
