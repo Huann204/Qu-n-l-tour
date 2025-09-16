@@ -2445,3 +2445,7 @@ textarea {
   display: block;
   height: 70px;
 }
+
+.inner-item.inner-reset{
+  padding: 0 14px;
+}
