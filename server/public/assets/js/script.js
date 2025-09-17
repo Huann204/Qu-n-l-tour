@@ -314,6 +314,28 @@ if(emailForm) {
             window.location.reload();
           }
         })
+      
+      const dataFinal = {
+        email: email
+      };
+
+      fetch(`/contact/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
     })
   ;
 }
