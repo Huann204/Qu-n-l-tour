@@ -20,21 +20,19 @@ block main
             .inner-body
               .inner-group
                 .inner-label Điểm đi
-                select(name="")
+                select(name="locationForm")
                   option(value="") -- Chọn điểm đi --
-                  option(value="") Hà Nội
-                  option(value="") Đà Nẵng
-                  option(value="") Nha Trang
+                  each item in cityList
+                    option(value=item.id) #{item.name}
               .inner-group
                 .inner-label Điểm đến
-                select(name="")
+                select(name="locationTo")
                   option(value="") -- Chọn điểm đến --
-                  option(value="") Hà Nội
-                  option(value="") Đà Nẵng
-                  option(value="") Nha Trang
+                  each item in cityList
+                    option(value=item.name) #{item.name}
               .inner-group
                 .inner-label Ngày khởi hành
-                input(type="date")
+                input(type="date" name="departureDate")
               .inner-group
                 .inner-label Số Lượng Hành Khách
                 .inner-input-list
@@ -43,28 +41,31 @@ block main
                     input(
                       value="0" 
                       type="number"
+                      name="stockAdult"
                       )
                   .inner-input-item
                     .inner-label Trẻ em:
                     input(
                       value="0" 
                       type="number"
+                      name="stockChildren"
                       )
                   .inner-input-item
                     .inner-label Em bé:
                     input(
                       value="0" 
                       type="number"
+                      name="stockBaby"
                       )
               .inner-group
                 .inner-label Mức giá
-                select(name="")
+                select(name="price")
                   option(value="") -- Chọn khoảng giá --
-                  option(value="") Dưới 1tr
-                  option(value="") Từ 1tr đến 3tr
-                  option(value="") Từ 3tr đến 6tr
-                  option(value="") Từ 6tr đến 10tr
-                  option(value="") Trên 10tr
+                  option(value="0-999999") Dưới 1tr
+                  option(value="1000000-3000000") Từ 1tr đến 3tr
+                  option(value="3000000-6000000") Từ 3tr đến 6tr
+                  option(value="6000000-10000000") Từ 6tr đến 10tr
+                  option(value="10000000-10000000000") Trên 10tr
               .inner-group
                 button.inner-button Áp Dụng
           .inner-overlay

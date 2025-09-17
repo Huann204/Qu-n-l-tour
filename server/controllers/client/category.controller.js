@@ -2,6 +2,7 @@ const Category = require("../../models/category.model");
 const moment = require("moment");
 const categoryHelper = require("../../helpers/category.helper");
 const Tour = require("../../models/tour.model");
+const City = require("../../models/city.model");
 
 module.exports.list = async (req, res) => {
   // Lấy slug từ params
@@ -76,13 +77,19 @@ module.exports.list = async (req, res) => {
 
     // Hết danh sách tour
 
+    // Danh sách thành phố
+    const cityList = await City.find({});
+    // Hết danh sách thành phố
+
+
 
     res.render("client/pages/tour-list.pug", {
       pageTitle: "Danh sách tour",
       breadcrumb: breadcrumb,
       category: category,
       tourList: tourList,
-      totalTour: totalTour
+      totalTour: totalTour,
+      cityList: cityList
     })
 
   }else {

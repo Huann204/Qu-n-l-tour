@@ -407,3 +407,37 @@ if(alertTime) {
 }
 
 // End Alert
+
+// Box Filter
+const boxFilter = document.querySelector(".box-filter");
+if(boxFilter) {
+  const url = new URL(`${window.location.origin}/search`);
+
+  const buttonApply = boxFilter.querySelector(".inner-button");
+  const filterList = [
+      "locationForm",
+      "locationTo",
+      "departureDate",
+      "stockAdult",
+      "stockChildren",
+      "stockBaby",
+      "price",
+    ]; 
+
+  buttonApply.addEventListener("click", () => {
+     filterList.forEach(name => {
+      const value = boxFilter.querySelector(`[name=${name}]`).value;
+
+      if(value) {
+        url.searchParams.set(name, value);
+      }else {
+        url.searchParams.delete(name);
+      }
+     })
+    
+     window.location.href = url.href;
+  })
+}
+
+
+// End Box Filter
