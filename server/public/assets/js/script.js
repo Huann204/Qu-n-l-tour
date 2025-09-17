@@ -423,7 +423,7 @@ if(orderForm) {
             }
   
             if(data.code == "success") {
-            // Cập nhật lại giỏ hàng
+            // Cập nhật lại giỏ hàng            
             let cart = JSON.parse(localStorage.getItem("cart"));
             cart = cart.filter(item => item.checked == false);
             localStorage.setItem("cart", JSON.stringify(cart));
@@ -432,7 +432,6 @@ if(orderForm) {
             window.location.href = `/order/success?orderId=${data.orderId}&email=${email}`;
             }
           })
-
       }else {
         alert("Vui lòng đặt ít nhất 1 tour!");
       }

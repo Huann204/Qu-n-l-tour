@@ -5,6 +5,7 @@ const schema = new mongoose.Schema(
     orderCode: String,
     fullName: String,
     phone: String,
+    email: String,
     note: String,
     items: Array,
     subTotal: Number,
@@ -25,7 +26,7 @@ const schema = new mongoose.Schema(
     deletedAt: Date
   },
   {
-    timestamps: true, // tự động sinh ra trường createdAt và updatedAt
+    timestamps: true, // Tự động sinh ra trường createdAt và updatedAt
   }
 );
 
