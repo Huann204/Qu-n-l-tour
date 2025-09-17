@@ -292,7 +292,28 @@ if(emailForm) {
     ])
     .onSuccess((event) => {
       const email = event.target.email.value;
-      console.log(email);
+      
+      const dataFinal = {
+        email: email
+      };
+
+      fetch(`/contact/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
     })
   ;
 }
@@ -374,3 +395,15 @@ if(orderForm) {
   // End List Input Method
 }
 // End Order Form
+
+// Alert
+const alertTime = document.querySelector("[alert-time]");
+if(alertTime) {
+  let time = alertTime.getAttribute("alert-time");
+  time = time ? parseInt(time) : 4000;
+  setTimeout(() => {
+    alertTime.remove(); // xóa phần tử khỏi giao diên
+  }, time);
+}
+
+// End Alert

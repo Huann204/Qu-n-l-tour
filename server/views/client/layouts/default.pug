@@ -33,6 +33,10 @@ html
       rel="stylesheet"
       )
   body
+    - if (messages.success)
+      div(class="alert alert-success" alert-time="3000")
+        span #{messages.success}
+
     include ../partials/header.pug
 
     block main
