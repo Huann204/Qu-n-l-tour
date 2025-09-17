@@ -606,7 +606,7 @@ const drawCart = () => {
         const htmlCart = data.cart.map(item => `
               <div class="inner-tour-item" bis_skin_checked="1">
                 <div class="inner-actions" bis_skin_checked="1">
-                  <button class="inner-delete">
+                  <button class="inner-delete"  button-delete tour-id="${item.tourId}">
                     <i class="fa-solid fa-xmark"></i>
                   </button>
                   <input class="inner-check" type="checkbox">
@@ -715,7 +715,7 @@ const drawCart = () => {
         cartTotal.innerHTML = totalPrice.toLocaleString("vi-VN");
         // hết Tính tổng tiền
 
-         // Sự kiện cập nhật số lượng
+        // Sự kiện cập nhật số lượng
         const listInputQuantity = document.querySelectorAll("[input-quantity]");
         listInputQuantity.forEach(input => {
           input.addEventListener("change", () => {
@@ -732,9 +732,22 @@ const drawCart = () => {
             drawCart();
           })
         })
-        
-
         // Hết sự kiện cập nhật số lượng
+
+         // Sự kiện xóa item
+        const listButtonDelete = document.querySelectorAll("[button-delete]");
+        listButtonDelete.forEach(button => {
+          button.addEventListener("click", () => {
+            const tourId = button.getAttribute("tour-id");
+
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const indexItem = cart.findIndex(tour => tour.tourId === tourId);
+            cart.splice(indexItem, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            drawCart();
+          })
+        })
+        // Hết sự kiện xóa item
 
 
       }
