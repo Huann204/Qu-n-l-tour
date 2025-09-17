@@ -441,3 +441,57 @@ if(boxFilter) {
 
 
 // End Box Filter
+
+// Form Search
+const formSearch = document.querySelector("[form-search]");
+if(formSearch) {
+  formSearch.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const url = new URL(`${window.location.origin}/search`);
+
+      // Điểm đếm
+      const locationTo = formSearch.querySelector(`[name="locationTo"]`).value;
+
+      if(locationTo) {
+        url.searchParams.set(locationTo, locationTo);
+      }else {
+        url.searchParams.delete(locationTo);
+      }
+
+    // Số lượng
+    const stockAdult = parseInt(formSearch.querySelector("[stock-adult]").innerHTML);
+    if(stockAdult > 0) {
+      url.searchParams.set("stockAdult", stockAdult);
+    } else {
+      url.searchParams.delete("stockAdult");
+    }
+
+    const stockChildren = parseInt(formSearch.querySelector("[stock-children]").innerHTML);
+    if(stockChildren > 0) {
+      url.searchParams.set("stockChildren", stockChildren);
+    } else {
+      url.searchParams.delete("stockChildren");
+    }
+
+    const stockBaby = parseInt(formSearch.querySelector("[stock-baby]").innerHTML);
+    if(stockBaby > 0) {
+      url.searchParams.set("stockBaby", stockBaby);
+    } else {
+      url.searchParams.delete("stockBaby");
+    }
+
+    // Ngày khởi hành
+    const departureDate = formSearch.departureDate.value;
+    if(departureDate) {
+      url.searchParams.set("departureDate", departureDate);
+    } else {
+      url.searchParams.delete("departureDate");
+    }
+
+    window.location.href = url.href;
+    
+  })
+}
+
+
+// End form Search
