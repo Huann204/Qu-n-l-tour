@@ -637,10 +637,16 @@ const drawCart = () => {
                     <div class="inner-item" bis_skin_checked="1">
                       <div class="inner-item-label" bis_skin_checked="1">Người lớn:</div>
                       <div class="inner-item-input" bis_skin_checked="1">
-                        <input value="${item.quantityAdult}" min="0" type="number">
+                        <input 
+                          value="${item.quantityAdult}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityAdult"
+                          tour-id="${item.tourId}"
+                        >
                       </div>
                       <div class="inner-item-price" bis_skin_checked="1">
-                        <span>1</span>
+                        <span>${item.quantityAdult}</span>
                         <span>x</span>
                         <span class="inner-highlight">${item.priceNewAdult.toLocaleString("vi-VN")}</span>
                       </div>
@@ -648,10 +654,16 @@ const drawCart = () => {
                     <div class="inner-item" bis_skin_checked="1">
                       <div class="inner-item-label" bis_skin_checked="1">Trẻ em:</div>
                       <div class="inner-item-input" bis_skin_checked="1">
-                        <input value="${item.quantityChildren}" min="0" type="number">
+                        <input 
+                          value="${item.quantityChildren}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityChildren"
+                          tour-id="${item.tourId}"
+                        >
                       </div>
                       <div class="inner-item-price" bis_skin_checked="1">
-                        <span>0</span>
+                        <span>${item.quantityChildren}</span>
                         <span>x</span>
                         <span class="inner-highlight">${item.priceNewChildren.toLocaleString("vi-VN")}</span>
                       </div>
@@ -659,10 +671,16 @@ const drawCart = () => {
                     <div class="inner-item" bis_skin_checked="1">
                       <div class="inner-item-label" bis_skin_checked="1">Em bé:</div>
                       <div class="inner-item-input" bis_skin_checked="1">
-                        <input value="${item.quantityBaby}" min="0" type="number">
+                        <input 
+                          value="${item.quantityBaby}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityBaby"
+                          tour-id="${item.tourId}"
+                        >
                       </div>
                       <div class="inner-item-price" bis_skin_checked="1">
-                        <span>0</span>
+                        <span>${item.quantityBaby}</span>
                         <span>x</span>
                         <span class="inner-highlight">${item.priceNewBaby.toLocaleString("vi-VN")}</span>
                       </div>
@@ -696,6 +714,28 @@ const drawCart = () => {
         const cartTotal = document.querySelector("[cart-total]");
         cartTotal.innerHTML = totalPrice.toLocaleString("vi-VN");
         // hết Tính tổng tiền
+
+         // Sự kiện cập nhật số lượng
+        const listInputQuantity = document.querySelectorAll("[input-quantity]");
+        listInputQuantity.forEach(input => {
+          input.addEventListener("change", () => {
+            const tourId = input.getAttribute("tour-id");
+            const name = input.getAttribute("input-quantity");
+            const quantity = parseInt(input.value);
+
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const itemUpdate = cart.find(item => item.tourId === tourId);
+            itemUpdate[name] = quantity;
+            
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            drawCart();
+          })
+        })
+        
+
+        // Hết sự kiện cập nhật số lượng
+
 
       }
     })
