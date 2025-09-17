@@ -23,9 +23,9 @@ mixin product-item(item)
           | #{item.priceNewAdult.toLocaleString("vi-VN")}
           span.inner-unit đ
       .inner-desc
-        //- .inner-desc-item
-        //-   | Mã Tour:
-        //-   b #{item.code}
+        .inner-desc-item
+          | Mã Tour:
+          b CVD00001
         .inner-desc-item
           | Ngày Khởi Hành:
           b #{item.departureDateFormat}
