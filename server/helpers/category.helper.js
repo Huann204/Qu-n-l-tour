@@ -1,3 +1,5 @@
+const Category = require("../models/category.model");
+
 const buildCategoryTree = (categories, parentId = "") => {
   const tree = [];
 
@@ -19,37 +21,30 @@ const buildCategoryTree = (categories, parentId = "") => {
 
 module.exports.buildCategoryTree = buildCategoryTree;
 
-// [
-//   {
-//     id: "",
-//     name: "Tour trong nước",
-//     Children: [
-//       {
-//         id: "",
-//         name: "Tour miền bắc",
-//         Children: []
-//       },
-//       {
-//         id: "",
-//         name: "Tour miền Trung",
-//         Children: []
-//       },
-//     ]
-//   },
-//   {
-//     id: "",
-//     name: "Tour nước ngoài",
-//     Children: [
-//       {
-//         id: "",
-//         name: "Tour châu Âu",
-//         Children: []
-//       },
-//       {
-//         id: "",
-//         name: "Tour Châu Á",
-//         Children: []
-//       },
-//     ]
-//   },
-// ]
+// Lấy tất cả id của danh mục cha + con
+module.exports.getAllSubcategoryIds = async (parentId) => {
+  const result = [parentId];
+
+  const findChildren = async (currentId) => {
+
+    const children = await Category
+      .find({
+        parent: currentId,
+        deleted: false,
+        status: "active"
+      });
+
+
+      for (const child of children) {
+          result.push(child.id);
+          await findChildren(child.id)
+      }
+  };
+
+
+  await findChildren(parentId);
+
+  return result;
+}
+
+// Hết lấy tất cả id của danh mục cha + con

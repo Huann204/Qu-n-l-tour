@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
   {
     email: String,
+    fullName: String,
+    phone: String,
+    subject: String,
+    content: String,
     deleted: {
       type: Boolean,
       default: false
@@ -11,7 +15,7 @@ const schema = new mongoose.Schema(
     deletedAt: Date
   },
   {
-    timestamps: true, // tự động sinh ra trường createdAt và updatedAt
+    timestamps: true, // Tự động sinh ra trường createdAt và updatedAt
   }
 );
 

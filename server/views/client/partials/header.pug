@@ -42,7 +42,7 @@ header.header
               ul
                 each itemChild in item.children
                   li
-                    a(href=`/category/${item.slug}`) #{itemChild.name}
+                    a(href=`/category/${itemChild.slug}`) #{itemChild.name}
           li
             a(href="#") Tin tức
           li
@@ -55,5 +55,5 @@ header.header
             alt="Cart" 
             src="/assets/images/icon-cart.svg"
             )
-          span 1
+          span(mini-cart) 0
 // End Header 

@@ -4,90 +4,10 @@ include ../mixins/product-item.pug
 
 block main
   // Breadcrumb
-
-  -
-    var breadcrumb = {
-      image: "/assets/images/banner-6.jpg",
-      title: "Tour Nước Ngoài",
-      list: [
-        {
-          link: "/",
-          title: "Trang chủ"
-        },
-        {
-          link: "/tours",
-          title: "Tour nước ngoài"
-        }
-      ]
-    };
-
   +box-breadcrumb(breadcrumb)
   // End Breadcrumb
 
   // Section 9
-
-  -
-    var productListSection9 = [
-      {
-        avatar: "/assets/images/product-1.jpg",
-        slug: "#",
-        discount: 30,
-        name: "Hà Nội - Lào Cai - SaPa 4N3Đ",
-        priceOld: 13650000,
-        priceNew: 2590000,
-        code: "TOUR000001",
-        departureDate: "22/12/2025",
-        time: "10 Ngày 9 Đêm",
-        ratingStars: 4,
-        ratingTotal: 20,
-        stock: 10
-      },
-      {
-        avatar: "/assets/images/product-2.jpg",
-        slug: "#",
-        discount: 0,
-        name: "Tour 2024 Phú Quốc - Thiên Đường Đảo Ngọc (3N2D)",
-        priceOld: 12000000,
-        priceNew: 12000000,
-        code: "TOUR000002",
-        departureDate: "24/12/2025",
-        time: "3 Ngày 2 Đêm",
-        ratingStars: 5,
-        ratingTotal: 30,
-        stock: 15
-      },
-      {
-        avatar: "/assets/images/product-3.jpg",
-        slug: "#",
-        discount: 30,
-        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL",
-        priceOld: 13650000,
-        priceNew: 2590000,
-        code: "TOUR000003",
-        departureDate: "22/12/2025",
-        time: "10 Ngày 9 Đêm",
-        ratingStars: 0,
-        ratingTotal: 0,
-        stock: 20
-      },
-      {
-        avatar: "/assets/images/product-3.jpg",
-        slug: "#",
-        discount: 30,
-        name: "Combo Đà Nẵng 2024: ĐÀ NẴNG - HỘI AN - BÀ NÀ HILL 2",
-        priceOld: 13650000,
-        priceNew: 2590000,
-        code: "TOUR000004",
-        departureDate: "22/12/2025",
-        time: "10 Ngày 9 Đêm",
-        ratingStars: 3,
-        ratingTotal: 12,
-        stock: 20
-      }
-    ];
-
-
-
   .section-9
     .container
       .inner-wrap
@@ -100,21 +20,19 @@ block main
             .inner-body
               .inner-group
                 .inner-label Điểm đi
-                select(name="")
+                select(name="locationForm")
                   option(value="") -- Chọn điểm đi --
-                  option(value="") Hà Nội
-                  option(value="") Đà Nẵng
-                  option(value="") Nha Trang
+                  each item in cityList
+                    option(value=item.id) #{item.name}
               .inner-group
                 .inner-label Điểm đến
-                select(name="")
+                select(name="locationTo")
                   option(value="") -- Chọn điểm đến --
-                  option(value="") Hà Nội
-                  option(value="") Đà Nẵng
-                  option(value="") Nha Trang
+                  each item in cityList
+                    option(value=item.name) #{item.name}
               .inner-group
                 .inner-label Ngày khởi hành
-                input(type="date")
+                input(type="date" name="departureDate")
               .inner-group
                 .inner-label Số Lượng Hành Khách
                 .inner-input-list
@@ -123,37 +41,40 @@ block main
                     input(
                       value="0" 
                       type="number"
+                      name="stockAdult"
                       )
                   .inner-input-item
                     .inner-label Trẻ em:
                     input(
                       value="0" 
                       type="number"
+                      name="stockChildren"
                       )
                   .inner-input-item
                     .inner-label Em bé:
                     input(
                       value="0" 
                       type="number"
+                      name="stockBaby"
                       )
               .inner-group
                 .inner-label Mức giá
-                select(name="")
+                select(name="price")
                   option(value="") -- Chọn khoảng giá --
-                  option(value="") Dưới 1tr
-                  option(value="") Từ 1tr đến 3tr
-                  option(value="") Từ 3tr đến 6tr
-                  option(value="") Từ 6tr đến 10tr
-                  option(value="") Trên 10tr
+                  option(value="0-999999") Dưới 1tr
+                  option(value="1000000-3000000") Từ 1tr đến 3tr
+                  option(value="3000000-6000000") Từ 3tr đến 6tr
+                  option(value="6000000-10000000") Từ 6tr đến 10tr
+                  option(value="10000000-10000000000") Trên 10tr
               .inner-group
                 button.inner-button Áp Dụng
           .inner-overlay
           // End Box Filter
         .inner-right
           .inner-info
-            h2.inner-title Tour Nước Ngoài
+            h2.inner-title  #{category.name}
             .inner-desc
-              | Du lịch Châu Á: là châu lục lớn và đông dân nhất thế giới. Châu Á cũng có nhiều danh lam thắng cảnh đẹp tại một số quốc gia như Hàn Quốc, Nhật Bản, Trung Quốc, Việt Nam,... và VK Travel là nhà tổ chức du lịch chuyên nghiệp hàng đầu Châu Á, đã 5 lần liên tiếp nhận giải TTG Travel Awards. Hãy cùng 28.Travel du lịch Châu Á để tận hưởng những dịch vụ tốt nhất.
+              | !{category.description}
           .inner-info-2
             .inner-sort
               .inner-label Sắp xếp:
@@ -172,12 +93,12 @@ block main
                   i.fa-solid.fa-eye
             .inner-count-record
               | Tất cả:
-              b 101 Tour
+              b.total #{totalTour} Tour
             button.inner-filter-mobile
               span.inner-title Bộ Lọc
               i.fa-solid.fa-filter
           .inner-list-tour
-            each item in productListSection9
+            each item in tourList
               // Product Item
               +product-item(item)
               // End Product Item
