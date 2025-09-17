@@ -3,7 +3,7 @@ mixin product-item(item)
 
   .product-item
     .inner-image
-      a(href=`/tour/detail/${item.slug}`)
+      a(href=`/tours/detail/${item.slug}`)
         img(
           alt=item.name 
           src=item.avatar
@@ -13,7 +13,7 @@ mixin product-item(item)
       | Giảm -#{discount}%
     .inner-content
       h3.inner-title
-        a(href=`/tour/detail/${item.slug}`) #{item.name}
+        a(href=`/tours/detail/${item.slug}`) #{item.name}
       .inner-prices
         if(discount > 0)
         .inner-price-old
