@@ -314,6 +314,28 @@ if(emailForm) {
             window.location.reload();
           }
         })
+      
+      const dataFinal = {
+        email: email
+      };
+
+      fetch(`/contact/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
     })
   ;
 }
@@ -366,16 +388,75 @@ if(orderForm) {
         errorMessage: 'Số điện thoại không đúng định dạng!'
       },
     ])
+    .addField('#email-input', [
+      {
+        rule: 'email',
+        errorMessage: 'Email không đúng định dạng!',
+      },
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập email!'
+      },
+    ])
+
     .onSuccess((event) => {
       const fullName = event.target.fullName.value;
       const phone = event.target.phone.value;
+      const email = event.target.elements["email"].value;
       const note = event.target.note.value;
       const method = event.target.method.value;
 
-      console.log(fullName);
-      console.log(phone);
-      console.log(note);
-      console.log(method);
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      cart = cart.filter(item => {
+        return (item.checked === true && (item.quantityAdult + item.quantityChildren + item.quantityBaby) > 0)
+      });
+
+      cart = cart.map(item => {
+        return {
+          tourId: item.tourId,
+          locationForm: item.locationForm,
+          quantityAdult: item.quantityAdult,
+          quantityChildren: item.quantityChildren,
+          quantityBaby: item.quantityBaby
+        }
+      });
+
+      if(cart.length > 0) {
+        const dataFinal = {
+          fullName: fullName,
+          phone: phone,
+          email: email,
+          note: note,
+          paymentMethod: method,
+          items: cart
+        };
+
+        fetch(`/order/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataFinal),
+        })
+          .then(res => res.json())
+          .then(data => {
+            if(data.code == "error") {
+              alert(data.message);
+            }
+  
+            if(data.code == "success") {
+            // Cập nhật lại giỏ hàng            
+            let cart = JSON.parse(localStorage.getItem("cart"));
+            cart = cart.filter(item => item.checked == false);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            // Chuyển hướng sang trang đặt hành thành công
+            window.location.href = `/order/success?orderId=${data.orderId}&email=${email}`;
+            }
+          })
+      }else {
+        alert("Vui lòng đặt ít nhất 1 tour!");
+      }
     })
   ;
 
@@ -552,7 +633,8 @@ if(boxTourDetail) {
         quantityAdult: quantityAdult,
         quantityChildren: quantityChildren,
         quantityBaby: quantityBaby,
-        locationForm: locationForm
+        locationForm: locationForm,
+        checked: true
       };
       
 
@@ -587,3 +669,204 @@ if(miniCart) {
   miniCart.innerHTML = cart.length;
 }
 // End Mini Cart
+
+// Page Cart
+
+const drawCart = () => {
+  const cart = localStorage.getItem("cart");
+
+  fetch(`/cart/detail`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: cart
+  })
+    .then(res => res.json())
+    .then(data => {
+      if(data.code === "success") {
+        const htmlCart = data.cart.map(item => `
+              <div class="inner-tour-item" bis_skin_checked="1">
+                <div class="inner-actions" bis_skin_checked="1">
+                  <button class="inner-delete"  button-delete tour-id="${item.tourId}">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                  <input 
+                    class="inner-check" 
+                    type="checkbox"
+                    ${item.checked ? 'checked': ''}
+                    input-check
+                    tour-id="${item.tourId}"
+                  >
+                </div>
+                <div class="inner-product" bis_skin_checked="1">
+                  <div class="inner-image" bis_skin_checked="1">
+                    <a href="/tours/detail/${item.slug}" bis_size="{&quot;x&quot;:352,&quot;y&quot;:257,&quot;w&quot;:178,&quot;h&quot;:149,&quot;abs_x&quot;:352,&quot;abs_y&quot;:257}">
+                      <img alt="" src="${item.avatar}" bis_size="{&quot;x&quot;:352,&quot;y&quot;:257,&quot;w&quot;:178,&quot;h&quot;:149,&quot;abs_x&quot;:352,&quot;abs_y&quot;:257}" bis_id="bn_aasfxm4cnbr2qu4qomf9zu">
+                    </a>
+                  </div>
+                  <div class="inner-content" bis_skin_checked="1">
+                    <div class="inner-title" bis_skin_checked="1">
+                      <a href="/tours/detail/${item.slug}">${item.name}</a>
+                    </div>
+                    <div class="inner-meta" bis_skin_checked="1">
+                      <div class="inner-meta-item" bis_skin_checked="1">Mã Tour: <b class="inner-abc">CVD123123</b>
+                      </div>
+                      <div class="inner-meta-item" bis_skin_checked="1">Ngày Khởi Hành: <b class="inner-abc">${item.departureDateFormat}
+                      </div>
+                      <div class="inner-meta-item" bis_skin_checked="1">Khởi Hành Tại: <b class="inner-abc">${item.locationFormName}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-quantity" bis_skin_checked="1">
+                  <label class="inner-label">Số Lượng Hành Khách</label>
+                  <div class="inner-list" bis_skin_checked="1">
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Người lớn:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input 
+                          value="${item.quantityAdult}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityAdult"
+                          tour-id="${item.tourId}"
+                        >
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>${item.quantityAdult}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewAdult.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Trẻ em:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input 
+                          value="${item.quantityChildren}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityChildren"
+                          tour-id="${item.tourId}"
+                        >
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>${item.quantityChildren}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewChildren.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Em bé:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input 
+                          value="${item.quantityBaby}" 
+                          min="0" 
+                          type="number"
+                          input-quantity="quantityBaby"
+                          tour-id="${item.tourId}"
+                        >
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>${item.quantityBaby}</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewBaby.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+          `);
+
+        const cartList = document.querySelector("[cart-list]");
+        cartList.innerHTML = htmlCart.join("");
+
+        // Cập nhật lại giỏ hàng
+        localStorage.setItem("cart", JSON.stringify(data.cart));
+        miniCart.innerHTML = data.cart.length;
+        // Hết cập nhật lại giỏ hàng
+
+        // Tính tổng tiền
+        const subTotalPrice = data.cart.reduce((sum, item) => {
+          if(item.checked) {
+            return sum 
+            + (item.priceNewAdult * item.quantityAdult) 
+            + (item.priceNewChildren * item.quantityChildren) 
+            + (item.priceNewBaby * item.quantityBaby);
+          }else{
+            return sum;
+          };
+        }, 0);
+        const discount = 0;
+        const totalPrice = subTotalPrice - discount;
+
+        const cartSubTotal = document.querySelector("[cart-sub-total]");
+        cartSubTotal.innerHTML = subTotalPrice.toLocaleString("vi-VN");
+
+        const cartTotal = document.querySelector("[cart-total]");
+        cartTotal.innerHTML = totalPrice.toLocaleString("vi-VN");
+        // hết Tính tổng tiền
+
+        // Sự kiện cập nhật số lượng
+        const listInputQuantity = document.querySelectorAll("[input-quantity]");
+        listInputQuantity.forEach(input => {
+          input.addEventListener("change", () => {
+            const tourId = input.getAttribute("tour-id");
+            const name = input.getAttribute("input-quantity");
+            const quantity = parseInt(input.value);
+
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const itemUpdate = cart.find(item => item.tourId === tourId);
+            itemUpdate[name] = quantity;
+            
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            drawCart();
+          })
+        })
+        // Hết sự kiện cập nhật số lượng
+
+         // Sự kiện xóa item
+        const listButtonDelete = document.querySelectorAll("[button-delete]");
+        listButtonDelete.forEach(button => {
+          button.addEventListener("click", () => {
+            const tourId = button.getAttribute("tour-id");
+
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const indexItem = cart.findIndex(tour => tour.tourId === tourId);
+            cart.splice(indexItem, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            drawCart();
+          })
+        })
+        // Hết sự kiện xóa item
+
+        // Sự kiện check item
+        const listInputCheck = document.querySelectorAll("[input-check]");
+        listInputCheck.forEach(input => {
+          input.addEventListener("change", () => {
+            const checked = input.checked;
+            const tourId = input.getAttribute("tour-id");
+
+            const cart = JSON.parse(localStorage.getItem("cart"));
+            const itemUpdate = cart.find(item => item.tourId === tourId);
+            itemUpdate.checked = checked;
+            
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            drawCart();
+          })
+        })
+        
+        // Hết sự kiện check item
+      }
+    })
+}
+
+
+const pageCart = document.querySelector("[page-cart]");
+if(pageCart) {
+  drawCart();
+}
+
+// End Page Cart
