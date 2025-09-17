@@ -449,14 +449,14 @@ if(formSearch) {
     event.preventDefault();
     const url = new URL(`${window.location.origin}/search`);
 
-      // Điểm đếm
-      const locationTo = formSearch.querySelector(`[name="locationTo"]`).value;
+    // Điểm đến
+    const locationTo = formSearch.locationTo.value;
+    if(locationTo) {
+      url.searchParams.set("locationTo", locationTo);
+    } else {
+      url.searchParams.delete("locationTo");
+    }
 
-      if(locationTo) {
-        url.searchParams.set(locationTo, locationTo);
-      }else {
-        url.searchParams.delete(locationTo);
-      }
 
     // Số lượng
     const stockAdult = parseInt(formSearch.querySelector("[stock-adult]").innerHTML);

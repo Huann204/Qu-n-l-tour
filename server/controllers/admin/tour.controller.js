@@ -53,11 +53,16 @@ module.exports.list = async (req, res) => {
   };
   // HếtLọc theo danh mục
 
-  // Lọc theo giá
+  // Mức giá
   if(req.query.price) {
-    find.priceNewAdult = parseInt(req.query.price);
-  };
-  // Hết lọc theo giá
+    const [priceMin, priceMax] = req.query.price.split("-").map(item => parseInt(item));
+    
+    find.priceNewAdult = {
+      $gte: priceMin,
+      $lte: priceMax
+    };
+  }
+  // Hết Mức giá
 
   // Pagination
   const limitItems = 3;

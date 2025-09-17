@@ -1,0 +1,13 @@
+extends ../layouts/default.pug
+include ../mixins/product-item.pug
+
+block main
+
+  // Section 4
+  .section-4(style="padding-top: 40px;")
+    .container
+      h2.box-title Kết quả tìm kiếm
+      .inner-wrap
+        each item in tourList
+          +product-item(item)
+  // End Section 4
