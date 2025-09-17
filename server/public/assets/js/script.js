@@ -366,16 +366,76 @@ if(orderForm) {
         errorMessage: 'Số điện thoại không đúng định dạng!'
       },
     ])
+    .addField('#email-input', [
+      {
+        rule: 'email',
+        errorMessage: 'Email không đúng định dạng!',
+      },
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập email!'
+      },
+    ])
+
     .onSuccess((event) => {
       const fullName = event.target.fullName.value;
       const phone = event.target.phone.value;
+      const email = event.target.elements["email"].value;
       const note = event.target.note.value;
       const method = event.target.method.value;
 
-      console.log(fullName);
-      console.log(phone);
-      console.log(note);
-      console.log(method);
+      let cart = JSON.parse(localStorage.getItem("cart"));
+      cart = cart.filter(item => {
+        return (item.checked === true && (item.quantityAdult + item.quantityChildren + item.quantityBaby) > 0)
+      });
+
+      cart = cart.map(item => {
+        return {
+          tourId: item.tourId,
+          locationForm: item.locationForm,
+          quantityAdult: item.quantityAdult,
+          quantityChildren: item.quantityChildren,
+          quantityBaby: item.quantityBaby
+        }
+      });
+
+      if(cart.length > 0) {
+        const dataFinal = {
+          fullName: fullName,
+          phone: phone,
+          email: email,
+          note: note,
+          paymentMethod: method,
+          items: cart
+        };
+
+        fetch(`/order/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataFinal),
+        })
+          .then(res => res.json())
+          .then(data => {
+            if(data.code == "error") {
+              alert(data.message);
+            }
+  
+            if(data.code == "success") {
+            // Cập nhật lại giỏ hàng
+            let cart = JSON.parse(localStorage.getItem("cart"));
+            cart = cart.filter(item => item.checked == false);
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            // Chuyển hướng sang trang đặt hành thành công
+            window.location.href = `/order/success?orderId=${data.orderId}&email=${email}`;
+            }
+          })
+
+      }else {
+        alert("Vui lòng đặt ít nhất 1 tour!");
+      }
     })
   ;
 
