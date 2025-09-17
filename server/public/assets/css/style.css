@@ -2920,3 +2920,7 @@ input, button, textarea {
 }
 
 /* End Alert */
+
+.total {
+  margin-left: 5px;
+}

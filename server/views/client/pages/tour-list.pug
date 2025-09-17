@@ -71,9 +71,9 @@ block main
           // End Box Filter
         .inner-right
           .inner-info
-            h2.inner-title Tour Nước Ngoài
+            h2.inner-title  #{category.name}
             .inner-desc
-              | Du lịch Châu Á: là châu lục lớn và đông dân nhất thế giới. Châu Á cũng có nhiều danh lam thắng cảnh đẹp tại một số quốc gia như Hàn Quốc, Nhật Bản, Trung Quốc, Việt Nam,... và VK Travel là nhà tổ chức du lịch chuyên nghiệp hàng đầu Châu Á, đã 5 lần liên tiếp nhận giải TTG Travel Awards. Hãy cùng 28.Travel du lịch Châu Á để tận hưởng những dịch vụ tốt nhất.
+              | !{category.description}
           .inner-info-2
             .inner-sort
               .inner-label Sắp xếp:
@@ -92,12 +92,12 @@ block main
                   i.fa-solid.fa-eye
             .inner-count-record
               | Tất cả:
-              b 101 Tour
+              b.total #{totalTour} Tour
             button.inner-filter-mobile
               span.inner-title Bộ Lọc
               i.fa-solid.fa-filter
           .inner-list-tour
-            //- each item in productListSection9
+            each item in tourList
               // Product Item
               +product-item(item)
               // End Product Item
