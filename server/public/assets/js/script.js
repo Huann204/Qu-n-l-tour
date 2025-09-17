@@ -587,3 +587,124 @@ if(miniCart) {
   miniCart.innerHTML = cart.length;
 }
 // End Mini Cart
+
+// Page Cart
+
+const drawCart = () => {
+  const cart = localStorage.getItem("cart");
+
+  fetch(`/cart/detail`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: cart
+  })
+    .then(res => res.json())
+    .then(data => {
+      if(data.code === "success") {
+        const htmlCart = data.cart.map(item => `
+              <div class="inner-tour-item" bis_skin_checked="1">
+                <div class="inner-actions" bis_skin_checked="1">
+                  <button class="inner-delete">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                  <input class="inner-check" type="checkbox">
+                </div>
+                <div class="inner-product" bis_skin_checked="1">
+                  <div class="inner-image" bis_skin_checked="1">
+                    <a href="/tours/detail/${item.slug}" bis_size="{&quot;x&quot;:352,&quot;y&quot;:257,&quot;w&quot;:178,&quot;h&quot;:149,&quot;abs_x&quot;:352,&quot;abs_y&quot;:257}">
+                      <img alt="" src="${item.avatar}" bis_size="{&quot;x&quot;:352,&quot;y&quot;:257,&quot;w&quot;:178,&quot;h&quot;:149,&quot;abs_x&quot;:352,&quot;abs_y&quot;:257}" bis_id="bn_aasfxm4cnbr2qu4qomf9zu">
+                    </a>
+                  </div>
+                  <div class="inner-content" bis_skin_checked="1">
+                    <div class="inner-title" bis_skin_checked="1">
+                      <a href="/tours/detail/${item.slug}">${item.name}</a>
+                    </div>
+                    <div class="inner-meta" bis_skin_checked="1">
+                      <div class="inner-meta-item" bis_skin_checked="1">Mã Tour: <b class="inner-abc">CVD123123</b>
+                      </div>
+                      <div class="inner-meta-item" bis_skin_checked="1">Ngày Khởi Hành: <b class="inner-abc">${item.departureDateFormat}
+                      </div>
+                      <div class="inner-meta-item" bis_skin_checked="1">Khởi Hành Tại: <b class="inner-abc">${item.locationFormName}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="inner-quantity" bis_skin_checked="1">
+                  <label class="inner-label">Số Lượng Hành Khách</label>
+                  <div class="inner-list" bis_skin_checked="1">
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Người lớn:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input value="${item.quantityAdult}" min="0" type="number">
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>1</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewAdult.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Trẻ em:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input value="${item.quantityChildren}" min="0" type="number">
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>0</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewChildren.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                    <div class="inner-item" bis_skin_checked="1">
+                      <div class="inner-item-label" bis_skin_checked="1">Em bé:</div>
+                      <div class="inner-item-input" bis_skin_checked="1">
+                        <input value="${item.quantityBaby}" min="0" type="number">
+                      </div>
+                      <div class="inner-item-price" bis_skin_checked="1">
+                        <span>0</span>
+                        <span>x</span>
+                        <span class="inner-highlight">${item.priceNewBaby.toLocaleString("vi-VN")}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+          `);
+
+        const cartList = document.querySelector("[cart-list]");
+        cartList.innerHTML = htmlCart.join("");
+
+        // Cập nhật lại giỏ hàng
+        localStorage.setItem("cart", JSON.stringify(data.cart));
+        miniCart.innerHTML = data.cart.length;
+        // Hết cập nhật lại giỏ hàng
+
+        // Tính tổng tiền
+        const subTotalPrice = data.cart.reduce((sum, item) => {
+          return sum 
+            + (item.priceNewAdult * item.quantityAdult) 
+            + (item.priceNewChildren * item.quantityChildren) 
+            + (item.priceNewBaby * item.quantityBaby);
+        }, 0);
+        const discount = 0;
+        const totalPrice = subTotalPrice - discount;
+
+        const cartSubTotal = document.querySelector("[cart-sub-total]");
+        cartSubTotal.innerHTML = subTotalPrice.toLocaleString("vi-VN");
+
+        const cartTotal = document.querySelector("[cart-total]");
+        cartTotal.innerHTML = totalPrice.toLocaleString("vi-VN");
+        // hết Tính tổng tiền
+
+      }
+    })
+}
+
+
+const pageCart = document.querySelector("[page-cart]");
+if(pageCart) {
+  drawCart();
+}
+
+// End Page Cart
