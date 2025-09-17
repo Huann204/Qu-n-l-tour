@@ -6,6 +6,10 @@
     <title>Tạo tour</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css">
+    <script src="https://cdn.tiny.cloud/1/useczbgh90xpdgco1c49cgn6uk34h5dd9h9mxus5sjnw09ue/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="../assets/js/tinymce-config.js"></script>
   </head>
   <body>
     <header class="header">
@@ -38,8 +42,154 @@
     <div class="sider-overlay"></div>
     <main class="main">
       <h1 class="box-title">Tạo tour</h1>
-      
+      <div class="section5">
+        <form id="tour-create-form">
+          <div class="inner-group">
+            <label class="inner-label" for="name">Tên tour</label>
+            <input type="text" id="name" name="name">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="category">Danh mục</label>
+            <select id="category" name="category">
+              <option value="">-- Chọn danh mục --</option>
+              <option value="">Danh mục 1</option>
+              <option value="">Danh mục 2</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="position">Vị trí</label>
+            <input type="number" id="position" name="position">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="status">Trạng thái</label>
+            <select id="status" name="status">
+              <option value="">Hoạt động</option>
+              <option value="">Dừng hoạt động</option>
+            </select>
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="avatar">Ảnh đại diện</label>
+            <div class="inner-upload-image">
+              <input type="file" id="avatar" accept="image/*" filepond-image name="avatar">
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Giá cũ</label>
+            <div class="inner-input-list">
+              <div class="inner-input-item">
+                <label>Người lớn</label>
+                <input type="number" name="priceAdult">
+              </div>
+              <div class="inner-input-item">
+                <label>Trẻ em</label>
+                <input type="number" name="priceChildren">
+              </div>
+              <div class="inner-input-item">
+                <label>Em bé</label>
+                <input type="number" name="priceBaby">
+              </div>
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Giá mới</label>
+            <div class="inner-input-list">
+              <div class="inner-input-item">
+                <label>Người lớn</label>
+                <input type="number" name="priceNewAdult">
+              </div>
+              <div class="inner-input-item">
+                <label>Trẻ em</label>
+                <input type="number" name="priceNewChildren">
+              </div>
+              <div class="inner-input-item">
+                <label>Em bé</label>
+                <input type="number" name="priceNewBaby">
+              </div>
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Còn lại</label>
+            <div class="inner-input-list">
+              <div class="inner-input-item">
+                <label>Người lớn</label>
+                <input type="number" name="stockAdult">
+              </div>
+              <div class="inner-input-item">
+                <label>Trẻ em</label>
+                <input type="number" name="stockChildren">
+              </div>
+              <div class="inner-input-item">
+                <label>Em bé</label>
+                <input type="number" name="stockBaby">
+              </div>
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Những địa điểm có tour</label>
+            <div class="inner-checkbox-list">
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="locations" value="Hà Nội">
+                <label>Hà Nội</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="locations" value="Đà Nẵng">
+                <label>Đà Nẵng</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="locations" value="Nha Trang">
+                <label>Nha Trang</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="locations" value="Hồ Chí Minh">
+                <label>Hồ Chí Minh</label>
+              </div>
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="time">Thời gian</label>
+            <input type="text" id="time" name="time">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="vehicle">Phương tiện</label>
+            <input type="text" id="vehicle" name="vehicle">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="departureDate">Ngày khởi hành</label>
+            <input type="date" id="departureDate" name="departureDate">
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="information">Thông tin tour</label>
+            <textarea id="information" textarea-mce name="information"></textarea>
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label">Lịch trình tour</label>
+            <div class="inner-schedule">
+              <div class="inner-schedule-list">
+                <div class="inner-schedule-item">
+                  <div class="inner-schedule-head"><span class="inner-schedule-button inner-move"><i class="fa-solid fa-up-down-left-right"></i></span>
+                    <input type="text"><span class="inner-schedule-button inner-remove"><i class="fa-regular fa-trash-can"></i></span><span class="inner-schedule-button inner-more"><i class="fa-solid fa-angle-down"></i></span>
+                  </div>
+                  <div class="inner-schedule-body">
+                    <textarea textarea-mce></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="inner-schedule-create">+ Thêm lich trình</div>
+            </div>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Tạo mới</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Quay lại danh sách</a></div>
+      </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"> </script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"> </script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
     <script src="../assets/js/scriptAdmin.js"></script>
   </body>
 </html>
