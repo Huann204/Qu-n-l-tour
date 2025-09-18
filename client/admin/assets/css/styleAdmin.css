@@ -320,6 +320,31 @@ a {
 }
 /* End Section 1 */
 
+/* Badge */
+.badge {
+  border-radius: 4.5px;
+  padding: 6px 22px;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.badge-orange {
+  background-color: rgba(255, 168, 86, 0.2);
+  color: #FFA756;
+}
+
+.badge-green {
+  background-color: rgba(0, 182, 155, 0.2);
+  color: #00B69B;
+}
+
+.badge-red {
+  background-color: rgba(239, 55, 38, 0.2);
+  color: #EF3826;
+}
+/* End Badge */
+
 /* Section 2 */
 .section2 {
   margin-bottom: 30px;
