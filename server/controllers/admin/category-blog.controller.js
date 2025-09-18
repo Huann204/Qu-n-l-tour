@@ -1,4 +1,3 @@
-
 // giao diện trang quản lý danh mục tin tức
 module.exports.list = async (req, res) => {
   res.render("admin/pages/category-blog-list.pug", {
