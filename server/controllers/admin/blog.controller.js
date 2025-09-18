@@ -294,7 +294,149 @@ module.exports.changeMultiPatch = async (req, res) => {
 
 // giao diện trang thùng rác tin tức
 module.exports.trash = async (req, res) => {
-  res.render("admin/pages/blog-trash.pug", {
-    pageTitle: "Thùng rác tin tức"
+  const find = {
+    deleted: true,
+  };
+
+  // pagination
+  let limitItems = 3;
+  let page = 1;
+
+  if(req.query.page) {
+    const currentPage = parseInt(req.query.page);
+
+    if(currentPage > 0) {
+      page = currentPage;
+    };
+  }
+
+  const totalRecord = await Blog.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+
+  if(page > totalPage) {
+    page = totalPage;
+  };
+
+  if(totalPage === 0) {
+    page = 1;
+  };
+
+  const skip = (page - 1) * limitItems;
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage
+  };
+
+  // End pagination
+
+  const blogList = await Blog
+    .find(find)
+    .sort({
+      position: "asc"
+    })
+
+    for (const item of blogList) {
+      if(item.createdBy) {
+        const infoAccountCreated = await AccountAdmin.findOne({
+          _id: item.createdBy
+        });
+
+        item.createdByFullName = infoAccountCreated.fullName;
+      }
+
+      if(item.deletedBy) {
+      const infoAccountDeleted = await AccountAdmin.findOne({
+        _id: item.deletedBy
+      })
+      item.deletedByFullName = infoAccountDeleted.fullName;
+    }
+
+
+      item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+      item.deletedAtFormat = moment(item.deletedAt).format("HH:mm - DD/MM/YYYY");
+    }
+
+  res.render("admin/pages/blog-trash", {
+    pageTitle: "Thùng rác tin tức",
+    blogList: blogList,
+    pagination: pagination
   })
 };
+
+module.exports.undoPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    await Blog.updateOne({
+      _id: id
+    },{
+      deleted: false,
+    });
+
+    req.flash("success", "Khôi phục tin tức thành công!");
+        
+    res.json({
+      code: "success"
+    })
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Id không hợp lệ"
+    })
+  }
+};
+
+module.exports.deleteDestroyPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    await Blog.deleteOne({
+      _id: id
+    });
+
+    req.flash("success", "Đã xóa tin tức khỏi cơ sở dữ liệu!");
+        
+    res.json({
+      code: "success"
+    })
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Id không hợp lệ"
+    })
+  }
+};
+
+module.exports.trashChangeMultiPatch = async(req, res ) => {
+  try {
+    const { option, ids } = req.body;
+
+    switch (option) {
+      case "undo":
+        await Blog.updateMany({
+          _id: { $in: ids}
+        }, {
+          deleted: false
+        });
+        req.flash("success", "Khôi phục tin tức thành công!");
+        break;
+      case "delete-destroy":
+        await Blog.deleteMany({
+          _id: { $in: ids }
+        });
+        req.flash("success", "Đã xóa tin tức khỏi cơ sở dữ liệu!");
+        break;
+    }
+    
+    res.json({
+      code: "success"
+    })
+    
+  } catch (error) {
+    res.json({
+      code: "error",
+      message: "Id không tồn tại trong hệ thông!"
+    });
+  }
+}

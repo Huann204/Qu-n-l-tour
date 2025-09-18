@@ -31,4 +31,10 @@ router.patch(`/change-multi`, blogController.changeMultiPatch);
 
 router.get('/trash', blogController.trash);
 
+router.patch('/undo/:id', blogController.undoPatch);
+
+router.patch('/delete-destroy/:id', blogController.deleteDestroyPatch);
+
+router.patch('/trash/change-multi', blogController.trashChangeMultiPatch);
+
 module.exports = router;
