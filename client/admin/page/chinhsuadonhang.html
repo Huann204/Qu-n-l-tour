@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa đơn hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </header>
+    <nav class="sider">
+      <ul class="inner-menu">
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
+      </ul>
+      <hr>
+      <ul class="inner-menu">
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i> Thông tin cá nhân</a></li>
+        <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <div class="sider-overlay"></div>
+    <main class="main">
+    <h1 class="box-title">Đơn hàng: OD000001</h1>
+      <div class="section5">
+        <form id="order-edit-form">
+          <div class="inner-group">
+            <label class="inner-label" for="fullName">Tên khách hàng</label>
+            <input type="text" id="fullName" name="fullName" value="Lê Văn A">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="phone">Số điện thoại</label>
+            <input type="text" id="phone" name="phone" value="0123456789">
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="note">Ghi chú</label>
+            <textarea id="note" name="note">Test...</textarea>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="paymentMethod">Phương thức thanh toán</label>
+            <select id="paymentMethod" name="paymentMethod">
+              <option value="">Ví Momo</option>
+              <option value="">VNPay</option>
+              <option value="">ZaloPay</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="paymentStatus">Trạng thái thanh toán</label>
+            <select id="paymentStatus" name="paymentStatus">
+              <option value="">Đã thanh toán</option>
+              <option value="">Chưa thanh toán</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="createdAt">Ngày đặt</label>
+            <input type="datetime-local" id="createdAt" name="createdAt" value="2024-11-18T10:30" readonly>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="status">Trạng thái</label>
+            <select id="status" name="status">
+              <option value="">Khởi tạo</option>
+              <option value="">Hoàn thành</option>
+              <option value="">Hủy</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Danh sách tour</label>
+            <div class="inner-order-list">
+              <div class="inner-order-item">
+                <div class="inner-order-image"><img src="../assets/images/tour-1.jpg" alt="Tour Hạ Long"></div>
+                <div class="inner-order-content">
+                  <div class="inner-order-name">Tour Hạ Long</div>
+                  <div class="inner-order-text">Người lớn: 3 x 1.500.000đ</div>
+                  <div class="inner-order-text">Trẻ em: 2 x 1.300.000đ</div>
+                  <div class="inner-order-text">Em bé: 2 x 1.000.000đ</div>
+                  <div class="inner-order-text">Ngày khởi hành: 20/10/2024</div>
+                  <div class="inner-order-text">Khởi hành tại: Hà Nội</div>
+                </div>
+              </div>
+              <div class="inner-order-item">
+                <div class="inner-order-image"><img src="../assets/images/tour-1.jpg" alt="Tour Hạ Long"></div>
+                <div class="inner-order-content">
+                  <div class="inner-order-name">Tour Hạ Long</div>
+                  <div class="inner-order-text">Người lớn: 3 x 1.500.000đ</div>
+                  <div class="inner-order-text">Trẻ em: 2 x 1.300.000đ</div>
+                  <div class="inner-order-text">Em bé: 2 x 1.000.000đ</div>
+                  <div class="inner-order-text">Ngày khởi hành: 20/10/2024</div>
+                  <div class="inner-order-text">Khởi hành tại: Hà Nội</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Thanh toán</label>
+            <div class="inner-order-total">
+              <div>Tổng tiền: 10.000.000đ</div>
+              <div>Giảm: 400.000đ</div>
+              <div>Mã giảm: TOURMUAHE2024</div>
+              <div>Thanh toán: <span class="inner-order-price">9.600.000đ</span></div>
+            </div>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Cập nhật</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Quay lại danh sách</a></div>
+      </div>
+    </main>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
+</html>

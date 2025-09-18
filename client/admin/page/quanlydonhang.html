@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </header>
+    <nav class="sider">
+      <ul class="inner-menu">
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
+      </ul>
+      <hr>
+      <ul class="inner-menu">
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i> Thông tin cá nhân</a></li>
+        <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <div class="sider-overlay"></div>
+    <main class="main">
+      <h1 class="box-title">Quản lý đơn hàng</h1>
+      <div class="section1">
+        <div class="inner-wrap">
+          <div class="inner-item inner-label"><i class="fa-solid fa-filter"></i> Bộ lọc</div>
+          <div class="inner-item">
+            <select>
+              <option value="">Trạng thái</option>
+              <option value="">Khởi tạo</option>
+              <option value="">Hoàn thành</option>
+              <option value="">Hủy</option>
+            </select>
+          </div>
+          <div class="inner-item inner-date">
+            <input type="date"><span>-</span>
+            <input type="date">
+          </div>
+          <div class="inner-item">
+            <select>
+              <option value="">Phương thức thanh toán</option>
+              <option value="">Ví Momo</option>
+              <option value="">VNPay</option>
+              <option value="">ZaloPay</option>
+            </select>
+          </div>
+          <div class="inner-item">
+            <select>
+              <option value="">Trạng thái thanh toán</option>
+              <option value="">Đã thanh toán</option>
+              <option value="">Chưa thanh toán</option>
+            </select>
+          </div>
+          <div class="inner-item inner-reset"><i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc</div>
+        </div>
+      </div>
+      <div class="section2">
+        <div class="inner-wrap">
+          <div class="inner-search"><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm">
+          </div>
+        </div>
+      </div>
+      <div class="section3">
+        <div class="table3">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã</th>
+                <th>Thông tin khách</th>
+                <th>Danh sách tour</th>
+                <th>Thanh toán</th>
+                <th>Trạng thái</th>
+                <th class="inner-center">Ngày đặt</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="inner-code">OD000001</div>
+                </td>
+                <td>
+                  <div>Họ tên: Lê Văn A</div>
+                  <div>SĐT: 0123456789</div>
+                  <div>Ghi chú: Test...</div>
+                </td>
+                <td>
+                  <div class="inner-item">
+                    <div class="inner-image"><img src="../assets/images/tour-1.jpg" alt="Tour Hạ Long"></div>
+                    <div class="inner-content">
+                      <div class="inner-name">Tour Hạ Long</div>
+                      <div class="inner-quantity">Người lớn: 3 x 1.500.000đ</div>
+                      <div class="inner-quantity">Trẻ em: 2 x 1.300.000đ</div>
+                      <div class="inner-quantity">Em bé: 2 x 1.000.000đ</div>
+                    </div>
+                  </div>
+                  <div class="inner-item">
+                    <div class="inner-image"><img src="../assets/images/tour-1.jpg" alt="Tour Hạ Long"></div>
+                    <div class="inner-content">
+                      <div class="inner-name">Tour Hạ Long</div>
+                      <div class="inner-quantity">Người lớn: 3 x 1.500.000đ</div>
+                      <div class="inner-quantity">Trẻ em: 2 x 1.300.000đ</div>
+                      <div class="inner-quantity">Em bé: 2 x 1.000.000đ</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>Tổng tiền: 10.000.000đ</div>
+                  <div>Giảm: 400.000đ</div>
+                  <div>Mã giảm: TOURMUAHE2024</div>
+                  <div>Thanh toán: 9.600.000đ</div>
+                  <div>PTTT: Ví Momo</div>
+                  <div>TTTT: Đã thanh toán</div>
+                </td>
+                <td>
+                  <div class="badge badge-orange">Khởi tạo</div>
+                </td>
+                <td class="inner-center">
+                  <div>16:20</div>
+                  <div>01/01/2024</div>
+                </td>
+                <td>
+                  <div class="inner-buttons">
+                    <button class="inner-edit"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="inner-delete"><i class="fa-regular fa-trash-can"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="section3"><span class="inner-label">Hiển thị</span>
+        <select class="inner-pagination">
+          <option>Trang 1</option>
+          <option>Trang 2</option>
+          <option>Trang 3</option>
+        </select>
+      </div>
+    </main>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
+</html>
