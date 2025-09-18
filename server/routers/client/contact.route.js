@@ -4,4 +4,6 @@ const contactController = require("../../controllers/client/contact.controller")
 
 router.post('/create', contactController.createPost);
 
+router.get('/list', contactController.list);
+
 module.exports = router;
