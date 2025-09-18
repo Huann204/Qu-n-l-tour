@@ -25,3 +25,9 @@ module.exports.createPost = async (req, res) => {
     code: "success"
   });
 }
+
+module.exports.list = async (req, res) => {
+  res.render("client/pages/contact", {
+    pageTitle: "Liên hệ",
+  })
+}

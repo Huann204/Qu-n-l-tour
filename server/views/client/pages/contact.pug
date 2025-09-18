@@ -1,0 +1,177 @@
+extends ../layouts/default.pug
+include ../mixins/product-item.pug
+
+block styles
+  link(rel="stylesheet", href="/assets/css/contact.css")
+
+block main
+    main.contact
+    // Hero
+    section.hero
+      .container(class="hero__inner")
+        div(class="hero__content")
+          span.badge
+            i.fa-solid.fa-headset
+            | Hỗ trợ 24/7
+          h1 Liên hệ Chúng tôi
+          p
+            | Hỏi gì đáp nấy — từ cách săn vé rẻ đến sắp lịch trình. Cứ gửi lời
+            |   nhắn, tụi mình xử liền tay!
+        div(class="hero__visual")
+          img(
+            alt="Liên hệ du lịch" 
+            src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1600&auto=format&fit=crop"
+            )
+      div(
+        aria-hidden="true" 
+        class="hero__wave"
+        )
+    // Content
+    section.container.layout
+      // Info
+      aside.info
+        .card(class="info__block")
+          h3
+            i.fa-solid.fa-phone-volume
+            | Gọi nhanh
+          ul
+            li
+              i.fa-solid.fa-phone
+              a(href="tel:0900000000") 0900 000 000
+            li
+              i.fa-brands.fa-whatsapp
+              a(href="#") WhatsApp
+            li
+              i.fa-brands.fa-facebook-messenger
+              a(href="#") Messenger
+        .card(class="info__block")
+          h3
+            i.fa-solid.fa-envelope-open-text
+            | Email
+          ul
+            li
+              i.fa-regular.fa-envelope
+              a(href="mailto:hello@huantour.vn") hello@huantour.vn
+            li
+              i.fa-regular.fa-paper-plane
+              a(href="#") Form liên hệ
+              | (bên phải)
+        .card(class="info__block")
+          h3
+            i.fa-solid.fa-location-dot
+            | Địa chỉ
+          ul
+            li
+              i.fa-solid.fa-map
+              | 123 Trần Du Lịch, Q.1, TP.HCM
+            li
+              i.fa-regular.fa-clock
+              | Thứ 2–Thứ 7: 8:00–18:00
+        .card(class="info__block")
+          h3
+            i.fa-solid.fa-hashtag
+            | Kết nối
+          .socials
+            a.soc(href="#")
+              i.fa-brands.fa-facebook
+            a.soc(href="#")
+              i.fa-brands.fa-instagram
+            a.soc(href="#")
+              i.fa-brands.fa-tiktok
+            a.soc(href="#")
+              i.fa-brands.fa-youtube
+      // Form
+      section.form
+        .card(class="form__card")
+          h2 Gửi lời nhắn cho tụi mình ✉️
+          p.muted
+            | Điền vài dòng là team phản hồi liền. Chỉ mất 1 phút, cứu cả chuyến
+            |   đi!
+          form(
+            onsubmit="return false;" 
+            novalidate="" 
+            method="post" 
+            action="#"
+            )
+            .grid
+              .input
+                label(for="fullname") Họ & tên
+                div(class="input__wrap")
+                  i.fa-regular.fa-user
+                  input#fullname(
+                    required="" 
+                    placeholder="Nguyễn Văn Du Lịch" 
+                    type="text" 
+                    name="fullname"
+                    )
+                small.error Vui lòng nhập họ tên.
+              .input
+                label(for="email") Email
+                div(class="input__wrap")
+                  i.fa-regular.fa-envelope
+                  input#email(
+                    required="" 
+                    placeholder="ban@vidu.com" 
+                    type="email" 
+                    name="email"
+                    )
+                small.error Email chưa hợp lệ.
+              .input
+                label(for="phone") Số điện thoại
+                div(class="input__wrap")
+                  i.fa-solid.fa-phone
+                  input#phone(
+                    placeholder="0900 000 000" 
+                    type="tel" 
+                    name="phone"
+                    )
+              .input
+                label(for="topic") Chủ đề
+                div(class="input__wrap")
+                  i.fa-solid.fa-list
+                  select#topic(name="topic")
+                    option(value="") — Chọn chủ đề —
+                    option(value="booking") Hỗ trợ đặt tour
+                    option(value="deal") Tư vấn deal/khuyến mãi
+                    option(value="visa") Hồ sơ visa
+                    option(value="other") Khác
+              .input.input--full
+                label(for="message") Nội dung
+                div(class="input__wrap input__wrap--textarea")
+                  i.fa-regular.fa-comment-dots
+                  textarea#message(
+                    placeholder="Mình muốn tư vấn tour Đà Lạt 3N2Đ..." 
+                    rows="6" 
+                    name="message"
+                    )
+            div(class="form__actions")
+              button.btn.btn--ghost(type="reset")
+                i.fa-regular.fa-circle-xmark
+                | Xóa
+              button.btn.btn--primary(type="submit")
+                i.fa-regular.fa-paper-plane
+                | Gửi liên hệ
+            p.muted.tiny
+              i.fa-regular.fa-circle-check
+              | Bằng việc gửi, bạn
+              |   đồng ý với Chính sách bảo mật của Chúng tôi.
+    // Map
+    section.map
+      .container
+        .card(class="map__card")
+          h3
+            i.fa-solid.fa-map-location-dot
+            | Bản đồ
+          div(class="map__frame")
+            iframe(
+              referrerpolicy="no-referrer-when-downgrade" 
+              loading="lazy" 
+              allowfullscreen="" 
+              style="border: 0" 
+              height="450" 
+              width="600" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.028171956226!2d105.7738645!3d21.071537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134552defbed8e9%3A0x1584f79c805eb017!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBN4buPIC0gxJDhu4thIGNo4bqldA!5e0!3m2!1svi!2s!4v1757860297086!5m2!1svi!2s" 
+              title="Chúng tôi Map"
+              )
+              | style="border: 0" allowfullscreen="" loading="lazy"
+              |   referrerpolicy="no-referrer-when-downgrade" >

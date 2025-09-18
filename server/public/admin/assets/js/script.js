@@ -1159,3 +1159,337 @@ if(filterPaymentMethod) {
   }
 }
 // Hết lọc theo phương thức thanh toán
+
+// Category Blog Create Form
+const categoryBlogCreateForm = document.querySelector("#category-blog-create-form");
+if(categoryBlogCreateForm) {
+  const validation = new JustValidate('#category-blog-create-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const name = event.target.name.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+      const description = tinymce.get("description").getContent();
+
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category-blog/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {          
+          window.location.href = `/${pathAdmin}/category-blog/list`;
+        }
+      })
+    });
+}
+// End Category Blog Create Form
+
+// Category Blog Edit Form
+const categoryBlogEditForm = document.querySelector("#category-blog-edit-form");
+if(categoryBlogEditForm) {
+  const validation = new JustValidate('#category-blog-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const description = tinymce.get("description").getContent();
+
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/category-blog/edit/${id}`, {
+      method: "PATCH",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.reload();
+        }
+      })
+    })
+  ;
+}
+// End Category Blog Edit Form
+
+// Category Create Form
+const blogCreateForm = document.querySelector("#blog-create-form");
+if(blogCreateForm) {
+  const validation = new JustValidate('#blog-create-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+      const description = tinymce.get("description").getContent();
+      
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/blog/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.href = `/${pathAdmin}/blog/list`;
+        }
+      })
+    });
+}
+// End Category Create Form
+
+// Blog Edit Form
+const blogEditForm = document.querySelector("#blog-edit-form");
+if(blogEditForm) {
+  const validation = new JustValidate('#blog-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const description = tinymce.get("description").getContent();
+
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/blog/edit/${id}`, {
+      method: "PATCH",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.reload();
+        }
+      })
+    })
+  ;
+}
+// End Blog Edit Form
+
+// Biểu đồ doanh thu
+const revenueChart = document.querySelector("#revenue-chart");
+if(revenueChart) {
+
+  let chart = null;
+
+  const drawChart = (date) => {
+    // Lấy ngày hiện tại
+    
+
+    // Lấy ngày và năm hiện tại
+    const currentMonth = date.getMonth() + 1; // getMonth() trả về giá trị từ 0 đến 11
+    const currentYear = date.getFullYear();
+
+    // Tạo một đối tượng Date mới cho tháng trước
+    // Nếu tháng hiện tại là tháng 1 thì new Date(currentYear, 0 - 1, 1) sẽ tự động chuyển thành tháng 12 của năm trước
+    const previousMonthDate = new Date(currentYear, date.getMonth() - 1, 1);
+
+    // Lấy tháng và năm từ đối tượng previousMonthDate
+    const previousMonth = previousMonthDate.getMonth() + 1;
+    const previousYear = previousMonthDate.getFullYear();
+
+    // Lấy ra tổng số ngày
+    const daysInMonthCurrent = new Date(currentYear, currentMonth, 0).getDate();
+    const daysInMonthPrevious= new Date(previousYear, previousMonth, 0).getDate();
+    const days = daysInMonthCurrent > daysInMonthPrevious ? daysInMonthCurrent : daysInMonthPrevious;
+
+    const arrayDay = [];
+    for(let i = 1; i <= days; i++) {
+      arrayDay.push(i);
+    };
+
+    const dataFinal = {
+      currentMonth: currentMonth,
+      currentYear: currentYear,
+      previousMonth: previousMonth,
+      previousYear: previousYear,
+      arrayDay: arrayDay
+    };
+
+    fetch(`/${pathAdmin}/dashboard/revenue-chart`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(dataFinal),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          if(chart) {
+            chart.destroy();
+          }
+          chart = new Chart(revenueChart, {
+            type: 'line',
+            data: {
+              labels: arrayDay,
+              datasets: [
+                {
+                  label: `Tháng ${String(currentMonth).padStart(2, '0')}/${currentYear}`, // Nhãn của dataset
+                  data: data.dataMonthCurrent, // Dữ liệu
+                  borderColor: '#4379EE', // Màu viền
+                  borderWidth: 1.5, // Độ dày của đường
+                },
+                {
+                  label: `Tháng ${String(previousMonth).padStart(2, '0')}/${previousYear}`, // Nhãn của dataset
+                  data: data.dataMonthPrevious, // Dữ liệu
+                  borderColor: '#EF3826', // Màu viền
+                  borderWidth: 1.5, // Độ dày của đường
+                }
+              ]
+            },
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom'
+                }
+              },
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Ngày'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Doanh thu (VND)'
+                  }
+                }
+              },
+              maintainAspectRatio: false, // Không giữ tỷ lệ khung hình mặc định
+            }
+          });
+        }
+      })
+  }
+
+  const now = new Date();
+
+  drawChart(now);
+
+  const inputMonth = document.querySelector("[input-month]");
+  inputMonth.addEventListener("change", () => {
+    const value = inputMonth.value;
+    drawChart(new Date(value));
+    
+  })
+  
+
+}
+// Hết Biểu đồ doanh thu
