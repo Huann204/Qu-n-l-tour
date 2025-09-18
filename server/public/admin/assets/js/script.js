@@ -1265,3 +1265,113 @@ if(categoryBlogEditForm) {
   ;
 }
 // End Category Blog Edit Form
+
+// Category Create Form
+const blogCreateForm = document.querySelector("#blog-create-form");
+if(blogCreateForm) {
+  const validation = new JustValidate('#blog-create-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+      const description = tinymce.get("description").getContent();
+      
+       // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/blog/create`, {
+      method: "POST",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.href = `/${pathAdmin}/blog/list`;
+        }
+      })
+    });
+}
+// End Category Create Form
+
+// Blog Edit Form
+const blogEditForm = document.querySelector("#blog-edit-form");
+if(blogEditForm) {
+  const validation = new JustValidate('#blog-edit-form');
+
+  validation
+    .addField('#name', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập tên danh mục!'
+      }
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const name = event.target.name.value;
+      const parent = event.target.parent.value;
+      const position = event.target.position.value;
+      const status = event.target.status.value;
+      const avatars = filePond.avatar.getFiles();
+      let avatar = null;
+      if(avatars.length > 0) {
+        avatar = avatars[0].file;
+        const elementImageDefault = event.target.avatar.closest("[image-default]");
+        const imageDefault = elementImageDefault.getAttribute("image-default");
+        if(imageDefault.includes(avatar.name)) {
+          avatar = null;
+        }
+      }
+      const description = tinymce.get("description").getContent();
+
+
+      // Tạo FormData
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("parent", parent);
+      formData.append("position", position);
+      formData.append("status", status);
+      formData.append("avatar", avatar);
+      formData.append("description", description);
+      
+     fetch(`/${pathAdmin}/blog/edit/${id}`, {
+      method: "PATCH",
+      body: formData
+     })
+      .then(res => res.json())
+      .then(data => {
+        if(data.code === "error") {
+          alert(data.message);
+        }
+
+        if(data.code === "success") {
+          window.location.reload();
+        }
+      })
+    })
+  ;
+}
+// End Blog Edit Form

@@ -1,0 +1,44 @@
+extends ../layouts/default.pug
+include ../mixins/options.pug
+
+block main
+  h1.box-title #{pageTitle}
+
+  .section-8
+    form#blog-edit-form
+      .inner-group(style="display: none;")
+        label(class="inner-label" for="id") Id
+        input(type="text" id="id" name="id" value=blogDetail.id)
+      .inner-group
+        label(class="inner-label" for="name") Tên danh mục
+        input(type="text" id="name" name="name" value=blogDetail.name)
+      .inner-group
+        label(class="inner-label" for="parent") Danh mục cha
+        select(id="parent" name="parent")
+          option(value="") -- Chọn danh mục --
+          +option(categoryBlogList, 0, blogDetail.parent)
+      .inner-group
+        label(class="inner-label" for="position") Vị trí
+        input(type="number" id="position" name="position" value=blogDetail.position)
+      .inner-group
+        label(class="inner-label" for="status") Trạng thái
+        select(id="status" name="status")
+          option(
+            value="active"
+            selected=(blogDetail.status == "active" ? true : false)
+            ) Hoạt động
+          option(
+            value="inactive"
+            selected=(blogDetail.status == "inactive" ? true : false)
+            ) Tạm dừng
+      .inner-group.inner-two-col
+        label(class="inner-label" for="avatar") Ảnh đại diện
+        div(class="inner-upload-image" image-default=blogDetail.avatar)
+          input(type="file" id="avatar" accept="image/*" filepond-image name="avatar")
+      .inner-group.inner-two-col
+        label(class="inner-label" for="description") Mô tả
+        textarea(id="description" textarea-mce name="description") #{value=blogDetail.description}
+      .inner-button.inner-two-col
+        button Cập nhật
+    .inner-back
+      a(href=`/${pathAdmin}/blog/list`) Quay lại danh sách
