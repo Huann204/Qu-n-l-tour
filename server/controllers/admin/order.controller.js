@@ -8,11 +8,46 @@ module.exports.list = async (req, res) => {
     deleted: false
   };
 
+  // Pagination
+  const limitItems = 3;
+  let page = 1;
+
+  if(req.query.page) {
+    const currentPage = parseInt(req.query.page);
+
+    if(currentPage > 0) {
+      page = currentPage;
+    };
+  };
+  
+  const totalRecord = await Order.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItems);
+
+  if(page > totalPage) {
+    page = totalPage
+  };
+
+  if(totalPage === 0) {
+    page = 1;
+  };
+  
+  const skip = (page - 1) * limitItems;
+  const pagination = {
+    skip: skip,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+  }
+
+  // End Pagination
+
   const orderList = await Order
     .find(find)
     .sort({
       createdAt: "desc"
-    });
+    })
+    .limit(limitItems)
+    .skip(skip)
+    ;
 
     for (const orderDetail of orderList) {
       orderDetail.paymentMethodName = variableConfig.paymentMethod.find(item => item.value == orderDetail.paymentMethod).label;
@@ -27,7 +62,8 @@ module.exports.list = async (req, res) => {
 
   res.render("admin/pages/order-list", {
     pageTitle: "Quản lý đơn hàng",
-    orderList: orderList
+    orderList: orderList,
+    pagination: pagination
   })
 };
 
