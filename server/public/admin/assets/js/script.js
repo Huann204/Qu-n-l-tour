@@ -1038,3 +1038,124 @@ if(search) {
 
 // End Search
 
+// Order Edit Form
+const orderEditForm = document.querySelector("#order-edit-form");
+if(orderEditForm) {
+  const validation = new JustValidate('#order-edit-form');
+
+  validation
+    .addField('#fullName', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập họ tên!'
+      },
+      {
+        rule: 'minLength',
+        value: 5,
+        errorMessage: 'Họ tên phải có ít nhất 5 ký tự!',
+      },
+      {
+        rule: 'maxLength',
+        value: 50,
+        errorMessage: 'Họ tên không được vượt quá 50 ký tự!',
+      },
+    ])
+    .addField('#phone', [
+      {
+        rule: 'required',
+        errorMessage: 'Vui lòng nhập số điện thoại!'
+      },
+      {
+        rule: 'customRegexp',
+        value: /(84|0[3|5|7|8|9])+([0-9]{8})\b/g,
+        errorMessage: 'Số điện thoại không đúng định dạng!'
+      },
+    ])
+    .onSuccess((event) => {
+      const id = event.target.id.value;
+      const fullName = event.target.fullName.value;
+      const phone = event.target.phone.value;
+      const note = event.target.note.value;
+      const paymentMethod = event.target.paymentMethod.value;
+      const paymentStatus = event.target.paymentStatus.value;
+      const status = event.target.status.value;
+
+      const dataFinal = {
+        fullName: fullName,
+        phone: phone,
+        note: note,
+        paymentMethod: paymentMethod,
+        paymentStatus: paymentStatus,
+        status: status
+      };
+      fetch(`/${pathAdmin}/order/edit/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataFinal),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if(data.code == "error") {
+            alert(data.message);
+          }
+
+          if(data.code == "success") {
+            window.location.reload();
+          }
+        })
+    })
+  ;
+}
+// End Order Edit Form
+
+// lọc theo trạng thái thanh toán
+
+const filterPaymentStatus = document.querySelector("[filter-paymentStatus]");
+if(filterPaymentStatus) {
+  const url = new URL(window.location.href);
+
+  filterPaymentStatus.addEventListener("change", () => {
+    const value = filterPaymentStatus.value;
+
+    if(value) {
+      url.searchParams.set("paymentStatus", value);
+    }else {
+      url.searchParams.delete("paymentStatus");
+    }
+
+    window.location.href = url.href
+  })
+
+  const currentValue = url.searchParams.get("paymentStatus");
+  if(currentValue) {
+    filterPaymentStatus.value = currentValue;
+  }
+}
+
+// hết lọc theo trạng thái thanh toán
+
+// lọc theo phương thức thanh toán
+const filterPaymentMethod= document.querySelector("[filter-paymentMethod]");
+if(filterPaymentMethod) {
+  const url = new URL(window.location.href);
+
+  filterPaymentMethod.addEventListener("change", () => {
+    const value = filterPaymentMethod.value;
+
+    if(value) {
+      url.searchParams.set("paymentMethod", value);
+    }else {
+      url.searchParams.delete("paymentMethod");
+    }
+
+    window.location.href = url.href
+  })
+
+  const currentValue = url.searchParams.get("paymentMethod");
+  if(currentValue) {
+    filterPaymentMethod.value = currentValue;
+  }
+}
+// Hết lọc theo phương thức thanh toán

@@ -1,0 +1,76 @@
+extends ../layouts/default.pug
+
+block main
+  .container
+    .section-11(style="padding-top: 20px;")
+      .inner-wrap
+        h4 Cảm ơn quý khách đã đặt tour! Chúng tôi sẽ liên hệ lại với quý khách trong thời gian sớm nhất.
+        .inner-head
+          .inner-title Thông tin đơn hàng
+        p Mã đơn hàng: #{orderDetail.orderCode}
+        p Tên khách hàng: #{orderDetail.fullName}
+        p Số điện thoại: #{orderDetail.phone}
+        p email: #{orderDetail.email}
+        p Ghi chú: #{orderDetail.note}
+        p Phương thức thanh toán: #{orderDetail.paymentMethodName}
+        p Trạng thái thanh toán: #{orderDetail.paymentStatusName}
+        p Trạng thái đơn hàng: #{orderDetail.statusName}
+        p Thời gian đặt: #{orderDetail.createdAtFormat}
+
+    .section-11(style="padding-top: 20px;")
+      .inner-wrap
+        .inner-head
+          .inner-title Danh sách tour
+        .inner-tour-list
+          each item in orderDetail.items
+            // Tour Item
+            .inner-tour-item
+              .inner-product
+                .inner-image
+                  a(href=`/tour/detail/${item.slug}`)
+                    img(
+                      alt="" 
+                      src=item.avatar
+                      )
+                .inner-content
+                  .inner-title
+                    a(href=`/tour/detail/${item.slug}`) #{item.name}
+                  .inner-meta
+                    .inner-meta-item
+                      | Ngày Khởi Hành: 
+                      b #{item.departureDateFormat}
+                    .inner-meta-item
+                      | Khởi Hành Tại: 
+                      b #{item.locationFromName}
+              .inner-quantity
+                label.inner-label Số Lượng Hành Khách
+                .inner-list
+                  .inner-item
+                    .inner-item-label Người lớn:
+                    .inner-item-price
+                      span #{item.quantityAdult}
+                      span x
+                      span.inner-highlight #{item.priceNewAdult.toLocaleString("vi-VN")}đ
+                  .inner-item
+                    .inner-item-label Trẻ em:
+                    .inner-item-price
+                      span #{item.quantityChildren}
+                      span x
+                      span.inner-highlight #{item.priceNewChildren.toLocaleString("vi-VN")}đ
+                  .inner-item
+                    .inner-item-label Em bé:
+                    .inner-item-price
+                      span #{item.quantityBaby}
+                      span x
+                      span.inner-highlight #{item.priceNewBaby.toLocaleString("vi-VN")}đ
+            // End Tour Item
+        .inner-list-price
+          .inner-item
+            .inner-label Tổng tiền:
+            .inner-price #{orderDetail.subTotal.toLocaleString("vi-VN")}đ
+          .inner-item
+            .inner-label Giảm:
+            .inner-price -#{orderDetail.discount.toLocaleString("vi-VN")}đ
+          .inner-item
+            .inner-label Thanh toán:
+            .inner-price-highlight #{orderDetail.total.toLocaleString("vi-VN")}đ
