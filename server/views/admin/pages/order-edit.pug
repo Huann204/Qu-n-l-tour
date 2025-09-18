@@ -1,0 +1,74 @@
+extends ../layouts/default.pug
+
+block main
+  h1.box-title Đơn hàng: #{orderDetail.orderCode}
+
+  .section-8
+    form#order-edit-form
+      .inner-group(style="display: none;")
+        label(class="inner-label" for="id") Id
+        input(type="text" id="id" name="id" value=orderDetail.id)
+      .inner-group
+        label(class="inner-label" for="fullName") Tên khách hàng
+        input(type="text" id="fullName" name="fullName" value=orderDetail.fullName)
+      .inner-group
+        label(class="inner-label" for="phone") Số điện thoại
+        input(type="text" id="phone" name="phone" value=orderDetail.phone)
+      .inner-group
+        label(class="inner-label" for="email") Email
+        input(type="email" id="email" name="email" value=orderDetail.email)
+      .inner-group.inner-two-col
+        label(class="inner-label" for="note") Ghi chú
+        textarea(id="note" name="note") #{orderDetail.note}
+      .inner-group
+        label(class="inner-label" for="paymentMethod") Phương thức thanh toán
+        select(id="paymentMethod" name="paymentMethod")
+          each item in paymentMethod
+            option(
+              value=item.value
+              selected=(item.value == orderDetail.paymentMethod ? true : false)
+            ) #{item.label}
+      .inner-group
+        label(class="inner-label" for="paymentStatus") Trạng thái thanh toán
+        select(id="paymentStatus" name="paymentStatus")
+          each item in paymentStatus
+            option(
+              value=item.value
+              selected=(item.value == orderDetail.paymentStatus ? true : false)
+            ) #{item.label}
+      .inner-group
+        label(class="inner-label" for="createdAt") Ngày đặt
+        input(type="datetime-local" id="createdAt" name="createdAt" value=orderDetail.createdAtFormat readonly)
+      .inner-group
+        label(class="inner-label" for="status") Trạng thái
+        select(id="status" name="status")
+          each item in orderStatus
+            option(
+              value=item.value
+              selected=(item.value == orderDetail.status ? true : false)
+            ) #{item.label}
+      .inner-group
+        label(class="inner-label") Danh sách tour
+        .inner-order-list
+          each item in orderDetail.items
+            .inner-order-item
+              .inner-order-image
+                img(src=item.avatar, alt=item.name)
+              .inner-order-content
+                .inner-order-name #{item.name}
+                .inner-order-text Người lớn: #{item.quantityAdult} x #{item.priceNewAdult.toLocaleString("vi-VN")}đ
+                .inner-order-text Trẻ em: #{item.quantityChildren} x #{item.priceNewChildren.toLocaleString("vi-VN")}đ
+                .inner-order-text Em bé: #{item.quantityBaby} x #{item.priceNewBaby.toLocaleString("vi-VN")}đ
+                .inner-order-text Ngày khởi hành: #{item.departureDateFormat}
+                .inner-order-text Khởi hành tại: #{item.locationFromName}
+      .inner-group
+        label(class="inner-label") Thanh toán
+        .inner-order-total
+          div Tạm tính: #{orderDetail.subTotal.toLocaleString("vi-VN")}đ
+          div Giảm: #{orderDetail.discount.toLocaleString("vi-VN")}đ
+          div Mã giảm: TOURMUAHE2024
+          div Thanh toán: <span class="inner-order-price">#{orderDetail.total.toLocaleString("vi-VN")}đ</span>
+      .inner-button.inner-two-col
+        button Cập nhật
+    .inner-back
+      a(href=`/${pathAdmin}/order/list`) Quay lại danh sách
