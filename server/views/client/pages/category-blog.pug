@@ -87,114 +87,29 @@ block main
       // Grid news
       .grid
         // Card 1
-        article.card
-          a(
-            href="#" 
-            class="card__thumb"
-            )
-            img(
-              alt="Nhật Bản mùa lá đỏ" 
-              src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
+        each item in newBlogList
+          article.card
+            a(
+              href="#" 
+              class="card__thumb"
               )
-            span.chip.chip--primary Trend
-          div(class="card__body")
-            a.category(href="#") Điểm đến
-            h3(class="card__title")
-              a(href="#") Nhật Bản mùa lá đỏ: lịch ngắm momiji 2025
-            p(class="card__desc")
-              | Update lịch lá đỏ theo từng vùng, cách di chuyển, set đồ sống
-              |   ảo, và gợi ý cung đường 5 ngày.
-            .meta.meta--sm
-              span
-                i.fa-regular.fa-clock
-                | 12/09/2025
-              span
-                i.fa-solid.fa-location-dot
-                | Kyoto
-        // Card 2
-        article.card
-          a(
-            href="#" 
-            class="card__thumb"
-            )
-            img(
-              alt="Châu Âu cuối năm" 
-              src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?q=80&w=1200&auto=format&fit=crop"
-              )
-          div(class="card__body")
-            a.category(href="#") Ưu đãi
-            h3(class="card__title")
-              a(href="#") Săn vé châu Âu cuối năm: 13M khứ hồi
-            p(class="card__desc")
-              | Checklist 7 bước “săn” vé rẻ, cảnh báo phí ẩn, và cách tối ưu
-              |   điểm thưởng thẻ.
-            .meta.meta--sm
-              span
-                i.fa-regular.fa-clock
-                | 10/09/2025
-              span
-                i.fa-solid.fa-location-dot
-                | Paris
-        // Card 3
-        article.card
-          a(
-            href="#" 
-            class="card__thumb"
-            )
-            img(
-              alt="Phú Quốc resort" 
-              src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
-              )
-          div(class="card__body")
-            a.category(href="#") Review
-            h3(class="card__title")
-              a(href="#") Top 7 resort private beach ở Phú Quốc
-            p(class="card__desc")
-              | Combo nghỉ dưỡng chuẩn “nạp pin”: bãi tắm riêng, brunch thảnh
-              |   thơi, sunset cocktail.
-            .meta.meta--sm
-              span
-                i.fa-regular.fa-clock
-                | 09/09/2025
-              span
-                i.fa-solid.fa-location-dot
-                | Phú Quốc
-        // Card 4
-        article.card
-          a(
-            href="#" 
-            class="card__thumb"
-            )
-            img(
-              alt="Visa Hàn Quốc" 
-              src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
-              )
-          div(class="card__body")
-            a.category(href="#") Thủ tục
-            h3(class="card__title")
-              a(href="#") Visa Hàn 2025: checklist hồ sơ & lịch hẹn
-            p(class="card__desc")
-              | Điều kiện mới, cách đặt lịch, mẹo phỏng vấn và các lỗi thường
-              |   gặp khi nộp.
-            .meta.meta--sm
-              span
-                i.fa-regular.fa-clock
-                | 08/09/2025
-              span
-                i.fa-solid.fa-location-dot
-                | Seoul
+              img(
+                alt=item.name
+                src=item.avatar
+                )
+              span.chip.chip--primary Trend
+            div(class="card__body")
+              a.category(href="#") Tin tức
+              h3(class="card__title")
+                a(href="#") #{item.name}
+              p(class="card__desc")
+                | !{item.description}
       // Pagination
       nav.pagination(aria-label="Pagination")
         a.page.disabled(
           aria-disabled="true" 
           href="#"
           )
-          i.fa-solid.fa-chevron-left
-        a.page.is-active(href="#") 1
-        a.page(href="#") 2
-        a.page(href="#") 3
-        a.page(href="#")
-          i.fa-solid.fa-chevron-right
     // Sidebar
     aside.sidebar
       // Search
@@ -215,61 +130,27 @@ block main
           i.fa-solid.fa-folder-open
           | Danh mục
         ul(class="widget__list")
-          li
-            a(href="#")
-              i.fa-solid.fa-tag
-              | Ưu đãi & Deal
-            span 12
-          li
-            a(href="#")
-              i.fa-solid.fa-tag
-              | Điểm đến
-            span 28
-          li
-            a(href="#")
-              i.fa-solid.fa-tag
-              | Kinh nghiệm
-            span 19
-          li
-            a(href="#")
-              i.fa-solid.fa-tag
-              | Review
-            span 15
-          li
-            a(href="#")
-              i.fa-solid.fa-tag
-              | Thủ tục
-            span 9
+          each item in categoryBlogList
+            li
+              a(href="/category-blog/:slug")
+                i.fa-solid.fa-tag
+                | #{item.name}
+              span #{item.totalBlog}
       // Trending
       .widget
         h4(class="widget__title")
           i.fa-solid.fa-fire
           | Đang nổi
         ul.trending
-          li
-            a(href="#")
-              img(
-                alt="Đà Lạt chill" 
-                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=400&auto=format&fit=crop"
-                )
-              div
-                p Đà Lạt 3N2Đ: lịch sống chậm, quán cà phê & homestay
-          li
-            a(href="#")
-              img(
-                alt="Bangkok street food" 
-                src="https://images.unsplash.com/photo-1494475673543-6a6bdcce3a5b?q=80&w=400&auto=format&fit=crop"
-                )
-              div
-                p Bangkok street food: map 12 quán “ăn-cho-đã”
-          li
-            a(href="#")
-              img(
-                alt="Jeju" 
-                src="https://images.unsplash.com/photo-1504199367641-aba8151af406?q=80&w=400&auto=format&fit=crop"
-                )
-              div
-                p Jeju tự túc: thuê xe, cung đường ngắm biển – núi
+          each item in newBlogList
+            li
+              a(href="/blog/:slug")
+                img(
+                  alt=item.name
+                  src=item.avatar
+                  )
+                div
+                  p #{item.name}
       // Tags
       .widget
         h4(class="widget__title")
