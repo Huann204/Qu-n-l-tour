@@ -8,6 +8,32 @@ module.exports.list = async (req, res) => {
     deleted: false
   };
 
+  if(req.query.status) {
+    find.status = req.query.status;
+  };
+
+  if(req.query.paymentStatus) {
+    find.paymentStatus = req.query.paymentStatus;
+  }
+  
+
+  const dateFilter = {};
+  
+    if(req.query.startDate) {    
+      const startDate = moment(req.query.startDate).startOf("date").toDate();
+      dateFilter.$gte = startDate;    
+    };
+  
+     if(req.query.endDate) {
+      const endDate = moment(req.query.endDate).endOf("date").toDate();
+      dateFilter.$lte = endDate;    
+    };
+
+    if(Object.keys(dateFilter).length > 0) {
+    find.createdAt = dateFilter;
+  };
+
+
   // Pagination
   const limitItems = 3;
   let page = 1;

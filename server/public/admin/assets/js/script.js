@@ -1109,3 +1109,53 @@ if(orderEditForm) {
   ;
 }
 // End Order Edit Form
+
+// lọc theo trạng thái thanh toán
+
+const filterPaymentStatus = document.querySelector("[filter-paymentStatus]");
+if(filterPaymentStatus) {
+  const url = new URL(window.location.href);
+
+  filterPaymentStatus.addEventListener("change", () => {
+    const value = filterPaymentStatus.value;
+
+    if(value) {
+      url.searchParams.set("paymentStatus", value);
+    }else {
+      url.searchParams.delete("paymentStatus");
+    }
+
+    window.location.href = url.href
+  })
+
+  const currentValue = url.searchParams.get("paymentStatus");
+  if(currentValue) {
+    filterPaymentStatus.value = currentValue;
+  }
+}
+
+// hết lọc theo trạng thái thanh toán
+
+// lọc theo phương thức thanh toán
+const filterPaymentMethod= document.querySelector("[filter-paymentMethod]");
+if(filterPaymentMethod) {
+  const url = new URL(window.location.href);
+
+  filterPaymentMethod.addEventListener("change", () => {
+    const value = filterPaymentMethod.value;
+
+    if(value) {
+      url.searchParams.set("paymentMethod", value);
+    }else {
+      url.searchParams.delete("paymentMethod");
+    }
+
+    window.location.href = url.href
+  })
+
+  const currentValue = url.searchParams.get("paymentMethod");
+  if(currentValue) {
+    filterPaymentMethod.value = currentValue;
+  }
+}
+// Hết lọc theo phương thức thanh toán

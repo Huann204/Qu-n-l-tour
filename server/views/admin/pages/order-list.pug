@@ -9,27 +9,27 @@ block main
       .inner-item.inner-label
         <i class="fa-solid fa-filter"></i> Bộ lọc
       .inner-item
-        select
+        select(filter-status)
           option(value="") Trạng thái
-          option(value="") Khởi tạo
-          option(value="") Hoàn thành
-          option(value="") Hủy
+          option(value="initial") Khởi tạo
+          option(value="done") Hoàn thành
+          option(value="cancel") Hủy
       .inner-item.inner-date
-        input(type="date")
+        input(type="date" filter-start-date)
         span -
-        input(type="date")
+        input(type="date" filter-end-date)
       .inner-item
-        select
+        select(filter-paymentMethod)
           option(value="") Phương thức thanh toán
           option(value="") Ví Momo
           option(value="") VNPay
           option(value="") ZaloPay
       .inner-item
-        select
+        select(filter-paymentStatus)
           option(value="") Trạng thái thanh toán
-          option(value="") Đã thanh toán
-          option(value="") Chưa thanh toán
-      .inner-item.inner-reset
+          option(value="paid") Đã thanh toán
+          option(value="unpaid") Chưa thanh toán
+      .inner-item.inner-reset(filter-reset)
         <i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc
   //- End Section 4
 
