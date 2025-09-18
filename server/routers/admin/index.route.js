@@ -8,11 +8,13 @@ const blogRoutes = require("./blog.route");
 const contactRoutes = require("./contact.route");
 const uploadRoutes = require("./upload.route");
 const orderRoutes = require("./order.route");
+const dashboardRoutes = require("./dashboard.route");
 
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
 
 router.use('/account', accountRoutes);
+router.use('/dashboard', authMiddleware.verifyToken, dashboardRoutes);
 router.use('/category',authMiddleware.verifyToken, categoryRoutes);
 router.use('/setting',authMiddleware.verifyToken, settingRoutes);
 router.use('/tour',authMiddleware.verifyToken, tourRoutes);
