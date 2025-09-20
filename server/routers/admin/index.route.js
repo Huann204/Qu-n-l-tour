@@ -9,11 +9,8 @@ const contactRoutes = require("./contact.route");
 const uploadRoutes = require("./upload.route");
 const orderRoutes = require("./order.route");
 const dashboardRoutes = require("./dashboard.route");
-<<<<<<< HEAD
 const profileRoutes = require("./profile.route");
 
-=======
->>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
 
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
