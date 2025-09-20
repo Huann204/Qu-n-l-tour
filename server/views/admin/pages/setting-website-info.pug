@@ -7,23 +7,23 @@ block main
     form#setting-website-info-form
       .inner-group
         label(class="inner-label" for="websiteName") Tên website
-        input(type="text" id="websiteName" name="websiteName")
+        input(type="text" id="websiteName" name="websiteName" value=settingWebsiteInfo.websiteName)
       .inner-group
         label(class="inner-label" for="phone") Số điện thoại
-        input(type="text" id="phone" name="phone")
+        input(type="text" id="phone" name="phone" value=settingWebsiteInfo.phone)
       .inner-group
         label(class="inner-label" for="email") Email
-        input(type="text" id="email" name="email")
+        input(type="text" id="email" name="email" value=settingWebsiteInfo.email)
       .inner-group
         label(class="inner-label" for="address") Địa chỉ
-        input(type="text" id="address" name="address")
+        input(type="text" id="address" name="address" value=settingWebsiteInfo.address)
       .inner-group
         label(class="inner-label" for="logo") Logo
-        div(class="inner-upload-image")
+        div(class="inner-upload-image" image-default=settingWebsiteInfo.logo)
           input(type="file" id="logo" accept="image/*" filepond-image name="logo")
       .inner-group
         label(class="inner-label" for="favicon") Favicon
-        div(class="inner-upload-image")
+        div(class="inner-upload-image" image-default=settingWebsiteInfo.favicon)
           input(type="file" id="favicon" accept="image/*" filepond-image name="favicon")
       .inner-button.inner-two-col
         button Cập nhật

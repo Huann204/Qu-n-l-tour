@@ -9,6 +9,8 @@ const contactRoutes = require("./contact.route");
 const uploadRoutes = require("./upload.route");
 const orderRoutes = require("./order.route");
 const dashboardRoutes = require("./dashboard.route");
+const profileRoutes = require("./profile.route");
+
 
 
 const authMiddleware = require("../../middlewares/admin/auth.middleware");
@@ -23,6 +25,7 @@ router.use('/blog',authMiddleware.verifyToken, blogRoutes);
 router.use('/contact',authMiddleware.verifyToken, contactRoutes);
 router.use('/upload',authMiddleware.verifyToken, uploadRoutes)
 router.use('/order',authMiddleware.verifyToken, orderRoutes);
+router.use('/profile',authMiddleware.verifyToken, profileRoutes);
 
 
 
