@@ -1,7 +1,7 @@
 extends ../layouts/default.pug
 
 block main
-  h1.box-title Tạo nhóm quyền
+  h1.box-title #{pageTitle}
 
   .section-8
     form#setting-role-create-form
@@ -14,21 +14,13 @@ block main
       .inner-group
         label(class="inner-label") Phân quyền
         .inner-checkbox-list
-          .inner-checkbox-item
-            input(type="checkbox" name="permissions" value="Xem trang Tổng quan")
-            label Xem trang Tổng quan
-          .inner-checkbox-item
-            input(type="checkbox" name="permissions" value="Xem danh mục")
-            label Xem danh mục
-          .inner-checkbox-item
-            input(type="checkbox" name="permissions" value="Tạo danh mục")
-            label Tạo danh mục
-          .inner-checkbox-item
-            input(type="checkbox" name="permissions" value="Sửa danh mục")
-            label Sửa danh mục
-          .inner-checkbox-item
-            input(type="checkbox" name="permissions" value="Xóa danh mục")
-            label Xóa danh mục
+          if permissionList && permissionList.length > 0
+            each item in permissionList
+              .inner-checkbox-item
+                input(type="checkbox" name="permissions" value=item.value)
+                label #{item.label}
+          else
+            p Không có quyền nào để hiển thị
       .inner-button.inner-two-col
         button Tạo mới
     .inner-back

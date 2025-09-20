@@ -26,7 +26,19 @@ module.exports.verifyToken = async (req, res, next) => {
       return;
     };
 
+    // const role = await Role.findOne({
+    //   _id: existAccount.role
+    // });
+
+    // existAccount.roleName = role.name;
+
     req.account = existAccount;
+
+    // req.permissions = role.permissions;
+
+    // res.locals.account = existAccount;
+
+    // res.locals.permissions = role.permissions;
     
     next();
   } catch (error) {

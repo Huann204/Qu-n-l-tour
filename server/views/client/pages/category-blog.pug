@@ -87,6 +87,25 @@ block main
       // Grid news
       .grid
         // Card 1
+<<<<<<< HEAD
+        each item in newBlogList
+          article.card
+            a(
+              href="#" 
+              class="card__thumb"
+              )
+              img(
+                alt=item.name
+                src=item.avatar
+                )
+              span.chip.chip--primary Trend
+            div(class="card__body")
+              a.category(href="#") Tin tức
+              h3(class="card__title")
+                a(href="#") #{item.name}
+              p(class="card__desc")
+                | !{item.description}
+=======
         article.card
           a(
             href="#" 
@@ -183,18 +202,22 @@ block main
               span
                 i.fa-solid.fa-location-dot
                 | Seoul
+>>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
       // Pagination
       nav.pagination(aria-label="Pagination")
         a.page.disabled(
           aria-disabled="true" 
           href="#"
           )
+<<<<<<< HEAD
+=======
           i.fa-solid.fa-chevron-left
         a.page.is-active(href="#") 1
         a.page(href="#") 2
         a.page(href="#") 3
         a.page(href="#")
           i.fa-solid.fa-chevron-right
+>>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
     // Sidebar
     aside.sidebar
       // Search
@@ -215,6 +238,14 @@ block main
           i.fa-solid.fa-folder-open
           | Danh mục
         ul(class="widget__list")
+<<<<<<< HEAD
+          each item in categoryBlogList
+            li
+              a(href="/category-blog/:slug")
+                i.fa-solid.fa-tag
+                | #{item.name}
+              span #{item.totalBlog}
+=======
           li
             a(href="#")
               i.fa-solid.fa-tag
@@ -240,12 +271,24 @@ block main
               i.fa-solid.fa-tag
               | Thủ tục
             span 9
+>>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
       // Trending
       .widget
         h4(class="widget__title")
           i.fa-solid.fa-fire
           | Đang nổi
         ul.trending
+<<<<<<< HEAD
+          each item in newBlogList
+            li
+              a(href="/blog/:slug")
+                img(
+                  alt=item.name
+                  src=item.avatar
+                  )
+                div
+                  p #{item.name}
+=======
           li
             a(href="#")
               img(
@@ -270,6 +313,7 @@ block main
                 )
               div
                 p Jeju tự túc: thuê xe, cung đường ngắm biển – núi
+>>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
       // Tags
       .widget
         h4(class="widget__title")
