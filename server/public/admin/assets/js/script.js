@@ -1736,6 +1736,7 @@ if(revenueChart) {
   
 
 }
+<<<<<<< HEAD
 // Hết Biểu đồ doanh thu
 
 // Profile Edit Form
@@ -1923,3 +1924,6 @@ if(filterPermission) {
 
 
 // End Filter permission
+=======
+// Hết Biểu đồ doanh thu
+>>>>>>> b45375d589e92f3c78a3f721b4bc54cc694d8737
