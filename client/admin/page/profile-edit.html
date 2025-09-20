@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo danh mục</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond@^4/dist/filepond.css">
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css">
+    <link rel="stylesheet" href="../assets/css/profile-edit.css">
+    <script src="https://cdn.tiny.cloud/1/useczbgh90xpdgco1c49cgn6uk34h5dd9h9mxus5sjnw09ue/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="../assets/js/tinymce-config.js"></script>
+    <body>
+    <header class="header">
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Nguyễn Đình Độ</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button. class="inner-button-menu"><i class="fa-solid fa-bars"></i></button.>
+      </div>
+    </header>
+    <nav class="sider">
+      <ul class="inner-menu">
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
+      </ul>
+      <hr>
+      <ul class="inner-menu">
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i> Thông tin cá nhân</a></li>
+        <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <div class="sider-overlay"></div>
+    <main class="main">
+      <h1 class="box-title">Thông tin cá nhân</h1>
+      <div class="section-8">
+        <form id="profile-edit-form">
+          <div class="inner-group">
+            <label class="inner-label" for="fullName">Họ tên</label>
+            <input type="text" id="fullName" name="fullName" value="Lê Văn A">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="email">Email</label>
+            <input type="email" id="email" name="email" value="levana@gmail.com">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="phone">Số điện thoại</label>
+            <input type="text" id="phone" name="phone" value="0123456789">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="positionCompany">Chức vụ</label>
+            <input type="text" id="positionCompany"  placeholder="Giám đốc" >
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="role">Nhóm quyền</label>
+            <input type="text" id="role"  placeholder="Quản trị viên" >
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="avatar">Ảnh đại diện</label>
+            <div class="inner-upload-image">
+              <input type="file" id="avatar" accept="image/*" filepond-image name="avatar">
+            </div>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Cập nhật</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Đổi mật khẩu</a></div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"> </script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"> </script>
+    <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
+    <script src="../assets/js/profile-edit.js"></script>
+  </body>
+</html>
