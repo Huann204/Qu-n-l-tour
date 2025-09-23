@@ -30,6 +30,12 @@ module.exports.websiteInfoPatch = async (req, res) => {
     delete req.body.logo;
   }
 
+   if(req.files && req.files.favicon) {
+    req.body.favicon = req.files.favicon[0].path;
+  } else {
+    delete req.body.favicon;
+  }
+
   const settingWebsiteInfo = await SettingWebsiteInfo.findOne({});
 
   if(settingWebsiteInfo){
