@@ -9,9 +9,9 @@ header.header
   .inner-wrap
     .inner-account
       .inner-avatar
-        img(src="/admin/assets/images/avt.jpg", alt="")
+        img(src=account.avatar, alt=account.fullName)
       .inner-text
-        .inner-name Phan Ngọc Hà
-        .inner-role Admin
+        .inner-name #{account.fullName}
+        .inner-role #{account.roleName}
     button.inner-button-menu
       <i class="fa-solid fa-bars"></i>
