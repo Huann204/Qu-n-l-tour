@@ -66,7 +66,7 @@ if(loginForm) {
           }
 
           if(data.code === "success") {
-            window.location.href = `/${pathAdmin}/setting/list`;
+            window.location.href = `/${pathAdmin}/dashboard`;
           }
         })
 
