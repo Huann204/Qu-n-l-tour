@@ -433,7 +433,7 @@ if(orderForm) {
                 case "money":
                 case "bank":
                   // Chuyển hướng sang trang đặt hành thành công
-                  window.location.href = `/order/success?orderId=${data.orderId}&phone=${phone}`;
+                  window.location.href = `/order/success?orderId=${data.orderId}&email=${email}`;
                   break;
                 case "zalopay":
                   // Chuyển hướng sang trang thanh toán bằng ZaloPay
