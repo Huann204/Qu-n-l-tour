@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo nhóm quyền</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </header>
+    <nav class="sider">
+      <ul class="inner-menu">
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
+      </ul>
+      <hr>
+      <ul class="inner-menu">
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i> Thông tin cá nhân</a></li>
+        <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <div class="sider-overlay"></div>
+    <main class="main">
+       <h1 class="box-title">Tạo nhóm quyền</h1>
+       <div class="section5">
+         <form id="setting-role-create-form">
+           <div class="inner-group">
+            <label class="inner-label" for="name">Tên nhóm quyền</label>
+            <input type="text" id="name" name="name">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="description">Mô tả ngắn</label>
+            <input type="text" id="description" name="description">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label">Phân quyền</label>
+            <div class="inner-checkbox-list">
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="permissions" value="Xem trang Tổng quan">
+                <label>Xem trang Tổng quan</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="permissions" value="Xem danh mục">
+                <label>Xem danh mục</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="permissions" value="Tạo danh mục">
+                <label>Tạo danh mục</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="permissions" value="Sửa danh mục">
+                <label>Sửa danh mục</label>
+              </div>
+              <div class="inner-checkbox-item">
+                <input type="checkbox" name="permissions" value="Xóa danh mục">
+                <label>Xóa danh mục</label>
+              </div>
+            </div>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Tạo mới</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Quay lại danh sách</a></div>
+      </div>
+    </main>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
+</html>
