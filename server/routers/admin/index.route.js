@@ -27,6 +27,11 @@ router.use('/upload',authMiddleware.verifyToken, uploadRoutes)
 router.use('/order',authMiddleware.verifyToken, orderRoutes);
 router.use('/profile',authMiddleware.verifyToken, profileRoutes);
 
+router.get('/*\w',authMiddleware.verifyToken, (req, res) => {
+  res.render("admin/pages/error-404", {
+    pageTitle: "404 Not Found"
+  })
+});
 
 
 module.exports = router;
