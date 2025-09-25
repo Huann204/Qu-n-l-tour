@@ -1,36 +1,35 @@
 extends ../layouts/default.pug
 
 block main
-  if (permissions.includes("role-edit"))
-    h1.box-title #{pageTitle}
+  h1.box-title #{pageTitle}
 
-    .section-8
-      form#setting-role-edit-form
-        .inner-group(style="display: none;")
-          label(class="inner-label" for="id") Id
-          input(type="text" id="id" name="id" value=roleDetail.id)
-        .inner-group
-          label(class="inner-label" for="name") Tên nhóm quyền
-          input(type="text" id="name" name="name" value=roleDetail.name )
-        .inner-group
-          label(class="inner-label" for="description") Mô tả ngắn
-          input(type="text" id="description" name="description" value=roleDetail.description)
-        .inner-group
-          label(class="inner-label") Phân quyền
-          .inner-checkbox-list
-            if permissionList && permissionList.length > 0
-              each item in permissionList
-                .inner-checkbox-item
-                  input(
-                    type="checkbox" 
-                    name="permissions" 
-                    value=item.value
-                    checked=roleDetail.permissions.includes(item.value)
-                    )
-                  label #{item.label}
-            else
-              p Không có quyền nào để hiển thị
-        .inner-button.inner-two-col
-          button Cập nhật
-      .inner-back
-        a(href=`/${pathAdmin}/setting/role/list`) Quay lại danh sách
+  .section-8
+    form#setting-role-edit-form
+      .inner-group(style="display: none;")
+        label(class="inner-label" for="id") Id
+        input(type="text" id="id" name="id" value=roleDetail.id)
+      .inner-group
+        label(class="inner-label" for="name") Tên nhóm quyền
+        input(type="text" id="name" name="name" value=roleDetail.name )
+      .inner-group
+        label(class="inner-label" for="description") Mô tả ngắn
+        input(type="text" id="description" name="description" value=roleDetail.description)
+      .inner-group
+        label(class="inner-label") Phân quyền
+        .inner-checkbox-list
+          if permissionList && permissionList.length > 0
+            each item in permissionList
+              .inner-checkbox-item
+                input(
+                  type="checkbox" 
+                  name="permissions" 
+                  value=item.value
+                  checked=roleDetail.permissions.includes(item.value)
+                  )
+                label #{item.label}
+          else
+            p Không có quyền nào để hiển thị
+      .inner-button.inner-two-col
+        button Cập nhật
+    .inner-back
+      a(href=`/${pathAdmin}/setting/role/list`) Quay lại danh sách

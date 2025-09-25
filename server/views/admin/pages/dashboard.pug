@@ -1,97 +1,98 @@
 extends ../layouts/default.pug
 
 block main
-  h1.box-title Tổng quan
+  if (permissions.includes("dashboard-view"))
+    h1.box-title Tổng quan
 
-  //- Section 1
-  .section-1
-    .inner-item
-      .inner-icon
-        img(src="/admin/assets/images/section-1-icon-1.svg")
-      .inner-content
-        .inner-title Quản trị viên
-        .inner-number #{overview.totalAdmin.toLocaleString("vi-VN")}
-    .inner-item
-      .inner-icon
-        img(src="/admin/assets/images/section-1-icon-1.svg")
-      .inner-content
-        .inner-title Người dùng
-        .inner-number #{overview.totalUser.toLocaleString("vi-VN")}
-    .inner-item
-      .inner-icon
-        img(src="/admin/assets/images/section-1-icon-2.svg")
-      .inner-content
-        .inner-title Đơn hàng
-        .inner-number #{overview.totalOrder.toLocaleString("vi-VN")}
-    .inner-item
-      .inner-icon
-        img(src="/admin/assets/images/section-1-icon-3.svg")
-      .inner-content
-        .inner-title Doanh thu
-        .inner-number #{overview.totalPrice.toLocaleString("vi-VN")}đ
-  //- End Section 1
+    //- Section 1
+    .section-1
+      .inner-item
+        .inner-icon
+          img(src="/admin/assets/images/section-1-icon-1.svg")
+        .inner-content
+          .inner-title Quản trị viên
+          .inner-number #{overview.totalAdmin.toLocaleString("vi-VN")}
+      .inner-item
+        .inner-icon
+          img(src="/admin/assets/images/section-1-icon-1.svg")
+        .inner-content
+          .inner-title Người dùng
+          .inner-number #{overview.totalUser.toLocaleString("vi-VN")}
+      .inner-item
+        .inner-icon
+          img(src="/admin/assets/images/section-1-icon-2.svg")
+        .inner-content
+          .inner-title Đơn hàng
+          .inner-number #{overview.totalOrder.toLocaleString("vi-VN")}
+      .inner-item
+        .inner-icon
+          img(src="/admin/assets/images/section-1-icon-3.svg")
+        .inner-content
+          .inner-title Doanh thu
+          .inner-number #{overview.totalPrice.toLocaleString("vi-VN")}đ
+    //- End Section 1
 
-  //- Section 2
-  .section-2
-    .inner-head
-      h2.inner-title Biểu đồ doanh thu
-      .inner-filter
-        input(
-          type="month"
-          name=""
-          input-month
-        )
-    .inner-chart
-      canvas(id="revenue-chart")
-  //- End Section 2
+    //- Section 2
+    .section-2
+      .inner-head
+        h2.inner-title Biểu đồ doanh thu
+        .inner-filter
+          input(
+            type="month"
+            name=""
+            input-month
+          )
+      .inner-chart
+        canvas(id="revenue-chart")
+    //- End Section 2
 
-  //- Section 3
-  .section-3
-    h2.inner-title Đơn hàng mới
-    .table-1
-      table
-        thead
-          tr
-            th Mã
-            th Thông tin khách
-            th Danh sách tour
-            th Thanh toán
-            th Trạng thái
-            th.inner-text-right Ngày đặt
-        tbody
-          each orderDetail in orderNew
+    //- Section 3
+    .section-3
+      h2.inner-title Đơn hàng mới
+      .table-1
+        table
+          thead
             tr
-              td
-                .inner-code #{orderDetail.orderCode}
-              td
-                .inner-text Họ tên: #{orderDetail.fullName}
-                .inner-text SĐT: #{orderDetail.phone}
-                .inner-text Ghi chú: #{orderDetail.note}
-              td
-                each item in orderDetail.items
-                  .inner-item
-                    .inner-image
-                      img(src=item.avatar, alt=item.name)
-                    .inner-content
-                      .inner-name #{item.name}
-                      .inner-quantity Người lớn: #{item.quantityAdult} x #{item.priceNewAdult.toLocaleString("vi-VN")}đ
-                      .inner-quantity Trẻ em: #{item.quantityChildren} x #{item.priceNewChildren.toLocaleString("vi-VN")}đ
-                      .inner-quantity Em bé: #{item.quantityBaby} x #{item.priceNewBaby.toLocaleString("vi-VN")}đ
-              td
-                .inner-text Tạm tính: #{orderDetail.subTotal.toLocaleString("vi-VN")}đ
-                .inner-text Giảm: #{orderDetail.discount.toLocaleString("vi-VN")}đ
-                .inner-text Mã giảm: TOURMUAHE2024
-                .inner-text Thanh toán: #{orderDetail.total.toLocaleString("vi-VN")}đ
-                .inner-text PTTT: #{orderDetail.paymentMethodName}
-                .inner-text TTTT: #{orderDetail.paymentStatusName}
-              td
-                if (orderDetail.status == "initial")
-                  .badge.badge-orange #{orderDetail.statusName}
-                else if (orderDetail.status == "done")
-                  .badge.badge-green #{orderDetail.statusName}
-                else if (orderDetail.status == "cancel")
-                  .badge.badge-red #{orderDetail.statusName}
-              td.inner-text-right
-                .inner-text #{orderDetail.createdAtTime}
-                .inner-text #{orderDetail.createdAtDate}
-    //- End Section 3
+              th Mã
+              th Thông tin khách
+              th Danh sách tour
+              th Thanh toán
+              th Trạng thái
+              th.inner-text-right Ngày đặt
+          tbody
+            each orderDetail in orderNew
+              tr
+                td
+                  .inner-code #{orderDetail.orderCode}
+                td
+                  .inner-text Họ tên: #{orderDetail.fullName}
+                  .inner-text SĐT: #{orderDetail.phone}
+                  .inner-text Ghi chú: #{orderDetail.note}
+                td
+                  each item in orderDetail.items
+                    .inner-item
+                      .inner-image
+                        img(src=item.avatar, alt=item.name)
+                      .inner-content
+                        .inner-name #{item.name}
+                        .inner-quantity Người lớn: #{item.quantityAdult} x #{item.priceNewAdult.toLocaleString("vi-VN")}đ
+                        .inner-quantity Trẻ em: #{item.quantityChildren} x #{item.priceNewChildren.toLocaleString("vi-VN")}đ
+                        .inner-quantity Em bé: #{item.quantityBaby} x #{item.priceNewBaby.toLocaleString("vi-VN")}đ
+                td
+                  .inner-text Tạm tính: #{orderDetail.subTotal.toLocaleString("vi-VN")}đ
+                  .inner-text Giảm: #{orderDetail.discount.toLocaleString("vi-VN")}đ
+                  .inner-text Mã giảm: TOURMUAHE2024
+                  .inner-text Thanh toán: #{orderDetail.total.toLocaleString("vi-VN")}đ
+                  .inner-text PTTT: #{orderDetail.paymentMethodName}
+                  .inner-text TTTT: #{orderDetail.paymentStatusName}
+                td
+                  if (orderDetail.status == "initial")
+                    .badge.badge-orange #{orderDetail.statusName}
+                  else if (orderDetail.status == "done")
+                    .badge.badge-green #{orderDetail.statusName}
+                  else if (orderDetail.status == "cancel")
+                    .badge.badge-red #{orderDetail.statusName}
+                td.inner-text-right
+                  .inner-text #{orderDetail.createdAtTime}
+                  .inner-text #{orderDetail.createdAtDate}
+      //- End Section 3
