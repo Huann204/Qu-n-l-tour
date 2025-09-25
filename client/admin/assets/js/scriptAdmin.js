@@ -212,3 +212,51 @@ if(scheduleSection8) {
   });
 }
 // End Schedule Section 5
+
+// Biểu đồ doanh thu
+const revenueChart = document.querySelector("#revenue-chart");
+if(revenueChart) {
+  new Chart(revenueChart, {
+    type: 'line',
+    data: {
+      labels: ['01', '02', '03', '04', '05'],
+      datasets: [
+        {
+          label: 'Tháng 04/2025', // Nhãn của dataset
+          data: [1200000, 1800000, 3200000, 900000, 1600000], // Dữ liệu
+          borderColor: '#4379EE', // Màu viền
+          borderWidth: 1.5, // Độ dày của đường
+        },
+        {
+          label: 'Tháng 03/2025', // Nhãn của dataset
+          data: [1000000, 900000, 1200000, 1200000, 1400000], // Dữ liệu
+          borderColor: '#EF3826', // Màu viền
+          borderWidth: 1.5, // Độ dày của đường
+        }
+      ]
+    },
+    options: {
+      plugins: {
+        legend: {
+          position: 'bottom'
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Ngày'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Doanh thu (VND)'
+          }
+        }
+      },
+      maintainAspectRatio: false, // Không giữ tỷ lệ khung hình mặc định
+    }
+  });
+}
+// Hết Biểu đồ doanh thu
