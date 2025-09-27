@@ -10,21 +10,24 @@ block main
       .inner-item.inner-label
         <i class="fa-solid fa-filter"></i> Bộ lọc
       .inner-item.inner-date
-        input(type="date")
+        input(type="date" filter-start-date)
         span -
-        input(type="date")
-      .inner-item.inner-reset
+        input(type="date" filter-end-date)
+      .inner-item.inner-reset(filter-reset)
         <i class="fa-solid fa-rotate-left"></i> Xóa bộ lọc
   //- End Section 4
 
   //- Section 5
   .section-5
     .inner-wrap
-      .inner-change-status
+      .inner-change-status(
+        change-multi
+        data-api=`/${pathAdmin}/contact/change-multi`
+      )
         .inner-item
           select
             option(value="") -- Hành động --
-            option(value="") Xóa
+            option(value="delete") Xóa
         .inner-item
           button Áp dụng
       .inner-search
@@ -39,7 +42,7 @@ block main
         thead
           tr
             th(class="inner-center")
-              input(type="checkbox" class="inner-check")
+              input(type="checkbox" class="inner-check" check-all)
             th Email
             th Ngày tạo
             th(class="inner-center") Hành động
@@ -47,7 +50,7 @@ block main
           each item in contactList
             tr
               td(class="inner-center")
-                input(type="checkbox" class="inner-check")
+                input(type="checkbox" class="inner-check" check-item=item.id)
               td #{item.email}
               td #{item.createdAtFormat}
               td(class="inner-center")
@@ -61,9 +64,8 @@ block main
 
   //- Section 7
   .section-7
-    span(class="inner-label") Hiển thị 1 - 9 của 78
-    select(class="inner-pagination")
-      option Trang 1
-      option Trang 2
-      option Trang 3
+    span(class="inner-label") Hiển thị #{pagination.skip + 1} - #{pagination.skip + contactList.length} của #{pagination.totalRecord}
+    select(class="inner-pagination" pagination)
+        - for (let i = 1; i <= pagination.totalPage; i++)
+          option(value=i) Trang #{i}
   //- End Section 7
