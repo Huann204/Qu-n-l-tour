@@ -9,16 +9,16 @@ module.exports.dashboard = async (req, res) => {
     totalAdmin: 0,
     totalUser: 0,
     totalOrder: 0,
-    totalPrice: 0
+    totalPrice: 0,
   };
 
   overview.totalAdmin = await AccountAdmin.countDocuments({
-    deleted: false
+    deleted: false,
   });
 
   const orderList = await Order.find({
-    deleted: false
-  })
+    deleted: false,
+  });
 
   overview.totalOrder = orderList.length;
 
@@ -28,30 +28,42 @@ module.exports.dashboard = async (req, res) => {
   // End Section 1
 
   const orderNew = await Order.find({
-  deleted: false
+    deleted: false,
   })
-  .sort({ createdAt: "desc" }) // mới nhất -> cũ nhất
-  .limit(2);
+    .sort({ createdAt: "desc" }) // mới nhất -> cũ nhất
+    .limit(2);
 
   for (const orderDetail of orderNew) {
-      orderDetail.paymentMethodName = variableConfig.paymentMethod.find(item => item.value == orderDetail.paymentMethod).label;
-      
-      orderDetail.paymentStatusName = variableConfig.paymentStatus.find(item => item.value == orderDetail.paymentStatus).label;
+    const methodObj = variableConfig.paymentMethod.find(
+      (item) => item.value == orderDetail.paymentMethod
+    );
+    orderDetail.paymentMethodName = methodObj?.label || "Không xác định";
 
-      orderDetail.statusName = variableConfig.orderStatus.find(item => item.value == orderDetail.status).label;
+    const statusObj = variableConfig.paymentStatus.find(
+      (item) => item.value == orderDetail.paymentStatus
+    );
+    orderDetail.paymentStatusName = statusObj?.label || "Không xác định";
 
-      orderDetail.createdAtTime = moment(orderDetail.createdAt).format("HH:mm");
-      orderDetail.createdAtDate = moment(orderDetail.createdAt).format("DD/MM/YYYY");
-    }  
+    const orderStatusObj = variableConfig.orderStatus.find(
+      (item) => item.value == orderDetail.status
+    );
+    orderDetail.statusName = orderStatusObj?.label || "Không xác định";
+
+    orderDetail.createdAtTime = moment(orderDetail.createdAt).format("HH:mm");
+    orderDetail.createdAtDate = moment(orderDetail.createdAt).format(
+      "DD/MM/YYYY"
+    );
+  }
   res.render("admin/pages/dashboard", {
     pageTitle: "Tổng quan",
     overview: overview,
-    orderNew: orderNew
-  })
-}
+    orderNew: orderNew,
+  });
+};
 
 module.exports.revenueChartPost = async (req, res) => {
-  const { currentMonth, currentYear, previousMonth, previousYear, arrayDay } = req.body;
+  const { currentMonth, currentYear, previousMonth, previousYear, arrayDay } =
+    req.body;
 
   // truy vấn tất cả đơn hàng trong tháng hiện tại
   const orderCurrentMonth = await Order.find({
@@ -59,7 +71,7 @@ module.exports.revenueChartPost = async (req, res) => {
     createdAt: {
       $gte: new Date(currentYear, currentMonth - 1, 1),
       $lte: new Date(currentYear, currentMonth, 1),
-    }
+    },
   });
 
   // truy vấn tất cả đơn hàng trong tháng hiện tại
@@ -68,7 +80,7 @@ module.exports.revenueChartPost = async (req, res) => {
     createdAt: {
       $gte: new Date(previousYear, previousMonth - 1, 1),
       $lte: new Date(previousYear, previousMonth, 1),
-    }
+    },
   });
 
   // Tạo mảng doanh thu theo từng ngày
@@ -80,7 +92,7 @@ module.exports.revenueChartPost = async (req, res) => {
     let totalCurrent = 0;
     for (const order of orderCurrentMonth) {
       const orderDate = new Date(order.createdAt).getDate();
-      if(day === parseInt(orderDate)) {
+      if (day === parseInt(orderDate)) {
         totalCurrent += order.total;
       }
     }
@@ -90,16 +102,16 @@ module.exports.revenueChartPost = async (req, res) => {
     let totalPrevious = 0;
     for (const order of orderPreviousMonth) {
       const orderDate = new Date(order.createdAt).getDate();
-      if(day === parseInt(orderDate)) {
+      if (day === parseInt(orderDate)) {
         totalPrevious += order.total;
       }
     }
     dataMonthPrevious.push(totalPrevious);
   }
-  
+
   res.json({
     code: "success",
     dataMonthCurrent: dataMonthCurrent,
-    dataMonthPrevious: dataMonthPrevious
-  })
-} 
+    dataMonthPrevious: dataMonthPrevious,
+  });
+};
