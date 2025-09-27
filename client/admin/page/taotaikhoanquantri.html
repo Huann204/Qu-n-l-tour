@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo tài khoản quản trị</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css">
+  </head>
+  <body>
+    <header class="header">
+      <div class="inner-logo"><a href="#"><img src="../assets/images/logo.png" alt="Logo"><span>Admin</span></a></div>
+        <div class="inner-account">
+          <div class="inner-avatar"><img src="../assets/images/avt.jpg" alt=""></div>
+          <div class="inner-text">
+            <div class="inner-name">Phan Ngọc Hà</div>
+            <div class="inner-role">Admin</div>
+          </div>
+        <button class="inner-button-menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </header>
+    <nav class="sider">
+      <ul class="inner-menu">
+        <li><a class="active" href="#"><i class="fa-solid fa-gauge-high"></i> Tổng quan</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-cells-large"></i> Quản lý danh mục</a></li>
+        <li><a href="#"><i class="fa-solid fa-table-list"></i> Quản lý tour</a></li>
+        <li><a href="#"><i class="fa-solid fa-list-check"></i> Quản lý đơn hàng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> Quản lý người dùng</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-group"></i> Thông tin liên hệ</a></li>
+      </ul>
+      <hr>
+      <ul class="inner-menu">
+        <li><a href="#"><i class="fa-solid fa-gear"></i> Cài đặt chung</a></li>
+        <li><a href="#"><i class="fa-solid fa-user-gear"></i> Thông tin cá nhân</a></li>
+        <li><a class="inner-logout" href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <div class="sider-overlay"></div>
+    <main class="main">
+      <h1 class="box-title">Tạo tài khoản quản trị</h1>
+      <div class="section5">
+        <form id="setting-account-admin-create-form">
+          <div class="inner-group">
+            <label class="inner-label" for="fullName">Họ tên</label>
+            <input type="text" id="fullName" name="fullName">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="email">Email</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="phone">Số điện thoại</label>
+            <input type="text" id="phone" name="phone">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="role">Nhóm quyền</label>
+            <select id="role" name="role">
+              <option value="">Quản trị viên</option>
+              <option value="">Quản lý tour</option>
+              <option value="">Quản lý đơn hàng</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="positionCompany">Chức vụ</label>
+            <input type="text" id="positionCompany" name="positionCompany">
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="status">Trạng thái</label>
+            <select id="status" name="status">
+              <option value="">Hoạt động</option>
+              <option value="">Dừng hoạt động</option>
+            </select>
+          </div>
+          <div class="inner-group">
+            <label class="inner-label" for="password">Mật khẩu</label>
+            <input type="text" id="password" name="password">
+          </div>
+          <div class="inner-group inner-two-col">
+            <label class="inner-label" for="avatar">Ảnh đại diện</label>
+            <div class="inner-upload-image">
+              <input type="file" id="avatar" accept="image/*" filepond-image name="avatar">
+            </div>
+          </div>
+          <div class="inner-button inner-two-col">
+            <button>Tạo mới</button>
+          </div>
+        </form>
+        <div class="inner-back"><a href="#">Quay lại danh sách</a></div>
+      </div>
+    </main>
+    <script src="../assets/js/scriptAdmin.js"></script>
+  </body>
+</html>
