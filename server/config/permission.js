@@ -4,23 +4,55 @@ module.exports.permissionList = [
     value: "dashboard-view"
   },
   {
-    label: "Quản lý danh mục tour",
+    label: "Xem danh mục tour",
     value: "category-view"
   },
   {
-    label: "Quản lý tour",
+    label: "Tạo danh mục tour",
+    value: "category-create"
+  },
+  {
+    label: "Chỉnh sửa danh mục tour",
+    value: "category-edit"
+  },
+  {
+    label: "Xóa danh mục tour",
+    value: "category-delete"
+  },
+  {
+    label: "Xem tour",
     value: "tour-view"
   },
   {
-    label: "Quản lý Thùng rác tour",
+    label: "Tạo tour",
+    value: "tour-create"
+  },
+  {
+    label: "Chỉnh sửa tour",
+    value: "tour-edit"
+  },
+  {
+    label: "Xóa tour",
+    value: "tour-delete"
+  },
+  {
+    label: "Thùng rác tour",
     value: "tour-trash"
   },
   {
-    label: "Quản lý đơn hàng",
+    label: "Xem đơn hàng",
     value: "order-view"
   },
   {
-    label: "Quản lý thông tin liên hệ",
+    label: "Chỉnh sửa đơn hàng",
+    value: "order-edit"
+  },
+  {
+    label: "Xóa đơn hàng",
+    value: "order-delete"
+  },
+  {
+    label: "Xem thông tin liên hệ",
     value: "contact-view"
   },
   {
@@ -28,11 +60,37 @@ module.exports.permissionList = [
     value: "setting-view"
   },
   {
-    label: "Quản lý tài khoản quản trị",
+    label: "Chỉnh sửa thông tin website",
+    value: "website-edit"
+  },
+  {
+    label: "Xem khoản quản trị",
     value: "account-admin-view"
+  },
+  {
+    label: "Tạo khoản quản trị",
+    value: "account-admin-create"
+  },
+  {
+    label: "Chỉnh sửa khoản quản trị",
+    value: "account-admin-edit"
+  },
+  { label: "Xóa khoản quản trị",
+    value: "account-admin-delete"
   },
   {
     label: "Xem nhóm quyền",
     value: "role-view"
   },
+  {
+    label: "Tạo nhóm quyền",
+    value: "role-create"
+  },
+  { label: "Chỉnh sửa nhóm quyền",
+    value: "role-edit"
+  },
+  {
+    label: "Xóa nhóm quyền",
+    value: "role-delete"
+  }
 ];
