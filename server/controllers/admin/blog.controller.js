@@ -342,14 +342,14 @@ module.exports.trash = async (req, res) => {
           _id: item.createdBy
         });
 
-        item.createdByFullName = infoAccountCreated.fullName;
+        item.createdByFullName = infoAccountCreated ? infoAccountCreated.fullName: "Tài khoản đã bị xóa";
       }
 
       if(item.deletedBy) {
       const infoAccountDeleted = await AccountAdmin.findOne({
         _id: item.deletedBy
       })
-      item.deletedByFullName = infoAccountDeleted.fullName;
+      item.updatedByFullName = infoAccountUpdated ? infoAccountUpdated.fullName: "Tài khoản đã bị xóa";
     }
 
 

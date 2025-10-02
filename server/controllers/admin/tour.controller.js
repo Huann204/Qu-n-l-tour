@@ -122,7 +122,7 @@ module.exports.list = async (req, res) => {
           _id: item.createdBy
         });
 
-        item.createdByFullName = infoAccountCreated.fullName;
+        item.createdByFullName = infoAccountCreated ? infoAccountCreated.fullName: "Tài khoản đã bị xóa";
       }
 
       if(item.updatedBy) {
@@ -130,7 +130,7 @@ module.exports.list = async (req, res) => {
           _id: item.updatedBy
         });
 
-        item.updatedByFullName = infoAccountUpdated.fullName;
+        item.updatedByFullName = infoAccountUpdated ? infoAccountUpdated.fullName: "Tài khoản đã bị xóa";
       }
 
       item.createdAtFormat = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");

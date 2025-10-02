@@ -61,13 +61,37 @@ module.exports.list = async (req, res) => {
       status: "active"
     };
 
+    // Pagination setup
+    const limitItems = 8;
+    let page = 1;
+
+    if (req.query.page) {
+      const currentPage = parseInt(req.query.page);
+      if (currentPage > 0) {
+        page = currentPage;
+      }
+    }
+
     const totalTour = await Tour.countDocuments(find);
+    const totalPage = Math.ceil(totalTour / limitItems);
+
+    if (page > totalPage) page = totalPage;
+    if (totalPage === 0) page = 1;
+
+    const skip = (page - 1) * limitItems;
+
+    const pagination = {
+      skip: skip,
+      totalTour: totalTour,
+      totalPage: totalPage,
+    }
 
     const tourList = await Tour.find(find)
     .sort({
       position: "asc"
     })
-    .limit(8)
+    .skip(skip)
+    .limit(limitItems);
 
     for (const item of tourList) {
       item.departureDateFormat = moment(item.departureDate).format("DD/MM/YYYY");
@@ -89,7 +113,8 @@ module.exports.list = async (req, res) => {
       category: category,
       tourList: tourList,
       totalTour: totalTour,
-      cityList: cityList
+      cityList: cityList,
+      pagination: pagination
     })
 
   }else {

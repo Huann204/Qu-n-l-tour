@@ -103,14 +103,15 @@ block main
               +product-item(item)
               // End Product Item
           // Pagination
-          .box-pagination
-            button
+          .box-pagination(pagination)
+            button.prev
               i.fa-solid.fa-angles-left
-            button.active 1
-            button 2
-            button 3
-            button 4
-            button
+            - for (let i = 1; i <= pagination.totalPage; i++)
+              if i === page
+                button.active(data-page=i)= i
+              else
+                button(data-page=i)= i
+            button.next
               i.fa-solid.fa-angles-right
           // End Pagination
   // End Section 9

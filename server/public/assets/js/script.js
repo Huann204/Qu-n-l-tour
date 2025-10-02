@@ -858,3 +858,75 @@ if(pageCart) {
 }
 
 // End Page Cart
+
+// pagination
+const paginationBox = document.querySelector("[pagination]");
+
+if(paginationBox) {
+  let url = new URL(window.location.href);
+
+   const pageButtons = paginationBox.querySelectorAll("button[data-page]");
+   const prevBtn = paginationBox.querySelector(".prev");
+   const nextBtn = paginationBox.querySelector(".next");
+
+   // click vào số trang
+   pageButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      let value = button.getAttribute("data-page");
+
+      if(value) {
+        url.searchParams.set("page", value);
+      }else {
+        url.searchParams.delete("page");
+      }
+
+      window.location.href = url.href;
+    });
+   })
+
+   // Lấy trang hiện tại từ URL
+  const currentPage = parseInt(url.searchParams.get("page")) || 1;
+
+   // Active trang hiện tại
+  pageButtons.forEach(btn => {
+    if (parseInt(btn.getAttribute("data-page")) === currentPage) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  })
+
+   // Prev button
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      let value = currentPage > 1 ? currentPage - 1 : null;
+
+      if (value) {
+        url.searchParams.set("page", value);
+      } else {
+        url.searchParams.delete("page");
+      }
+
+      window.location.href = url.href;
+    });
+  };
+
+  // Next button
+  if (nextBtn) {
+    const lastPage = pageButtons.length;
+    nextBtn.addEventListener("click", () => {
+      let value = currentPage < lastPage ? currentPage + 1 : null;
+
+      if (value) {
+        url.searchParams.set("page", value);
+      } else {
+        url.searchParams.delete("page");
+      }
+
+      window.location.href = url.href;
+    });
+  }
+
+
+}
+// End pagination
