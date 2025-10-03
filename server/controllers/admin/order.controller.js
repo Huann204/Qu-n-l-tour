@@ -76,11 +76,15 @@ module.exports.list = async (req, res) => {
     ;
 
     for (const orderDetail of orderList) {
-      orderDetail.paymentMethodName = variableConfig.paymentMethod.find(item => item.value == orderDetail.paymentMethod).label;
-      
-      orderDetail.paymentStatusName = variableConfig.paymentStatus.find(item => item.value == orderDetail.paymentStatus).label;
+      const paymentMethodObj = variableConfig.paymentMethod.find(item => item.value == orderDetail.paymentMethod);
+        orderDetail.paymentMethodName = paymentMethodObj ? paymentMethodObj.label : "Không xác định";
 
-      orderDetail.statusName = variableConfig.orderStatus.find(item => item.value == orderDetail.status).label;
+        const paymentStatusObj = variableConfig.paymentStatus.find(item => item.value == orderDetail.paymentStatus);
+        orderDetail.paymentStatusName = paymentStatusObj ? paymentStatusObj.label : "Không xác định";
+
+        const statusObj = variableConfig.orderStatus.find(item => item.value == orderDetail.status);
+        orderDetail.statusName = statusObj ? statusObj.label : "Không xác định";
+
 
       orderDetail.createdAtTime = moment(orderDetail.createdAt).format("HH:mm");
       orderDetail.createdAtDate = moment(orderDetail.createdAt).format("DD/MM/YYYY");
