@@ -62,7 +62,7 @@ module.exports.list = async (req, res) => {
     };
 
     // Pagination setup
-    const limitItems = 8;
+    const limitItems = 3;
     let page = 1;
 
     if (req.query.page) {
